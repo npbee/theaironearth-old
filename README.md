@@ -18,4 +18,5 @@
 - SystemJS / JSPM
 - ES6
 - Stripe
+- Snap.svg
 
