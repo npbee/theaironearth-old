@@ -1,49 +1,50 @@
 import range from 'lodash/utility/range';
+import generateSphere from './sphere';
+import { changeBackground } from '../actions';
 
-const POINTS = 256;
-const INIT_POINTS = 50;
-const amplitude = 5;
-const ANGLE = 10;
-const RADIUS = 1;
-const COLOR_AMP = 0.4;
+import config, {
+    POINTS,
+    RADIUS
+} from './config';
 
-function generatePoints(data, path, radius) {
-    path.segments = path.segments.map((segment, i) => {
-        let xPos = paper.view.size.width / 2;
-        let yPos = paper.view.size.height / 2;
-        let magnitude = data[i] * (0.2 * (amplitude / 20));
-        let x = radius * Math.cos(radius * magnitude) + xPos;
-        let y = radius * Math.sin(radius * magnitude) + yPos;
+function render(player, store, analyser, freqByteData, path) {
 
-        segment.point.x = x;
-        segment.point.y = y;
+    //requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path));
+    //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
+    let state = store.getState();
+    let currentTrackIndex = state.currentTrackIndex;
+    let trackConfig = config[currentTrackIndex];
+    let visualizer = trackConfig.visualizer;
 
+    store.dispatch(changeBackground({
+        hue: trackConfig.hue,
+        saturation: trackConfig.saturation,
+        lightness: trackConfig.lightness
+    }));
 
-        return segment;
+    let dispose = store.subscribe(() => {
+        let state = store.getState();
+
+        if (currentTrackIndex !== state.currentTrackIndex) {
+            currentTrackIndex = state.currentTrackIndex;
+            trackConfig = config[currentTrackIndex];
+            visualizer = trackConfig.visualizer;
+
+            store.dispatch(changeBackground({
+                hue: trackConfig.hue,
+                saturation: trackConfig.saturation,
+                lightness: trackConfig.lightness
+            }));
+        }
     });
 
-    let sum = data.slice(0, data.length).reduce((a, b) => a + b);
-    let rounded = Math.round((sum / 1024) / 255 * 100);
-    let neg = Math.random() < 0.5 ? -1 : 1;
-    let colorAmp = neg * rounded * COLOR_AMP;
+    return paper.view.onFrame = (event) => {
+        analyser.getByteFrequencyData(freqByteData);
 
-    path.strokeColor = `hsla(${3 + colorAmp}, ${33 + colorAmp}%, 67%, 0.8)`;
+        path.segments = visualizer(freqByteData, path, RADIUS);
 
-    paper.view.draw();
-
-}
-
-function render(player, store, analyser, freqByteData, path, radius) {
-
-    let r = (radius || RADIUS);
-
-    r = r > 300 ? r -= 0.05 : r += 0.05;
-
-    requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path, r));
-    //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
-    analyser.getByteFrequencyData(freqByteData);
-
-    return generatePoints(freqByteData, path, r);
+        paper.view.draw();
+    };
 }
 
 function initPath(totalWidth, totalHeight) {
@@ -51,19 +52,15 @@ function initPath(totalWidth, totalHeight) {
     let path = new paper.Path();
 
     path.closed = false;
-    //path.strokeColor = 'rgba(234, 198, 198, 0.5)';
-    //path.strokeColor = `hsla(3, 39%, 67%, 0.5)`;
     path.strokeWidth = 1;
+    path.strokeColor = '#444444';
 
-    let points = range(POINTS).map((i) => {
-        let radius = RADIUS;
-        let magnitude = i * (0.2 * (amplitude / 20));
-        let x = radius * Math.cos(RADIUS * magnitude * i) + totalWidth / 2;
-        let y = radius * Math.sin(RADIUS * magnitude * i) + totalHeight / 2;
+    range(POINTS).map(i => {
+        let x = i;
+        let y = 300;
+        let point = new paper.Point(x, y);
 
-        return new paper.Point(x, y);
-    }).map(point => {
-        return path.add(point)
+        path.add(point);
     });
 
     return path;
@@ -90,17 +87,15 @@ export default function createVisualizer(player, store) {
 
     const path = initPaper(canvas);
 
-    paper.view.draw();
-
     const dispose = store.subscribe(() => {
         let state = store.getState();
 
         if (state.isPlaying) {
-            render(player, store, analyser, freqByteData, path);
-
             // Just listen for the first play and cancel the subscription
             // after that.
             dispose();
+
+            render(player, store, analyser, freqByteData, path);
         }
     });
 

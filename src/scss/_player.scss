@@ -2,7 +2,14 @@
 * LAYOUT
 ******************************/
 .player {
-    box-sizing: border-box;
+    button {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        &:hover svg {
+            fill: $primary;
+        }
+    }
     .controls {
         display: block;
         width: 100%;
@@ -14,12 +21,14 @@
     }
     .scrubber {
         display: block;
-        height: 30px;
+        height: 10px;
         width: 100%;
         @include desktop-and-up {
-            width: 80%;
-            display: inline-block;
-            vertical-align: middle;
+            top: 0;
+            left: 0;
+            background: $black;
+            position: fixed;
+            width: 100%;
         }
     }
     .status {
@@ -44,65 +53,9 @@
     }
 }
 
-
-/******************************
-* CONTROLS
-******************************/
-.icon-prev,
-.icon-next,
-.icon-play,
-.icon-pause {
-    display: inline-block;
-    vertical-align: middle;
-    svg {
-        @include transition(fill 200ms);
-        fill: $black;
-        @include desktop-and-up {
-            /*max-height: $player_height / 2;*/
-            /*fill: $grey;*/
-        }
-    }
-    &:hover {
-        cursor: pointer;
-        svg {
-            fill: $primary;
-        }
-    }
-}
-
-.icon-prev,
-.icon-next {
-    width: 25%;
-    svg {
-        width: 90px;
-        height: 90px;
-        @include desktop-and-up {
-            width: 20px;
-            height: 25px;
-        }
-    }
-}
-
-.icon-pause {
+button.icon-pause {
     display: none;
 }
-
-.icon-play,
-.icon-pause {
-    width: 50%;
-    @include desktop-and-up {
-    }
-    svg {
-        width: 150px;
-        height: 180px;
-        fill: $black;
-        @include desktop-and-up {
-            width: 30px;
-            height: 50px;
-        }
-    }
-}
-
 
 /******************************
 * TRACKLIST (Mobile only)
@@ -121,54 +74,24 @@
     }
 }
 
+
+/******************************
+* STATES
+******************************/
 .isPlaying {
     .icon-play {
         display: none;
     }
     .icon-pause {
-        display: block;
+        display: inline-block;
     }
 }
 
 .isPaused {
     .icon-play {
-        display: block;
+        display: inline-block;
     }
     .icon-pause {
         display: none;
     }
-}
-
-
-/******************************
-* SCRUBBER
-******************************/
-.scrubber {
-    padding: 0 $base-spacing-unit/2;
-    position: relative;
-    .scrubber-inner,
-    .scrubber-played {
-        border-radius: 3px;
-        position: absolute;
-        height: 6px;
-        top: 50%;
-        margin-top: -3px;
-    }
-    .scrubber-inner {
-        width: 100%;
-        background: $black;
-    }
-    .scrubber-played {
-        width: 90%;
-        background: $primary;
-    }
-}
-
-
-/******************************
-* STATUS
-******************************/
-.status {
-    color: $black;
-    text-align: center;
 }

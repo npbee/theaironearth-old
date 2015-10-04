@@ -1,4 +1,4 @@
-import { play, pause, next, prev } from './actions';
+import { play, pause, next, prev, end } from './actions';
 
 var playBtn = document.getElementById('play');
 var pauseBtn = document.getElementById('pause');
@@ -6,8 +6,22 @@ var nextBtn = document.getElementById('next');
 var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('player');
 var scrubber = document.getElementById('scrubber');
+var overlay = document.getElementById('overlay');
 
 export function bindEvents(player, dispatch, getState) {
+
+    player.on('ended', e => {
+        let trackList = player._playlist;
+        let currentTrackIndex = getState().currentTrackIndex;
+
+        if (currentTrackIndex + 1 >= trackList.length) {
+            dispatch(end(player));
+        } else {
+            //dispatch(end(player));
+            dispatch(next(player));
+        }
+
+    });
 
     playBtn.addEventListener('click', e => {
         const isPlaying = getState().isPlaying;
@@ -41,6 +55,12 @@ export function bindEvents(player, dispatch, getState) {
 export function bindClasses(player, store) {
     store.subscribe(() => {
         let state = store.getState();
+        let hue = state.hue;
+        let saturation = state.saturation;
+        let lightness = state.lightness;
+        let opacity = state.opacity;
+
+        overlay.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
 
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
@@ -48,6 +68,9 @@ export function bindClasses(player, store) {
         } else if (state.isPaused) {
             playerEl.classList.remove('isPlaying');
             playerEl.classList.add('isPaused');
+        } else {
+            playerEl.classList.remove('isPlaying');
+            playerEl.classList.remove('isPaused');
         }
     });
 }
