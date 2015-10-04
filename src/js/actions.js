@@ -32,9 +32,9 @@ export const PREV = 'PREV';
 export const NEXT = 'NEXT';
 export const END = 'END';
 
-export function play(player) {
+export function play(player, index) {
     return (dispatch, getState) => {
-        let trackIndex = getState().currentTrackIndex;
+        let trackIndex = index !== undefined ? index : getState().currentTrackIndex;
         player.play({ playlistIndex: trackIndex });
 
         dispatch({ type: PLAY, payload: player });

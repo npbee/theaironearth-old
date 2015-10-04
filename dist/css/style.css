@@ -181,6 +181,8 @@ nav {
 
 .tracklist {
   display: none; }
+  .tracklist svg {
+    pointer-events: none; }
   .tracklist li a {
     display: block; }
   @media only screen and (min-width: 1025px) {
@@ -188,7 +190,7 @@ nav {
       display: block;
       padding-left: 32px; } }
 
-.icon--active {
+.active svg {
   stroke: #CC8D8A;
   stroke-width: 20; }
 
