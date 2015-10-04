@@ -11,6 +11,11 @@ button {
   border: none;
   outline: none; }
 
+svg {
+  -webkit-transition: fill 200ms;
+  transition: fill 200ms;
+  fill: #444; }
+
 .icon-theaironearth {
   stroke: #444;
   stroke-width: 20;
@@ -85,6 +90,32 @@ button {
   height: 40px;
   margin-top: -8px; }
 
+.icon-prev,
+.icon-next {
+  width: 25%; }
+  .icon-prev svg,
+  .icon-next svg {
+    width: 90px;
+    height: 90px; }
+    @media only screen and (min-width: 1025px) {
+      .icon-prev svg,
+      .icon-next svg {
+        width: 20px;
+        height: 25px; } }
+
+.icon-play,
+.icon-pause {
+  width: 50%; }
+  .icon-play svg,
+  .icon-pause svg {
+    width: 150px;
+    height: 180px; }
+    @media only screen and (min-width: 1025px) {
+      .icon-play svg,
+      .icon-pause svg {
+        width: 30px;
+        height: 50px; } }
+
 html,
 body {
   height: 100%; }
@@ -94,33 +125,17 @@ body {
   margin: 0; }
 
 body {
-  /*display: flex;*/
-  /*flex-direction: column;*/
   padding: 16px; }
-  @media only screen and (min-width: 1025px) {
-    body {
-      /*flex-direction: row;*/
-      /*justify-content: space-between;*/ } }
 
 @media only screen and (min-width: 1025px) {
   nav {
     float: right;
-    width: 15%;
-    /*order: 2;*/
-    /*flex-basis: 200px;*/ } }
+    width: 15%; } }
 
-main {
-  /*display: flex;*/
-  /*justify-content: center;*/ }
-  @media only screen and (min-width: 1025px) {
-    main {
-      float: left;
-      width: 85%;
-      /*align-items: baseline;*/
-      /*flex-basis: 100%;*/
-      /*justify-content: flex-start;*/
-      /*align-items: flex-start;*/
-      /*order: 1;*/ } }
+@media only screen and (min-width: 1025px) {
+  main {
+    float: left;
+    width: 85%; } }
 
 /******************************
 * LOGO
@@ -173,27 +188,6 @@ nav {
       display: block;
       padding-left: 32px; } }
 
-.overlay--active {
-  background: #444; }
-  .overlay--active .tracklist {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    width: 100%;
-    /*ul {*/
-    /*display: flex;*/
-    /*height: 100%;*/
-    /*flex-direction: column;*/
-    /*}*/
-    /*li {*/
-    /*flex: 1;*/
-    /*}*/ }
-    .overlay--active .tracklist svg {
-      height: 70px;
-      fill: #f9f9f9; }
-
 .icon--active {
   stroke: #CC8D8A;
   stroke-width: 20; }
@@ -203,6 +197,8 @@ nav {
   z-index: -1; }
 
 .overlay {
+  -webkit-transition: background 300ms;
+  transition: background 300ms;
   position: fixed;
   top: 0;
   left: 0;
@@ -234,103 +230,48 @@ nav {
 /******************************
 * LAYOUT
 ******************************/
-.player {
-  box-sizing: border-box; }
-  .player .controls {
-    display: block;
-    width: 100%; }
-    @media only screen and (min-width: 1025px) {
-      .player .controls {
-        max-width: 150px;
-        display: inline-block;
-        vertical-align: middle; } }
-  .player .scrubber {
-    display: block;
-    height: 30px;
-    width: 100%; }
-    @media only screen and (min-width: 1025px) {
-      .player .scrubber {
-        width: 80%;
-        display: inline-block;
-        vertical-align: middle; } }
-  .player .status > div {
-    display: inline-block;
-    vertical-align: middle; }
+.player button {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer; }
+  .player button:hover svg {
+    fill: #CC8D8A; }
+.player .controls {
+  display: block;
+  width: 100%; }
   @media only screen and (min-width: 1025px) {
-    .player .status {
-      width: 10%;
+    .player .controls {
+      max-width: 150px;
       display: inline-block;
       vertical-align: middle; } }
-  .player .tracklist {
-    display: block;
-    width: 100%; }
-    @media only screen and (min-width: 1025px) {
-      .player .tracklist {
-        display: none; } }
-
-/******************************
-* CONTROLS
-******************************/
-.icon-prev,
-.icon-next,
-.icon-play,
-.icon-pause {
+.player .scrubber {
+  display: block;
+  height: 10px;
+  width: 100%; }
+  @media only screen and (min-width: 1025px) {
+    .player .scrubber {
+      top: 0;
+      left: 0;
+      background: #444;
+      position: fixed;
+      width: 100%; } }
+.player .status > div {
   display: inline-block;
   vertical-align: middle; }
-  .icon-prev svg,
-  .icon-next svg,
-  .icon-play svg,
-  .icon-pause svg {
-    -webkit-transition: fill 200ms;
-    transition: fill 200ms;
-    fill: #444; }
-    @media only screen and (min-width: 1025px) {
-      .icon-prev svg,
-      .icon-next svg,
-      .icon-play svg,
-      .icon-pause svg {
-        /*max-height: $player_height / 2;*/
-        /*fill: $grey;*/ } }
-  .icon-prev:hover,
-  .icon-next:hover,
-  .icon-play:hover,
-  .icon-pause:hover {
-    cursor: pointer; }
-    .icon-prev:hover svg,
-    .icon-next:hover svg,
-    .icon-play:hover svg,
-    .icon-pause:hover svg {
-      fill: #CC8D8A; }
+@media only screen and (min-width: 1025px) {
+  .player .status {
+    width: 10%;
+    display: inline-block;
+    vertical-align: middle; } }
+.player .tracklist {
+  display: block;
+  width: 100%; }
+  @media only screen and (min-width: 1025px) {
+    .player .tracklist {
+      display: none; } }
 
-.icon-prev,
-.icon-next {
-  width: 25%; }
-  .icon-prev svg,
-  .icon-next svg {
-    width: 90px;
-    height: 90px; }
-    @media only screen and (min-width: 1025px) {
-      .icon-prev svg,
-      .icon-next svg {
-        width: 20px;
-        height: 25px; } }
-
-.icon-pause {
+button.icon-pause {
   display: none; }
-
-.icon-play,
-.icon-pause {
-  width: 50%; }
-  .icon-play svg,
-  .icon-pause svg {
-    width: 150px;
-    height: 180px;
-    fill: #444; }
-    @media only screen and (min-width: 1025px) {
-      .icon-play svg,
-      .icon-pause svg {
-        width: 30px;
-        height: 50px; } }
 
 /******************************
 * TRACKLIST (Mobile only)
@@ -343,39 +284,15 @@ nav {
 .player .tracklist svg {
   margin-top: 0; }
 
+/******************************
+* STATES
+******************************/
 .isPlaying .icon-play {
   display: none; }
 .isPlaying .icon-pause {
-  display: block; }
+  display: inline-block; }
 
 .isPaused .icon-play {
-  display: block; }
+  display: inline-block; }
 .isPaused .icon-pause {
   display: none; }
-
-/******************************
-* SCRUBBER
-******************************/
-.scrubber {
-  padding: 0 8px;
-  position: relative; }
-  .scrubber .scrubber-inner,
-  .scrubber .scrubber-played {
-    border-radius: 3px;
-    position: absolute;
-    height: 6px;
-    top: 50%;
-    margin-top: -3px; }
-  .scrubber .scrubber-inner {
-    width: 100%;
-    background: #444; }
-  .scrubber .scrubber-played {
-    width: 90%;
-    background: #CC8D8A; }
-
-/******************************
-* STATUS
-******************************/
-.status {
-  color: #444;
-  text-align: center; }

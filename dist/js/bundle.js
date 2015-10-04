@@ -1034,6 +1034,7 @@ SoundCloud.prototype.resolve = function (url, callback) {
 
         callback(data);
     }.bind(this));
+
 };
 
 SoundCloud.prototype._jsonp = function (url, callback) {
@@ -1078,6 +1079,21 @@ SoundCloud.prototype.preload = function (streamUrl) {
 };
 
 SoundCloud.prototype.play = function (options) {
+
+    this._playlist = {
+        tracks: [
+            { stream_url: '/audio/exit.mp3' },
+            { stream_url: '/audio/ghost.mp3' },
+            { stream_url: '/audio/second_skin.mp3' },
+            { stream_url: '/audio/reflection.mp3' },
+            { stream_url: '/audio/farewell.mp3' },
+            { stream_url: '/audio/stillness.mp3' },
+            { stream_url: '/audio/young_guns.mp3' },
+            { stream_url: '/audio/innocent.mp3' },
+            { stream_url: '/audio/wake.mp3' }
+        ]
+    };
+
     options = options || {};
     var src;
 
@@ -1098,8 +1114,6 @@ SoundCloud.prototype.play = function (options) {
     } else if (this._track) {
         src = this._track.stream_url;
     }
-
-    src = '/audio/farewell.mp3';
 
     if (!src) {
         throw new Error('There is no tracks to play, use `streamUrl` option or `load` method');
@@ -1166,6 +1180,8 @@ exports.play = play;
 exports.pause = pause;
 exports.prev = prev;
 exports.next = next;
+exports.end = end;
+exports.changeBackground = changeBackground;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1210,8 +1226,10 @@ exports.PAUSE = PAUSE;
 var PREV = 'PREV';
 exports.PREV = PREV;
 var NEXT = 'NEXT';
-
 exports.NEXT = NEXT;
+var END = 'END';
+
+exports.END = END;
 
 function play(player) {
     return function (dispatch, getState) {
@@ -1243,6 +1261,32 @@ function next(player) {
         player.next();
 
         dispatch({ type: NEXT, payload: player });
+    };
+}
+
+function end(player) {
+    return {
+        type: END,
+        payload: player
+    };
+}
+
+var CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
+
+exports.CHANGE_BACKGROUND = CHANGE_BACKGROUND;
+
+function changeBackground(_ref) {
+    var hue = _ref.hue;
+    var saturation = _ref.saturation;
+    var lightness = _ref.lightness;
+
+    return {
+        type: CHANGE_BACKGROUND,
+        payload: {
+            hue: hue,
+            saturation: saturation,
+            lightness: lightness
+        }
     };
 }
 
@@ -1290,7 +1334,7 @@ store.dispatch((0, _actions.fetchTracks)(player));
 
 (0, _visualizer2['default'])(player, store);
 
-},{"./actions":22,"./constants":24,"./player":25,"./reducer":26,"./visualizer":27,"redux":13,"redux-logger":10,"redux-thunk":11,"soundcloud-audio":21}],24:[function(require,module,exports){
+},{"./actions":22,"./constants":24,"./player":25,"./reducer":26,"./visualizer":28,"redux":13,"redux-logger":10,"redux-thunk":11,"soundcloud-audio":21}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1318,8 +1362,21 @@ var nextBtn = document.getElementById('next');
 var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('player');
 var scrubber = document.getElementById('scrubber');
+var overlay = document.getElementById('overlay');
 
 function bindEvents(player, dispatch, getState) {
+
+    player.on('ended', function (e) {
+        var trackList = player._playlist;
+        var currentTrackIndex = getState().currentTrackIndex;
+
+        if (currentTrackIndex + 1 >= trackList.length) {
+            dispatch((0, _actions.end)(player));
+        } else {
+            //dispatch(end(player));
+            dispatch((0, _actions.next)(player));
+        }
+    });
 
     playBtn.addEventListener('click', function (e) {
         var isPlaying = getState().isPlaying;
@@ -1353,6 +1410,12 @@ function bindEvents(player, dispatch, getState) {
 function bindClasses(player, store) {
     store.subscribe(function () {
         var state = store.getState();
+        var hue = state.hue;
+        var saturation = state.saturation;
+        var lightness = state.lightness;
+        var opacity = state.opacity;
+
+        overlay.style.backgroundColor = 'hsla(' + hue + ', ' + saturation + '%, ' + lightness + '%, ' + opacity + ')';
 
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
@@ -1360,6 +1423,9 @@ function bindClasses(player, store) {
         } else if (state.isPaused) {
             playerEl.classList.remove('isPlaying');
             playerEl.classList.add('isPaused');
+        } else {
+            playerEl.classList.remove('isPlaying');
+            playerEl.classList.remove('isPaused');
         }
     });
 }
@@ -1377,7 +1443,10 @@ var initialState = {
     isFetching: false,
     isPlaying: false,
     isPaused: false,
-    currentTrackIndex: 0
+    currentTrackIndex: 0,
+    hue: 0,
+    saturation: 0,
+    opacity: 0.6
 };
 
 exports['default'] = function (state, action) {
@@ -1411,6 +1480,22 @@ exports['default'] = function (state, action) {
                 isPlaying: true,
                 isPaused: false
             });
+        case _actions.END:
+            return Object.assign({}, state, {
+                isPlaying: false,
+                isPaused: false,
+                hue: 0,
+                saturation: 0,
+                currentTrackIndex: 0,
+                lightness: 0,
+                opacity: 0
+            });
+        case _actions.CHANGE_BACKGROUND:
+            return Object.assign({}, state, {
+                hue: action.payload.hue,
+                saturation: action.payload.saturation,
+                lightness: action.payload.lightness
+            });
         default:
             return state;
     }
@@ -1419,6 +1504,47 @@ exports['default'] = function (state, action) {
 module.exports = exports['default'];
 
 },{"./actions":22}],27:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _sphere = require('./sphere');
+
+var _sphere2 = _interopRequireDefault(_sphere);
+
+var POINTS = 256;
+exports.POINTS = POINTS;
+var INIT_POINTS = 50;
+exports.INIT_POINTS = INIT_POINTS;
+var amplitude = 5;
+exports.amplitude = amplitude;
+var ANGLE = 10;
+exports.ANGLE = ANGLE;
+var RADIUS = 100;
+exports.RADIUS = RADIUS;
+var COLOR_AMP = 0.4;
+
+exports.COLOR_AMP = COLOR_AMP;
+exports["default"] = {
+    "0": {
+        visualizer: _sphere2["default"],
+        hue: 195,
+        saturation: 30,
+        lightness: 72
+    },
+    "1": {
+        visualizer: _sphere2["default"],
+        hue: 30,
+        saturation: 48,
+        lightness: 72
+    }
+};
+
+},{"./sphere":29}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1432,50 +1558,54 @@ var _lodashUtilityRange = require('lodash/utility/range');
 
 var _lodashUtilityRange2 = _interopRequireDefault(_lodashUtilityRange);
 
-var POINTS = 256;
-var INIT_POINTS = 50;
-var amplitude = 5;
-var ANGLE = 10;
-var RADIUS = 1;
-var COLOR_AMP = 0.4;
+var _sphere = require('./sphere');
 
-function generatePoints(data, path, radius) {
-    path.segments = path.segments.map(function (segment, i) {
-        var xPos = paper.view.size.width / 2;
-        var yPos = paper.view.size.height / 2;
-        var magnitude = data[i] * (0.2 * (amplitude / 20));
-        var x = radius * Math.cos(radius * magnitude) + xPos;
-        var y = radius * Math.sin(radius * magnitude) + yPos;
+var _sphere2 = _interopRequireDefault(_sphere);
 
-        segment.point.x = x;
-        segment.point.y = y;
+var _actions = require('../actions');
 
-        return segment;
-    });
+var _config = require('./config');
 
-    var sum = data.slice(0, data.length).reduce(function (a, b) {
-        return a + b;
-    });
-    var rounded = Math.round(sum / 1024 / 255 * 100);
-    var neg = Math.random() < 0.5 ? -1 : 1;
-    var colorAmp = neg * rounded * COLOR_AMP;
+var _config2 = _interopRequireDefault(_config);
 
-    path.strokeColor = 'hsla(' + (3 + colorAmp) + ', ' + (33 + colorAmp) + '%, 67%, 0.8)';
+function render(player, store, analyser, freqByteData, path) {
 
-    paper.view.draw();
-}
-
-function render(player, store, analyser, freqByteData, path, radius) {
-
-    var r = radius || RADIUS;
-
-    r = r > 300 ? r -= 0.05 : r += 0.05;
-
-    requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path, r));
+    //requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path));
     //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
-    analyser.getByteFrequencyData(freqByteData);
+    var state = store.getState();
+    var currentTrackIndex = state.currentTrackIndex;
+    var trackConfig = _config2['default'][currentTrackIndex];
+    var visualizer = trackConfig.visualizer;
 
-    return generatePoints(freqByteData, path, r);
+    store.dispatch((0, _actions.changeBackground)({
+        hue: trackConfig.hue,
+        saturation: trackConfig.saturation,
+        lightness: trackConfig.lightness
+    }));
+
+    var dispose = store.subscribe(function () {
+        var state = store.getState();
+
+        if (currentTrackIndex !== state.currentTrackIndex) {
+            currentTrackIndex = state.currentTrackIndex;
+            trackConfig = _config2['default'][currentTrackIndex];
+            visualizer = trackConfig.visualizer;
+
+            store.dispatch((0, _actions.changeBackground)({
+                hue: trackConfig.hue,
+                saturation: trackConfig.saturation,
+                lightness: trackConfig.lightness
+            }));
+        }
+    });
+
+    return paper.view.onFrame = function (event) {
+        analyser.getByteFrequencyData(freqByteData);
+
+        path.segments = visualizer(freqByteData, path, _config.RADIUS);
+
+        paper.view.draw();
+    };
 }
 
 function initPath(totalWidth, totalHeight) {
@@ -1483,19 +1613,15 @@ function initPath(totalWidth, totalHeight) {
     var path = new paper.Path();
 
     path.closed = false;
-    //path.strokeColor = 'rgba(234, 198, 198, 0.5)';
-    //path.strokeColor = `hsla(3, 39%, 67%, 0.5)`;
     path.strokeWidth = 1;
+    path.strokeColor = '#444444';
 
-    var points = (0, _lodashUtilityRange2['default'])(POINTS).map(function (i) {
-        var radius = RADIUS;
-        var magnitude = i * (0.2 * (amplitude / 20));
-        var x = radius * Math.cos(RADIUS * magnitude * i) + totalWidth / 2;
-        var y = radius * Math.sin(RADIUS * magnitude * i) + totalHeight / 2;
+    (0, _lodashUtilityRange2['default'])(_config.POINTS).map(function (i) {
+        var x = i;
+        var y = 300;
+        var point = new paper.Point(x, y);
 
-        return new paper.Point(x, y);
-    }).map(function (point) {
-        return path.add(point);
+        path.add(point);
     });
 
     return path;
@@ -1522,21 +1648,47 @@ function createVisualizer(player, store) {
 
     var path = initPaper(canvas);
 
-    paper.view.draw();
-
     var dispose = store.subscribe(function () {
         var state = store.getState();
 
         if (state.isPlaying) {
-            render(player, store, analyser, freqByteData, path);
-
             // Just listen for the first play and cancel the subscription
             // after that.
             dispose();
+
+            render(player, store, analyser, freqByteData, path);
         }
     });
 }
 
 module.exports = exports['default'];
 
-},{"lodash/utility/range":8}]},{},[23]);
+},{"../actions":22,"./config":27,"./sphere":29,"lodash/utility/range":8}],29:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+exports['default'] = generateSphere;
+
+var _config = require('./config');
+
+function generateSphere(data, path, radius) {
+
+    return path.segments.map(function (segment, i) {
+        var xPos = paper.view.size.width / 2;
+        var yPos = paper.view.size.height / 2;
+        var magnitude = data[i] * (0.2 * (_config.amplitude / 20));
+        var x = radius * Math.cos(radius * magnitude) + xPos;
+        var y = radius * Math.sin(radius * magnitude) + yPos;
+
+        segment.point.x = x;
+        segment.point.y = y;
+
+        return segment;
+    });
+}
+
+module.exports = exports['default'];
+
+},{"./config":27}]},{},[23]);

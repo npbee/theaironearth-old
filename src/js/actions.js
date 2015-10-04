@@ -30,6 +30,7 @@ export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
 export const PREV = 'PREV';
 export const NEXT = 'NEXT';
+export const END = 'END';
 
 export function play(player) {
     return (dispatch, getState) => {
@@ -61,5 +62,25 @@ export function next(player) {
         player.next();
 
         dispatch({ type: NEXT, payload: player });
+    };
+}
+
+export function end(player) {
+    return {
+        type: END,
+        payload: player
+    };
+}
+
+export const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
+
+export function changeBackground({ hue, saturation, lightness }) {
+    return {
+        type: CHANGE_BACKGROUND,
+        payload: {
+            hue,
+            saturation,
+            lightness
+        }
     };
 }

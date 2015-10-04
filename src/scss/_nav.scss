@@ -65,30 +65,6 @@ nav {
     }
 }
 
-.overlay--active {
-    background: $black;
-    .tracklist {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        /*ul {*/
-            /*display: flex;*/
-            /*height: 100%;*/
-            /*flex-direction: column;*/
-        /*}*/
-        /*li {*/
-            /*flex: 1;*/
-        /*}*/
-        svg {
-            height: 70px;
-            fill: $white;
-        }
-    }
-}
-
 .icon--active {
     stroke: $primary;
     stroke-width: 20;

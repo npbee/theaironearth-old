@@ -5,14 +5,19 @@ import {
     PLAY,
     PAUSE,
     NEXT,
-    PREV
+    PREV,
+    END,
+    CHANGE_BACKGROUND
 } from './actions';
 
 const initialState = {
     isFetching: false,
     isPlaying: false,
     isPaused: false,
-    currentTrackIndex: 0
+    currentTrackIndex: 0,
+    hue: 0,
+    saturation: 0,
+    opacity: 0.6
 };
 
 export default function(state = initialState, action) {
@@ -43,6 +48,22 @@ export default function(state = initialState, action) {
             currentTrackIndex: action.payload._playlistIndex,
             isPlaying: true,
             isPaused: false
+        });
+    case END:
+        return Object.assign({}, state, {
+            isPlaying: false,
+            isPaused: false,
+            hue: 0,
+            saturation: 0,
+            currentTrackIndex: 0,
+            lightness: 0,
+            opacity: 0
+        });
+    case CHANGE_BACKGROUND:
+        return Object.assign({}, state, {
+            hue: action.payload.hue,
+            saturation: action.payload.saturation,
+            lightness: action.payload.lightness
         });
     default:
         return state;
