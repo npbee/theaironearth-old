@@ -7,6 +7,14 @@ var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('player');
 var scrubber = document.getElementById('scrubber');
 var overlay = document.getElementById('overlay');
+const nav = document.getElementById('nav');
+const trackList = Array.from(document.querySelectorAll('.tracklist'));
+
+function getIndex(li) {
+    let children = Array.from(li.parentNode.children);
+
+    return children.indexOf(li);
+}
 
 export function bindEvents(player, dispatch, getState) {
 
@@ -50,21 +58,57 @@ export function bindEvents(player, dispatch, getState) {
     scrubber.addEventListener('click', e => {
         player.seek(e);
     });
+
+    nav.addEventListener('click', e => {
+        if (e.target && e.target.nodeName === 'A') {
+            let target = e.target;
+            let parentNode = target.parentNode;
+            let index = getIndex(parentNode);
+
+            dispatch(play(player, index));
+
+            e.preventDefault();
+        }
+    });
+
 }
 
 export function bindClasses(player, store) {
+
     store.subscribe(() => {
         let state = store.getState();
         let hue = state.hue;
         let saturation = state.saturation;
         let lightness = state.lightness;
         let opacity = state.opacity;
+        let currentTrackIndex = state.currentTrackIndex;
 
-        overlay.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
+        overlay.style.backgroundColor =
+            `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
+
+            //.filter((list, idx) => {
+                //console.log(idx);
+                //idx === currentTrackIndex;
+            //})
+            //.map(list => list.classList.add('active'));
 
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
+
+            trackList
+                .map(list => {
+                    let children = Array.from(list.children);
+
+                    return children
+                        .map(li => {
+                            li.classList.remove('active');
+                            return li;
+                        })
+                        .filter((li, idx) => idx === currentTrackIndex)
+                        .map(li => li.classList.add('active'));
+                });
+
         } else if (state.isPaused) {
             playerEl.classList.remove('isPlaying');
             playerEl.classList.add('isPaused');
@@ -73,4 +117,5 @@ export function bindClasses(player, store) {
             playerEl.classList.remove('isPaused');
         }
     });
+
 }

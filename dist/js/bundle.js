@@ -1231,9 +1231,9 @@ var END = 'END';
 
 exports.END = END;
 
-function play(player) {
+function play(player, index) {
     return function (dispatch, getState) {
-        var trackIndex = getState().currentTrackIndex;
+        var trackIndex = index !== undefined ? index : getState().currentTrackIndex;
         player.play({ playlistIndex: trackIndex });
 
         dispatch({ type: PLAY, payload: player });
@@ -1317,7 +1317,7 @@ var _actions = require('./actions');
 
 var _constants = require('./constants');
 
-var _player = require('./player');
+var _dom = require('./dom');
 
 var _visualizer = require('./visualizer');
 
@@ -1329,12 +1329,12 @@ var player = new _soundcloudAudio2['default'](_constants.CLIENT_ID);
 
 store.dispatch((0, _actions.fetchTracks)(player));
 
-(0, _player.bindEvents)(player, store.dispatch, store.getState);
-(0, _player.bindClasses)(player, store);
+(0, _dom.bindEvents)(player, store.dispatch, store.getState);
+(0, _dom.bindClasses)(player, store);
 
 (0, _visualizer2['default'])(player, store);
 
-},{"./actions":22,"./constants":24,"./player":25,"./reducer":26,"./visualizer":28,"redux":13,"redux-logger":10,"redux-thunk":11,"soundcloud-audio":21}],24:[function(require,module,exports){
+},{"./actions":22,"./constants":24,"./dom":25,"./reducer":26,"./visualizer":28,"redux":13,"redux-logger":10,"redux-thunk":11,"soundcloud-audio":21}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1363,6 +1363,14 @@ var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('player');
 var scrubber = document.getElementById('scrubber');
 var overlay = document.getElementById('overlay');
+var nav = document.getElementById('nav');
+var trackList = Array.from(document.querySelectorAll('.tracklist'));
+
+function getIndex(li) {
+    var children = Array.from(li.parentNode.children);
+
+    return children.indexOf(li);
+}
 
 function bindEvents(player, dispatch, getState) {
 
@@ -1405,21 +1413,54 @@ function bindEvents(player, dispatch, getState) {
     scrubber.addEventListener('click', function (e) {
         player.seek(e);
     });
+
+    nav.addEventListener('click', function (e) {
+        if (e.target && e.target.nodeName === 'A') {
+            var target = e.target;
+            var parentNode = target.parentNode;
+            var index = getIndex(parentNode);
+
+            dispatch((0, _actions.play)(player, index));
+
+            e.preventDefault();
+        }
+    });
 }
 
 function bindClasses(player, store) {
+
     store.subscribe(function () {
         var state = store.getState();
         var hue = state.hue;
         var saturation = state.saturation;
         var lightness = state.lightness;
         var opacity = state.opacity;
+        var currentTrackIndex = state.currentTrackIndex;
 
         overlay.style.backgroundColor = 'hsla(' + hue + ', ' + saturation + '%, ' + lightness + '%, ' + opacity + ')';
+
+        //.filter((list, idx) => {
+        //console.log(idx);
+        //idx === currentTrackIndex;
+        //})
+        //.map(list => list.classList.add('active'));
 
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
+
+            trackList.map(function (list) {
+                var children = Array.from(list.children);
+
+                return children.map(function (li) {
+                    li.classList.remove('active');
+                    return li;
+                }).filter(function (li, idx) {
+                    return idx === currentTrackIndex;
+                }).map(function (li) {
+                    return li.classList.add('active');
+                });
+            });
         } else if (state.isPaused) {
             playerEl.classList.remove('isPlaying');
             playerEl.classList.add('isPaused');

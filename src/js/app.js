@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { fetchTracks } from './actions';
 import { CLIENT_ID } from './constants';
-import { bindEvents as bindPlayerEvents, bindClasses as bindPlayerClasses } from './player';
+import { bindEvents, bindClasses } from './dom';
 import createVisualizer from './visualizer';
 
 
@@ -16,7 +16,7 @@ let player = new SoundCloudAudio(CLIENT_ID);
 
 store.dispatch(fetchTracks(player));
 
-bindPlayerEvents(player, store.dispatch, store.getState);
-bindPlayerClasses(player, store);
+bindEvents(player, store.dispatch, store.getState);
+bindClasses(player, store);
 
 createVisualizer(player, store);

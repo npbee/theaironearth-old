@@ -12,7 +12,6 @@ export default function generateSphere(data, path, radius) {
         segment.point.x = x;
         segment.point.y = y;
 
-
         return segment;
     });
 

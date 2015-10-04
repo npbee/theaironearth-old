@@ -55,6 +55,9 @@ nav {
 }
 
 .tracklist {
+    svg {
+        pointer-events: none;
+    }
     display: none;
     li a {
         display: block;
@@ -65,7 +68,7 @@ nav {
     }
 }
 
-.icon--active {
+.active svg {
     stroke: $primary;
     stroke-width: 20;
 }
