@@ -1,0 +1,17 @@
+body {
+    padding: $base-spacing-unit;
+}
+
+nav {
+    @include desktop-and-up {
+        float: right;
+        width: 15%;
+    }
+}
+
+main {
+    @include desktop-and-up {
+        float: left;
+        width: 85%;
+    }
+}

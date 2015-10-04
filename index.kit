@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>the air on earth</title>
+        <link rel="stylesheet" href="dist/css/style.css" />
+        <base href="/" >
+    </head>
+    <body class="xoverlay--active">
+        <!-- @include "src/svg/defs.kit" -->
+        <!-- @include "src/svg/linedefs.kit" -->
+
+        <nav>
+            <a class="logo">
+                <svg class="icon icon-theaironearth">
+                    <use xlink:href="#icon-theaironearth"></use>
+                </svg>
+            </a>
+
+            <ul class="subnav">
+                <li>
+                    <a>
+                        <svg class="icon icon-listen">
+                            <use xlink:href="#icon-listen"></use>
+                        </svg>
+                    </a>
+                </li><!--
+                --><li class="tracklist">
+                    <ul>
+                        <li>
+                            <a>
+                            <svg class="icon icon-exit icon--active">
+                                <use xlink:href="#icon-exit"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-ghost">
+                                <use xlink:href="#icon-ghost"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-second-skin">
+                                <use xlink:href="#icon-secondskin"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-reflection">
+                                <use xlink:href="#icon-reflection"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-farewell">
+                                <use xlink:href="#icon-farewell"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-stillness">
+                                <use xlink:href="#icon-stillness"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-young-guns">
+                                <use xlink:href="#icon-youngguns"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-innocent">
+                                <use xlink:href="#icon-innocent"></use>
+                            </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <svg class="icon icon-wake">
+                                <use xlink:href="#icon-wake"></use>
+                            </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!--
+                --><li>
+                    <a>
+                    <svg class="icon icon-download">
+                        <use xlink:href="#icon-download"></use>
+                    </svg>
+                    </a>
+                </li><!--
+                --><li>
+                    <a id="about" href="#about">
+                    <svg class="icon icon-about">
+                        <use xlink:href="#icon-about"></use>
+                    </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="player" id="player">
+                <div class="controls">
+                    <button class="icon-prev" id="prev">
+                        <svg>
+                            <use xlink:href="#icon-prev"></use>
+                        </svg>
+                    </button><!--
+                    --><button class="icon-play" id="play">
+                        <svg>
+                            <use xlink:href="#icon-play2"></use>
+                        </svg>
+                    </button><!--
+                    --><button class="icon-pause" id="pause">
+                        <svg>
+                            <use xlink:href="#icon-pause1"></use>
+                        </svg>
+                    </button><!--
+                    --><button class="icon-next" id="next">
+                        <svg>
+                            <use xlink:href="#icon-next"></use>
+                        </svg>
+                    </button>
+                </div><!--
+                --><div id="scrubber" class="scrubber"></div><!--
+                --><div style="display: none" id="status" class="status">
+                    <div id="current-time" class="time">1:07</div>
+                    <div id="separator" class="status-separator">/</div>
+                    <div id="total-time" class="time">4:03</div>
+                </div>
+                <ul class="tracklist">
+                    <li>
+                        <a>
+                        <svg class="icon icon-exit icon--active">
+                            <use xlink:href="#icon-exit"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-ghost">
+                            <use xlink:href="#icon-ghost"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-second-skin">
+                            <use xlink:href="#icon-secondskin"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-reflection">
+                            <use xlink:href="#icon-reflection"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-farewell">
+                            <use xlink:href="#icon-farewell"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-stillness">
+                            <use xlink:href="#icon-stillness"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-young-guns">
+                            <use xlink:href="#icon-youngguns"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-innocent">
+                            <use xlink:href="#icon-innocent"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                        <svg class="icon icon-wake">
+                            <use xlink:href="#icon-wake"></use>
+                        </svg>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <canvas class="visualizer" id="visualizer"></canvas>
+        </main>
+        <div class="overlay" id="overlay"></div>
+        <script src="dist/js/paper-full.min.js"></script>
+        <script src="dist/js/bundle.js"></script>
+    </body>
+</html>
