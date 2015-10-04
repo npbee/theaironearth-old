@@ -1,0 +1,32 @@
+body {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    padding: $base-spacing-unit;
+    @include desktop-and-up {
+        /*flex-direction: row;*/
+        /*justify-content: space-between;*/
+    }
+}
+
+nav {
+    @include desktop-and-up {
+        float: right;
+        width: 15%;
+        /*order: 2;*/
+        /*flex-basis: 200px;*/
+    }
+}
+
+main {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    @include desktop-and-up {
+        float: left;
+        width: 85%;
+        /*align-items: baseline;*/
+        /*flex-basis: 100%;*/
+        /*justify-content: flex-start;*/
+        /*align-items: flex-start;*/
+        /*order: 1;*/
+    }
+}
