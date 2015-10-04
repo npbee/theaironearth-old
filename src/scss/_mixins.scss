@@ -1,0 +1,13 @@
+$mq-mobile-portrait: 320px !default;
+$mq-mobile-landscape: 480px !default;
+$mq-tablet-portrait: 768px !default;
+$mq-tablet-landscape: 1024px !default;
+$mq-desktop: 1382px !default;
+
+
+// Everything larger than a landscape tablet
+@mixin desktop-and-up {
+    @media only screen and (min-width : $mq-tablet-landscape + 1) {
+        @content;
+    }
+}
