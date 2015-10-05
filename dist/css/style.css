@@ -116,6 +116,14 @@ svg {
         width: 30px;
         height: 50px; } }
 
+.icon-pause svg {
+  width: 140px;
+  height: 160px; }
+  @media only screen and (min-width: 1025px) {
+    .icon-pause svg {
+      width: 20px;
+      height: 40px; } }
+
 html,
 body {
   height: 100%; }
@@ -176,17 +184,22 @@ nav {
     stroke: #CC8D8A;
     stroke-width: 20; }
 
-.subnav > li:not(.tracklist) {
+.subnav > li {
   display: inline-block;
   vertical-align: middle;
   width: 33.33%;
   /*flex: 1;*/
   text-align: center; }
   @media only screen and (min-width: 1025px) {
-    .subnav > li:not(.tracklist) {
+    .subnav > li {
       text-align: left;
       display: block;
       width: 100%; } }
+.subnav > li:nth-child(2) {
+  display: none; }
+  @media only screen and (min-width: 1025px) {
+    .subnav > li:nth-child(2) {
+      display: block; } }
 
 .tracklist {
   display: none; }
