@@ -21,6 +21,7 @@ nav {
     margin-bottom: $base-spacing-unit * 2;
     svg {
         max-width: 100%;
+        pointer-events: none;
     }
     a {
         display: block;
@@ -34,7 +35,10 @@ nav {
             }
         }
     }
-
+    .active svg {
+        stroke: $primary;
+        stroke-width: 20;
+    }
 }
 
 .subnav {
@@ -55,9 +59,6 @@ nav {
 }
 
 .tracklist {
-    svg {
-        pointer-events: none;
-    }
     display: none;
     li a {
         display: block;
@@ -66,9 +67,4 @@ nav {
         display: block;
         padding-left: $base-spacing-unit * 2;
     }
-}
-
-.active svg {
-    stroke: $primary;
-    stroke-width: 20;
 }

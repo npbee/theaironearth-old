@@ -137,6 +137,11 @@ body {
     float: left;
     width: 85%; } }
 
+.section {
+  display: none; }
+  .section.active {
+    display: block; }
+
 /******************************
 * LOGO
 ******************************/
@@ -156,7 +161,8 @@ body {
 nav {
   margin-bottom: 32px; }
   nav svg {
-    max-width: 100%; }
+    max-width: 100%;
+    pointer-events: none; }
   nav a {
     display: block; }
     nav a svg {
@@ -166,6 +172,9 @@ nav {
       cursor: pointer; }
       nav a:hover svg {
         fill: #CC8D8A; }
+  nav .active svg {
+    stroke: #CC8D8A;
+    stroke-width: 20; }
 
 .subnav > li:not(.tracklist) {
   display: inline-block;
@@ -181,18 +190,12 @@ nav {
 
 .tracklist {
   display: none; }
-  .tracklist svg {
-    pointer-events: none; }
   .tracklist li a {
     display: block; }
   @media only screen and (min-width: 1025px) {
     .tracklist {
       display: block;
       padding-left: 32px; } }
-
-.active svg {
-  stroke: #CC8D8A;
-  stroke-width: 20; }
 
 .overlay,
 .visualizer {

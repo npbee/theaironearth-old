@@ -15,3 +15,12 @@ main {
         width: 85%;
     }
 }
+
+.section {
+    display: none;
+    &.active {
+        display: block;
+    }
+}
+
+

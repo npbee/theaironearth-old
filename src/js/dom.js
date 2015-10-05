@@ -4,16 +4,31 @@ var playBtn = document.getElementById('play');
 var pauseBtn = document.getElementById('pause');
 var nextBtn = document.getElementById('next');
 var prevBtn = document.getElementById('prev');
-var playerEl = document.getElementById('player');
+var playerEl = document.getElementById('listen');
 var scrubber = document.getElementById('scrubber');
 var overlay = document.getElementById('overlay');
 const nav = document.getElementById('nav');
+const pageNavs = Array.from(document.querySelectorAll('.subnav > li > a'));
+const navTracklist = document.getElementById('nav-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
+const sections = Array.from(document.querySelectorAll('.section'));
 
 function getIndex(li) {
     let children = Array.from(li.parentNode.children);
 
     return children.indexOf(li);
+}
+
+function activateEl(els, filterFn) {
+    els.map(el => {
+        el.classList.remove('active');
+        return el;
+    })
+    .filter(filterFn)
+    .map(el => {
+        el.classList.add('active');
+        return el;
+    });
 }
 
 export function bindEvents(player, dispatch, getState) {
@@ -59,7 +74,7 @@ export function bindEvents(player, dispatch, getState) {
         player.seek(e);
     });
 
-    nav.addEventListener('click', e => {
+    navTracklist.addEventListener('click', e => {
         if (e.target && e.target.nodeName === 'A') {
             let target = e.target;
             let parentNode = target.parentNode;
@@ -68,8 +83,42 @@ export function bindEvents(player, dispatch, getState) {
             dispatch(play(player, index));
 
             e.preventDefault();
+            e.stopPropagation();
         }
     });
+
+    nav.addEventListener('click', e => {
+        if (e.target && e.target.nodeName === 'A') {
+            console.log('hi');
+            let hash = e.target.hash;
+            let id = hash.slice(1);
+
+            activateEl(pageNavs, el => el.hash === hash);
+            activateEl(sections, el => el.getAttribute('id') === id);
+
+            if (window.history) {
+                window.history.pushState({ activeSection: id }, null, hash);
+            }
+
+            e.preventDefault();
+        }
+    });
+
+    window.addEventListener('popstate', e => {
+        let activeSection = e.state.activeSection;
+
+        if (activeSection) {
+            activateEl(sections, el => el.getAttribute('id') === activeSection);
+            activateEl(pageNavs, el => el.hash === `#${activeSection}`);
+        }
+    });
+
+    if (document.location.hash) {
+        let hash = document.location.hash;
+
+        activateEl(pageNavs, el => el.hash === hash);
+        activateEl(sections, el => el.getAttribute('id') === hash.slice(1));
+    }
 
 }
 

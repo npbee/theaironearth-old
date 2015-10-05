@@ -102,7 +102,7 @@
 </svg>
 
         <nav id="nav">
-            <a class="logo">
+            <a class="logo" href="/">
                 <svg class="icon icon-theaironearth">
                     <use xlink:href="#icon-theaironearth"></use>
                 </svg>
@@ -110,14 +110,14 @@
 
             <ul class="subnav">
                 <li>
-                    <a>
+                    <a href="#listen" id="listen-svg">
                         <svg class="icon icon-listen">
                             <use xlink:href="#icon-listen"></use>
                         </svg>
                     </a>
                 </li><!--
                 --><li>
-                    <ul class="tracklist">
+                    <ul class="tracklist" id="nav-tracklist">
                         <li>
                             <a>
                                 <svg class="icon icon-exit">
@@ -184,14 +184,14 @@
                     </ul>
                 </li><!--
                 --><li>
-                    <a>
+                    <a href="#download">
                     <svg class="icon icon-download">
                         <use xlink:href="#icon-download"></use>
                     </svg>
                     </a>
                 </li><!--
                 --><li>
-                    <a id="about" href="#about">
+                    <a href="#about">
                     <svg class="icon icon-about">
                         <use xlink:href="#icon-about"></use>
                     </svg>
@@ -201,7 +201,7 @@
         </nav>
 
         <main>
-            <section class="player" id="player">
+            <section class="player section active" id="listen">
                 <div class="controls">
                     <button class="icon-prev" id="prev">
                         <svg>
@@ -295,6 +295,12 @@
                         </a>
                     </li>
                 </ul>
+            </section>
+            <section class="section" id="about">
+                About
+            </section>
+            <section class="section" id="download">
+                Download
             </section>
             <canvas class="visualizer" id="visualizer"></canvas>
         </main>

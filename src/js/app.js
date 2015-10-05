@@ -8,6 +8,7 @@ import { fetchTracks } from './actions';
 import { CLIENT_ID } from './constants';
 import { bindEvents, bindClasses } from './dom';
 import createVisualizer from './visualizer';
+import createRouter from './router';
 
 
 let logger = createLogger();
