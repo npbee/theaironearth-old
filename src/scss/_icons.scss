@@ -107,3 +107,14 @@ svg {
         }
     }
 }
+
+.icon-pause {
+    svg {
+        width: 140px;
+        height: 160px;
+        @include desktop-and-up {
+            width: 20px;
+            height: 40px;
+        }
+    }
+}

@@ -42,7 +42,7 @@ nav {
 }
 
 .subnav {
-    > li:not(.tracklist) {
+    > li {
         display: inline-block;
         vertical-align: middle;
         width: 33.33%;
@@ -52,6 +52,12 @@ nav {
             text-align: left;
             display: block;
             width: 100%;
+        }
+    }
+    >li:nth-child(2) {
+        display: none;
+        @include desktop-and-up {
+            display: block;
         }
     }
     svg {
