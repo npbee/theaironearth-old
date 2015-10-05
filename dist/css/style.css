@@ -109,12 +109,12 @@ svg {
   .icon-play svg,
   .icon-pause svg {
     width: 150px;
-    height: 180px; }
+    height: 160px; }
     @media only screen and (min-width: 1025px) {
       .icon-play svg,
       .icon-pause svg {
         width: 30px;
-        height: 50px; } }
+        height: 40px; } }
 
 .icon-pause svg {
   width: 140px;

@@ -100,10 +100,10 @@ svg {
     }
     svg {
         width: 150px;
-        height: 180px;
+        height: 160px;
         @include desktop-and-up {
             width: 30px;
-            height: 50px;
+            height: 40px;
         }
     }
 }
