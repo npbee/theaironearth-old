@@ -296,15 +296,6 @@
 		"outputAbbreviatedPath": "\/src\/svg\/defs.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/src\/svg\/linedefs.kit": {
-		"fileType": 2048,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/src\/svg\/linedefs.kit",
-		"outputAbbreviatedPath": "\/src\/svg\/linedefs.html",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
 		}
 	},
 "hooks": [
