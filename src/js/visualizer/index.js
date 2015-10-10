@@ -1,6 +1,7 @@
 import range from 'lodash/utility/range';
 import generateSphere from './sphere';
 import { changeBackground } from '../actions';
+import generateSimpleWave from './simpleWave';
 
 import config, {
     POINTS,
@@ -15,12 +16,24 @@ function render(player, store, analyser, freqByteData, path) {
     let currentTrackIndex = state.currentTrackIndex;
     let trackConfig = config[currentTrackIndex];
     let visualizer = trackConfig.visualizer;
+    let strokeColor = trackConfig.strokeColor;
 
     store.dispatch(changeBackground({
         hue: trackConfig.hue,
         saturation: trackConfig.saturation,
         lightness: trackConfig.lightness
     }));
+
+    function run() {
+        return paper.view.onFrame = (event) => {
+            analyser.getByteFrequencyData(freqByteData);
+
+            path.segments = visualizer(freqByteData, path, paper, event);
+            path.strokeColor = strokeColor;
+
+            paper.view.draw();
+        };
+    }
 
     let dispose = store.subscribe(() => {
         let state = store.getState();
@@ -29,22 +42,25 @@ function render(player, store, analyser, freqByteData, path) {
             currentTrackIndex = state.currentTrackIndex;
             trackConfig = config[currentTrackIndex];
             visualizer = trackConfig.visualizer;
+            strokeColor = trackConfig.strokeColor;
 
             store.dispatch(changeBackground({
                 hue: trackConfig.hue,
                 saturation: trackConfig.saturation,
                 lightness: trackConfig.lightness
             }));
+
+            paper.view.off('frame');
+        }
+
+        if (!state.isPlaying) {
+            paper.view.off('frame');
+        } else {
+            run();
         }
     });
 
-    return paper.view.onFrame = (event) => {
-        analyser.getByteFrequencyData(freqByteData);
-
-        path.segments = visualizer(freqByteData, path, RADIUS);
-
-        paper.view.draw();
-    };
+    return run();
 }
 
 function initPath(totalWidth, totalHeight) {
@@ -53,12 +69,19 @@ function initPath(totalWidth, totalHeight) {
 
     path.closed = false;
     path.strokeWidth = 1;
-    path.strokeColor = '#444444';
+    path.strokeColor = 'rgba(0,0,0,0)';
 
-    range(POINTS).map(i => {
-        let x = i;
-        let y = 300;
-        let point = new paper.Point(x, y);
+    let midX = totalWidth / 2;
+    let midY = totalHeight / 2;
+    let startX = midX - POINTS / 2;
+
+    function initDraw(point) {
+        path.add(point);
+        paper.view.draw();
+    }
+
+    range(POINTS).map((i, idx) => {
+        let point = new paper.Point(i, midY);
 
         path.add(point);
     });
@@ -68,7 +91,7 @@ function initPath(totalWidth, totalHeight) {
 
 function initPaper(canvas) {
     paper.setup(canvas);
-    paper.view.fillColor = 'rgb(255, 255,233)';
+    paper.view.fillColor = 'rgb(255,255,233)';
 
     return initPath(paper.view.size.width, paper.view.size.height);
 }

@@ -41,6 +41,14 @@ export function play(player, index) {
     };
 }
 
+export function resume(player) {
+    return dispatch => {
+        player.audio.play();
+
+        dispatch({ type: PLAY, payload: player });
+    };
+}
+
 export function pause(player) {
     return dispatch => {
         player.pause();

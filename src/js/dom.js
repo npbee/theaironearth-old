@@ -1,4 +1,4 @@
-import { play, pause, next, prev, end } from './actions';
+import { play, pause, next, prev, end, resume } from './actions';
 
 var playBtn = document.getElementById('play');
 var pauseBtn = document.getElementById('pause');
@@ -47,9 +47,13 @@ export function bindEvents(player, dispatch, getState) {
     });
 
     playBtn.addEventListener('click', e => {
-        const isPlaying = getState().isPlaying;
+        let state = getState();
+        const isPlaying = state.isPlaying;
+        const isPaused = state.isPaused;
 
-        if (!isPlaying) {
+        if (isPaused) {
+            dispatch(resume(player));
+        } else if (!isPlaying) {
             dispatch(play(player));
         }
     });
