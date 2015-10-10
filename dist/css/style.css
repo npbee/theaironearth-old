@@ -210,7 +210,9 @@ nav {
       display: block;
       padding-left: 32px; } }
 
-.overlay,
+.overlay {
+  z-index: -2; }
+
 .visualizer {
   z-index: -1; }
 

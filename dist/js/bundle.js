@@ -4,6 +4,114 @@ module.exports = Array.isArray || function (arr) {
 };
 
 },{}],2:[function(require,module,exports){
+var MapCache = require('../internal/MapCache');
+
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is coerced to a string and used as the
+ * cache key. The `func` is invoked with the `this` binding of the memoized
+ * function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the [`Map`](http://ecma-international.org/ecma-262/6.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoizing function.
+ * @example
+ *
+ * var upperCase = _.memoize(function(string) {
+ *   return string.toUpperCase();
+ * });
+ *
+ * upperCase('fred');
+ * // => 'FRED'
+ *
+ * // modifying the result cache
+ * upperCase.cache.set('fred', 'BARNEY');
+ * upperCase('fred');
+ * // => 'BARNEY'
+ *
+ * // replacing `_.memoize.Cache`
+ * var object = { 'user': 'fred' };
+ * var other = { 'user': 'barney' };
+ * var identity = _.memoize(_.identity);
+ *
+ * identity(object);
+ * // => { 'user': 'fred' }
+ * identity(other);
+ * // => { 'user': 'fred' }
+ *
+ * _.memoize.Cache = WeakMap;
+ * var identity = _.memoize(_.identity);
+ *
+ * identity(object);
+ * // => { 'user': 'fred' }
+ * identity(other);
+ * // => { 'user': 'barney' }
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result);
+    return result;
+  };
+  memoized.cache = new memoize.Cache;
+  return memoized;
+}
+
+// Assign cache to `_.memoize`.
+memoize.Cache = MapCache;
+
+module.exports = memoize;
+
+},{"../internal/MapCache":3}],3:[function(require,module,exports){
+var mapDelete = require('./mapDelete'),
+    mapGet = require('./mapGet'),
+    mapHas = require('./mapHas'),
+    mapSet = require('./mapSet');
+
+/**
+ * Creates a cache object to store key/value pairs.
+ *
+ * @private
+ * @static
+ * @name Cache
+ * @memberOf _.memoize
+ */
+function MapCache() {
+  this.__data__ = {};
+}
+
+// Add functions to the `Map` cache.
+MapCache.prototype['delete'] = mapDelete;
+MapCache.prototype.get = mapGet;
+MapCache.prototype.has = mapHas;
+MapCache.prototype.set = mapSet;
+
+module.exports = MapCache;
+
+},{"./mapDelete":10,"./mapGet":11,"./mapHas":12,"./mapSet":13}],4:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -19,7 +127,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -36,7 +144,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./baseProperty":2}],4:[function(require,module,exports){
+},{"./baseProperty":4}],6:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -53,7 +161,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./getLength":3,"./isLength":7}],5:[function(require,module,exports){
+},{"./getLength":5,"./isLength":9}],7:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -79,7 +187,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike'),
     isIndex = require('./isIndex'),
     isObject = require('../lang/isObject');
@@ -109,7 +217,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"../lang/isObject":8,"./isArrayLike":4,"./isIndex":5}],7:[function(require,module,exports){
+},{"../lang/isObject":14,"./isArrayLike":6,"./isIndex":7}],9:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -131,7 +239,81 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+/**
+ * Removes `key` and its value from the cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf _.memoize.Cache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed successfully, else `false`.
+ */
+function mapDelete(key) {
+  return this.has(key) && delete this.__data__[key];
+}
+
+module.exports = mapDelete;
+
+},{}],11:[function(require,module,exports){
+/**
+ * Gets the cached value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf _.memoize.Cache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the cached value.
+ */
+function mapGet(key) {
+  return key == '__proto__' ? undefined : this.__data__[key];
+}
+
+module.exports = mapGet;
+
+},{}],12:[function(require,module,exports){
+/** Used for native method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if a cached value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf _.memoize.Cache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapHas(key) {
+  return key != '__proto__' && hasOwnProperty.call(this.__data__, key);
+}
+
+module.exports = mapHas;
+
+},{}],13:[function(require,module,exports){
+/**
+ * Sets `value` to `key` of the cache.
+ *
+ * @private
+ * @name set
+ * @memberOf _.memoize.Cache
+ * @param {string} key The key of the value to cache.
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache object.
+ */
+function mapSet(key, value) {
+  if (key != '__proto__') {
+    this.__data__[key] = value;
+  }
+  return this;
+}
+
+module.exports = mapSet;
+
+},{}],14:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -161,7 +343,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],9:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var isIterateeCall = require('../internal/isIterateeCall');
 
 /* Native method references for those with the same name as other `lodash` methods. */
@@ -229,7 +411,7 @@ function range(start, end, step) {
 
 module.exports = range;
 
-},{"../internal/isIterateeCall":6}],10:[function(require,module,exports){
+},{"../internal/isIterateeCall":8}],16:[function(require,module,exports){
 (function (process){
   /* globals require, module */
 
@@ -852,7 +1034,7 @@ module.exports = range;
   page.sameOrigin = sameOrigin;
 
 }).call(this,require('_process'))
-},{"_process":12,"path-to-regexp":11}],11:[function(require,module,exports){
+},{"_process":18,"path-to-regexp":17}],17:[function(require,module,exports){
 var isArray = require('isarray');
 
 /**
@@ -1056,7 +1238,7 @@ function pathToRegexp (path, keys, options) {
   return attachKeys(new RegExp('^' + route, flags(options)), keys);
 }
 
-},{"isarray":1}],12:[function(require,module,exports){
+},{"isarray":1}],18:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1149,7 +1331,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],13:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1261,7 +1443,7 @@ function createLogger() {
 
 exports["default"] = createLogger;
 module.exports = exports["default"];
-},{}],14:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1279,7 +1461,7 @@ function thunkMiddleware(_ref) {
 }
 
 module.exports = exports['default'];
-},{}],15:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1437,7 +1619,7 @@ function createStore(reducer, initialState) {
     replaceReducer: replaceReducer
   };
 }
-},{"./utils/isPlainObject":21}],16:[function(require,module,exports){
+},{"./utils/isPlainObject":27}],22:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1469,7 +1651,7 @@ exports.combineReducers = _utilsCombineReducers2['default'];
 exports.bindActionCreators = _utilsBindActionCreators2['default'];
 exports.applyMiddleware = _utilsApplyMiddleware2['default'];
 exports.compose = _utilsCompose2['default'];
-},{"./createStore":15,"./utils/applyMiddleware":17,"./utils/bindActionCreators":18,"./utils/combineReducers":19,"./utils/compose":20}],17:[function(require,module,exports){
+},{"./createStore":21,"./utils/applyMiddleware":23,"./utils/bindActionCreators":24,"./utils/combineReducers":25,"./utils/compose":26}],23:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1531,7 +1713,7 @@ function applyMiddleware() {
 }
 
 module.exports = exports['default'];
-},{"./compose":20}],18:[function(require,module,exports){
+},{"./compose":26}],24:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1587,7 +1769,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 module.exports = exports['default'];
-},{"../utils/mapValues":22}],19:[function(require,module,exports){
+},{"../utils/mapValues":28}],25:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1718,7 +1900,7 @@ function combineReducers(reducers) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"../createStore":15,"../utils/isPlainObject":21,"../utils/mapValues":22,"../utils/pick":23,"_process":12}],20:[function(require,module,exports){
+},{"../createStore":21,"../utils/isPlainObject":27,"../utils/mapValues":28,"../utils/pick":29,"_process":18}],26:[function(require,module,exports){
 /**
  * Composes single-argument functions from right to left.
  *
@@ -1744,7 +1926,7 @@ function compose() {
 }
 
 module.exports = exports["default"];
-},{}],21:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1775,7 +1957,7 @@ function isPlainObject(obj) {
 }
 
 module.exports = exports['default'];
-},{}],22:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /**
  * Applies a function to every key-value pair inside an object.
  *
@@ -1796,7 +1978,7 @@ function mapValues(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],23:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /**
  * Picks key-value pairs from an object where values satisfy a predicate.
  *
@@ -1819,7 +2001,7 @@ function pick(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],24:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 function SoundCloud (clientId) {
@@ -2001,7 +2183,7 @@ SoundCloud.prototype.seek = function (e) {
 
 module.exports = SoundCloud;
 
-},{}],25:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2009,6 +2191,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.fetchTracks = fetchTracks;
 exports.play = play;
+exports.resume = resume;
 exports.pause = pause;
 exports.prev = prev;
 exports.next = next;
@@ -2072,6 +2255,14 @@ function play(player, index) {
     };
 }
 
+function resume(player) {
+    return function (dispatch) {
+        player.audio.play();
+
+        dispatch({ type: PLAY, payload: player });
+    };
+}
+
 function pause(player) {
     return function (dispatch) {
         player.pause();
@@ -2122,7 +2313,7 @@ function changeBackground(_ref) {
     };
 }
 
-},{"./constants":27,"soundcloud-audio":24}],26:[function(require,module,exports){
+},{"./constants":33,"soundcloud-audio":30}],32:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -2170,7 +2361,7 @@ store.dispatch((0, _actions.fetchTracks)(player));
 
 (0, _visualizer2['default'])(player, store);
 
-},{"./actions":25,"./constants":27,"./dom":28,"./reducer":29,"./router":30,"./visualizer":32,"redux":16,"redux-logger":13,"redux-thunk":14,"soundcloud-audio":24}],27:[function(require,module,exports){
+},{"./actions":31,"./constants":33,"./dom":34,"./reducer":35,"./router":36,"./visualizer":38,"redux":22,"redux-logger":19,"redux-thunk":20,"soundcloud-audio":30}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2181,7 +2372,7 @@ exports.RESOLVE_URL = RESOLVE_URL;
 var CLIENT_ID = "287e0a470aceec7d505ab41e1892fddc";
 exports.CLIENT_ID = CLIENT_ID;
 
-},{}],28:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2236,9 +2427,13 @@ function bindEvents(player, dispatch, getState) {
     });
 
     playBtn.addEventListener('click', function (e) {
-        var isPlaying = getState().isPlaying;
+        var state = getState();
+        var isPlaying = state.isPlaying;
+        var isPaused = state.isPaused;
 
-        if (!isPlaying) {
+        if (isPaused) {
+            dispatch((0, _actions.resume)(player));
+        } else if (!isPlaying) {
             dispatch((0, _actions.play)(player));
         }
     });
@@ -2370,7 +2565,7 @@ function bindClasses(player, store) {
     });
 }
 
-},{"./actions":25}],29:[function(require,module,exports){
+},{"./actions":31}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2443,7 +2638,7 @@ exports['default'] = function (state, action) {
 
 module.exports = exports['default'];
 
-},{"./actions":25}],30:[function(require,module,exports){
+},{"./actions":31}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2479,18 +2674,22 @@ function createRouter() {
 
 module.exports = exports['default'];
 
-},{"page":10}],31:[function(require,module,exports){
-"use strict";
+},{"page":16}],37:[function(require,module,exports){
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _sphere = require('./sphere');
 
 var _sphere2 = _interopRequireDefault(_sphere);
+
+var _simpleWave = require('./simpleWave');
+
+var _simpleWave2 = _interopRequireDefault(_simpleWave);
 
 var POINTS = 256;
 exports.POINTS = POINTS;
@@ -2505,22 +2704,83 @@ exports.RADIUS = RADIUS;
 var COLOR_AMP = 0.4;
 
 exports.COLOR_AMP = COLOR_AMP;
-exports["default"] = {
+exports['default'] = {
+
+    // Exit
     "0": {
-        visualizer: _sphere2["default"],
-        hue: 195,
-        saturation: 30,
-        lightness: 72
+        visualizer: _sphere2['default'],
+        hue: 32,
+        saturation: 50,
+        lightness: 81
     },
+
+    // Ghost
     "1": {
-        visualizer: _sphere2["default"],
-        hue: 30,
-        saturation: 48,
-        lightness: 72
+        visualizer: _simpleWave2['default'],
+        hue: 7,
+        saturation: 50,
+        lightness: 69,
+        strokeColor: 'hsla(213, 50, 29, 0.8)'
+    },
+
+    // Second Skin
+    "2": {
+        visualizer: _sphere2['default'],
+        hue: 213,
+        saturation: 50,
+        lightness: 29
+    },
+
+    // Reflection
+    "3": {
+        visualizer: _sphere2['default'],
+        hue: 227,
+        saturation: 50,
+        lightness: 9
+    },
+
+    //Farewell
+    "4": {
+        visualizer: _sphere2['default'],
+        hue: 230,
+        saturation: 50,
+        lightness: 2
+    },
+
+    // Stillness
+    "5": {
+        visualizer: _sphere2['default'],
+        hue: 7,
+        saturation: 50,
+        lightness: 14
+    },
+
+    // Young Guns
+    "6": {
+        visualizer: _sphere2['default'],
+        hue: 2,
+        saturation: 23,
+        lightness: 46
+    },
+
+    // Innocent
+    "7": {
+        visualizer: _sphere2['default'],
+        hue: 26,
+        saturation: 49,
+        lightness: 67
+    },
+
+    // Wake
+    "8": {
+        visualizer: _sphere2['default'],
+        hue: 175,
+        saturation: 17,
+        lightness: 78
     }
 };
 
-},{"./sphere":33}],32:[function(require,module,exports){
+},{"./simpleWave":39,"./sphere":40}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2540,6 +2800,10 @@ var _sphere2 = _interopRequireDefault(_sphere);
 
 var _actions = require('../actions');
 
+var _simpleWave = require('./simpleWave');
+
+var _simpleWave2 = _interopRequireDefault(_simpleWave);
+
 var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -2552,12 +2816,24 @@ function render(player, store, analyser, freqByteData, path) {
     var currentTrackIndex = state.currentTrackIndex;
     var trackConfig = _config2['default'][currentTrackIndex];
     var visualizer = trackConfig.visualizer;
+    var strokeColor = trackConfig.strokeColor;
 
     store.dispatch((0, _actions.changeBackground)({
         hue: trackConfig.hue,
         saturation: trackConfig.saturation,
         lightness: trackConfig.lightness
     }));
+
+    function run() {
+        return paper.view.onFrame = function (event) {
+            analyser.getByteFrequencyData(freqByteData);
+
+            path.segments = visualizer(freqByteData, path, paper, event);
+            path.strokeColor = strokeColor;
+
+            paper.view.draw();
+        };
+    }
 
     var dispose = store.subscribe(function () {
         var state = store.getState();
@@ -2566,22 +2842,25 @@ function render(player, store, analyser, freqByteData, path) {
             currentTrackIndex = state.currentTrackIndex;
             trackConfig = _config2['default'][currentTrackIndex];
             visualizer = trackConfig.visualizer;
+            strokeColor = trackConfig.strokeColor;
 
             store.dispatch((0, _actions.changeBackground)({
                 hue: trackConfig.hue,
                 saturation: trackConfig.saturation,
                 lightness: trackConfig.lightness
             }));
+
+            paper.view.off('frame');
+        }
+
+        if (!state.isPlaying) {
+            paper.view.off('frame');
+        } else {
+            run();
         }
     });
 
-    return paper.view.onFrame = function (event) {
-        analyser.getByteFrequencyData(freqByteData);
-
-        path.segments = visualizer(freqByteData, path, _config.RADIUS);
-
-        paper.view.draw();
-    };
+    return run();
 }
 
 function initPath(totalWidth, totalHeight) {
@@ -2590,12 +2869,19 @@ function initPath(totalWidth, totalHeight) {
 
     path.closed = false;
     path.strokeWidth = 1;
-    path.strokeColor = '#444444';
+    path.strokeColor = 'rgba(0,0,0,0)';
 
-    (0, _lodashUtilityRange2['default'])(_config.POINTS).map(function (i) {
-        var x = i;
-        var y = 300;
-        var point = new paper.Point(x, y);
+    var midX = totalWidth / 2;
+    var midY = totalHeight / 2;
+    var startX = midX - _config.POINTS / 2;
+
+    function initDraw(point) {
+        path.add(point);
+        paper.view.draw();
+    }
+
+    (0, _lodashUtilityRange2['default'])(_config.POINTS).map(function (i, idx) {
+        var point = new paper.Point(i, midY);
 
         path.add(point);
     });
@@ -2605,7 +2891,7 @@ function initPath(totalWidth, totalHeight) {
 
 function initPaper(canvas) {
     paper.setup(canvas);
-    paper.view.fillColor = 'rgb(255, 255,233)';
+    paper.view.fillColor = 'rgb(255,255,233)';
 
     return initPath(paper.view.size.width, paper.view.size.height);
 }
@@ -2639,7 +2925,52 @@ function createVisualizer(player, store) {
 
 module.exports = exports['default'];
 
-},{"../actions":25,"./config":31,"./sphere":33,"lodash/utility/range":9}],33:[function(require,module,exports){
+},{"../actions":31,"./config":37,"./simpleWave":39,"./sphere":40,"lodash/utility/range":15}],39:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+exports['default'] = generateSimpleWave;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodashFunctionMemoize = require('lodash/function/memoize');
+
+var _lodashFunctionMemoize2 = _interopRequireDefault(_lodashFunctionMemoize);
+
+var _config = require('./config');
+
+var getInterval = (0, _lodashFunctionMemoize2['default'])(function getInterval(width, count) {
+    return Math.ceil(width / count);
+});
+
+var getStartX = (0, _lodashFunctionMemoize2['default'])(function getStartX(width, count, interval) {
+    var halfW = width / 2;
+    var halfCount = count / 2;
+
+    return halfW - halfCount * interval;
+});
+
+function generateSimpleWave(data, path, paper, event) {
+    var width = paper.view.size.width;
+    var height = paper.view.size.height;
+    var interval = getInterval(width, path.segments.length);
+    var startX = getStartX(width, path.segments.length, interval);
+    path.smooth();
+
+    return path.segments.map(function (segment, i) {
+
+        segment.point.x = i * interval;
+        segment.point.y = height * .75 + data[i] * (_config.amplitude / 10);
+
+        return segment;
+    });
+}
+
+module.exports = exports['default'];
+
+},{"./config":37,"lodash/function/memoize":2}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2649,14 +2980,18 @@ exports['default'] = generateSphere;
 
 var _config = require('./config');
 
-function generateSphere(data, path, radius) {
+function generateSphere(data, path) {
 
     return path.segments.map(function (segment, i) {
+
+        path.strokeColor = 'rgba(256, 256, 256, 1)';
+        path.strokeWidth = 1;
+
         var xPos = paper.view.size.width / 2;
         var yPos = paper.view.size.height / 2;
         var magnitude = data[i] * (0.2 * (_config.amplitude / 20));
-        var x = radius * Math.cos(radius * magnitude) + xPos;
-        var y = radius * Math.sin(radius * magnitude) + yPos;
+        var x = _config.RADIUS * Math.cos(_config.RADIUS * magnitude) + xPos;
+        var y = _config.RADIUS * Math.sin(_config.RADIUS * magnitude) + yPos;
 
         segment.point.x = x;
         segment.point.y = y;
@@ -2667,4 +3002,4 @@ function generateSphere(data, path, radius) {
 
 module.exports = exports['default'];
 
-},{"./config":31}]},{},[26]);
+},{"./config":37}]},{},[32]);

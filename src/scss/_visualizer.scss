@@ -1,4 +1,6 @@
-.overlay,
+.overlay {
+    z-index: -2;
+}
 .visualizer {
     z-index: -1;
 }
