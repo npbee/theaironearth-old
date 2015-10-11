@@ -1,22 +1,25 @@
 import range from 'lodash/utility/range';
+import inRange from 'lodash/number/inRange';
+import once from 'lodash/function/once';
+
 import generateSphere from './sphere';
 import { changeBackground } from '../actions';
-import generateSimpleWave from './simpleWave';
 
 import config, {
     POINTS,
     RADIUS
 } from './config';
 
-function render(player, store, analyser, freqByteData, path) {
+function render(player, store, analyser, freqByteData, paper) {
 
     //requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path));
     //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
     let state = store.getState();
     let currentTrackIndex = state.currentTrackIndex;
     let trackConfig = config[currentTrackIndex];
-    let visualizer = trackConfig.visualizer;
+    let createVisualizer = trackConfig.visualizer;
     let strokeColor = trackConfig.strokeColor;
+    let hitpoints = trackConfig.hitpoints;
 
     store.dispatch(changeBackground({
         hue: trackConfig.hue,
@@ -25,13 +28,35 @@ function render(player, store, analyser, freqByteData, path) {
     }));
 
     function run() {
+        var visualizer = createVisualizer(paper);
+
         return paper.view.onFrame = (event) => {
-            analyser.getByteFrequencyData(freqByteData);
 
-            path.segments = visualizer(freqByteData, path, paper, event);
-            path.strokeColor = strokeColor;
+            if (event.count % 5 === 0) {
 
-            paper.view.draw();
+                let currentTime = player.audio.currentTime;
+                let hits = hitpoints.filter(hitpoint => {
+                    return !isNaN(player.audio.duration) &&
+                        inRange(currentTime, hitpoint, player.audio.duration);
+                });
+
+                if (hits.length) {
+                    hits.forEach(hit => {
+                        let hitFn = trackConfig[hit];
+
+                        if (hitFn) {
+                            hitFn(store.dispatch);
+                        }
+
+                    });
+                }
+
+                analyser.getByteFrequencyData(freqByteData);
+
+                visualizer(freqByteData, event, hits);
+
+                paper.view.draw();
+            }
         };
     }
 
@@ -41,7 +66,7 @@ function render(player, store, analyser, freqByteData, path) {
         if (currentTrackIndex !== state.currentTrackIndex) {
             currentTrackIndex = state.currentTrackIndex;
             trackConfig = config[currentTrackIndex];
-            visualizer = trackConfig.visualizer;
+            createVisualizer = trackConfig.visualizer;
             strokeColor = trackConfig.strokeColor;
 
             store.dispatch(changeBackground({
@@ -51,12 +76,12 @@ function render(player, store, analyser, freqByteData, path) {
             }));
 
             paper.view.off('frame');
+
+            run();
         }
 
         if (!state.isPlaying) {
             paper.view.off('frame');
-        } else {
-            run();
         }
     });
 
@@ -81,7 +106,7 @@ function initPath(totalWidth, totalHeight) {
     }
 
     range(POINTS).map((i, idx) => {
-        let point = new paper.Point(i, midY);
+        let point = new paper.Point(0, 0);
 
         path.add(point);
     });
@@ -93,7 +118,9 @@ function initPaper(canvas) {
     paper.setup(canvas);
     paper.view.fillColor = 'rgb(255,255,233)';
 
-    return initPath(paper.view.size.width, paper.view.size.height);
+    return paper;
+
+    //return initPath(paper.view.size.width, paper.view.size.height);
 }
 
 export default function createVisualizer(player, store) {
@@ -108,7 +135,7 @@ export default function createVisualizer(player, store) {
     source.connect(analyser);
     analyser.connect(context.destination);
 
-    const path = initPaper(canvas);
+    const paper = initPaper(canvas);
 
     const dispose = store.subscribe(() => {
         let state = store.getState();
@@ -118,7 +145,7 @@ export default function createVisualizer(player, store) {
             // after that.
             dispose();
 
-            render(player, store, analyser, freqByteData, path);
+            render(player, store, analyser, freqByteData, paper);
         }
     });
 

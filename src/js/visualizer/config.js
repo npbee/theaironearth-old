@@ -1,5 +1,7 @@
+import once from 'lodash/function/once';
 import generateSphere from './sphere';
-import generateSimpleWave from './simpleWave';
+import generateMountains from './mountains';
+import { changeBackground } from '../actions';
 
 export const POINTS = 256;
 export const INIT_POINTS = 50;
@@ -20,11 +22,18 @@ export default {
 
     // Ghost
     "1": {
-        visualizer: generateSimpleWave,
-        hue: 7,
-        saturation: 50,
-        lightness: 69,
-        strokeColor: 'hsla(213, 50, 29, 0.8)'
+        visualizer: generateMountains,
+        hue: 32,
+        saturation: 76,
+        lightness: 67,
+        hitpoints: [89], //89
+        "89": once(function(dispatch) {
+            dispatch(changeBackground({
+                hue: 26,
+                saturation: 80,
+                lightness: 67
+            }));
+        })
     },
 
     // Second Skin
