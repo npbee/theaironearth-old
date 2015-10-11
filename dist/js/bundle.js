@@ -4,114 +4,76 @@ module.exports = Array.isArray || function (arr) {
 };
 
 },{}],2:[function(require,module,exports){
-var MapCache = require('../internal/MapCache');
-
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
 /**
- * Creates a function that memoizes the result of `func`. If `resolver` is
- * provided it determines the cache key for storing the result based on the
- * arguments provided to the memoized function. By default, the first argument
- * provided to the memoized function is coerced to a string and used as the
- * cache key. The `func` is invoked with the `this` binding of the memoized
- * function.
- *
- * **Note:** The cache is exposed as the `cache` property on the memoized
- * function. Its creation may be customized by replacing the `_.memoize.Cache`
- * constructor with one whose instances implement the [`Map`](http://ecma-international.org/ecma-262/6.0/#sec-properties-of-the-map-prototype-object)
- * method interface of `get`, `has`, and `set`.
+ * Creates a function that invokes `func`, with the `this` binding and arguments
+ * of the created function, while it's called less than `n` times. Subsequent
+ * calls to the created function return the result of the last `func` invocation.
  *
  * @static
  * @memberOf _
  * @category Function
- * @param {Function} func The function to have its output memoized.
- * @param {Function} [resolver] The function to resolve the cache key.
- * @returns {Function} Returns the new memoizing function.
+ * @param {number} n The number of calls at which `func` is no longer invoked.
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
  * @example
  *
- * var upperCase = _.memoize(function(string) {
- *   return string.toUpperCase();
- * });
- *
- * upperCase('fred');
- * // => 'FRED'
- *
- * // modifying the result cache
- * upperCase.cache.set('fred', 'BARNEY');
- * upperCase('fred');
- * // => 'BARNEY'
- *
- * // replacing `_.memoize.Cache`
- * var object = { 'user': 'fred' };
- * var other = { 'user': 'barney' };
- * var identity = _.memoize(_.identity);
- *
- * identity(object);
- * // => { 'user': 'fred' }
- * identity(other);
- * // => { 'user': 'fred' }
- *
- * _.memoize.Cache = WeakMap;
- * var identity = _.memoize(_.identity);
- *
- * identity(object);
- * // => { 'user': 'fred' }
- * identity(other);
- * // => { 'user': 'barney' }
+ * jQuery('#add').on('click', _.before(5, addContactToList));
+ * // => allows adding up to 4 contacts to the list
  */
-function memoize(func, resolver) {
-  if (typeof func != 'function' || (resolver && typeof resolver != 'function')) {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  var memoized = function() {
-    var args = arguments,
-        key = resolver ? resolver.apply(this, args) : args[0],
-        cache = memoized.cache;
-
-    if (cache.has(key)) {
-      return cache.get(key);
+function before(n, func) {
+  var result;
+  if (typeof func != 'function') {
+    if (typeof n == 'function') {
+      var temp = n;
+      n = func;
+      func = temp;
+    } else {
+      throw new TypeError(FUNC_ERROR_TEXT);
     }
-    var result = func.apply(this, args);
-    memoized.cache = cache.set(key, result);
+  }
+  return function() {
+    if (--n > 0) {
+      result = func.apply(this, arguments);
+    }
+    if (n <= 1) {
+      func = undefined;
+    }
     return result;
   };
-  memoized.cache = new memoize.Cache;
-  return memoized;
 }
 
-// Assign cache to `_.memoize`.
-memoize.Cache = MapCache;
+module.exports = before;
 
-module.exports = memoize;
-
-},{"../internal/MapCache":3}],3:[function(require,module,exports){
-var mapDelete = require('./mapDelete'),
-    mapGet = require('./mapGet'),
-    mapHas = require('./mapHas'),
-    mapSet = require('./mapSet');
+},{}],3:[function(require,module,exports){
+var before = require('./before');
 
 /**
- * Creates a cache object to store key/value pairs.
+ * Creates a function that is restricted to invoking `func` once. Repeat calls
+ * to the function return the value of the first call. The `func` is invoked
+ * with the `this` binding and arguments of the created function.
  *
- * @private
  * @static
- * @name Cache
- * @memberOf _.memoize
+ * @memberOf _
+ * @category Function
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * var initialize = _.once(createApplication);
+ * initialize();
+ * initialize();
+ * // `initialize` invokes `createApplication` once
  */
-function MapCache() {
-  this.__data__ = {};
+function once(func) {
+  return before(2, func);
 }
 
-// Add functions to the `Map` cache.
-MapCache.prototype['delete'] = mapDelete;
-MapCache.prototype.get = mapGet;
-MapCache.prototype.has = mapHas;
-MapCache.prototype.set = mapSet;
+module.exports = once;
 
-module.exports = MapCache;
-
-},{"./mapDelete":10,"./mapGet":11,"./mapHas":12,"./mapSet":13}],4:[function(require,module,exports){
+},{"./before":2}],4:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -217,7 +179,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"../lang/isObject":14,"./isArrayLike":6,"./isIndex":7}],9:[function(require,module,exports){
+},{"../lang/isObject":10,"./isArrayLike":6,"./isIndex":7}],9:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -240,80 +202,6 @@ function isLength(value) {
 module.exports = isLength;
 
 },{}],10:[function(require,module,exports){
-/**
- * Removes `key` and its value from the cache.
- *
- * @private
- * @name delete
- * @memberOf _.memoize.Cache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed successfully, else `false`.
- */
-function mapDelete(key) {
-  return this.has(key) && delete this.__data__[key];
-}
-
-module.exports = mapDelete;
-
-},{}],11:[function(require,module,exports){
-/**
- * Gets the cached value for `key`.
- *
- * @private
- * @name get
- * @memberOf _.memoize.Cache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the cached value.
- */
-function mapGet(key) {
-  return key == '__proto__' ? undefined : this.__data__[key];
-}
-
-module.exports = mapGet;
-
-},{}],12:[function(require,module,exports){
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Checks if a cached value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf _.memoize.Cache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function mapHas(key) {
-  return key != '__proto__' && hasOwnProperty.call(this.__data__, key);
-}
-
-module.exports = mapHas;
-
-},{}],13:[function(require,module,exports){
-/**
- * Sets `value` to `key` of the cache.
- *
- * @private
- * @name set
- * @memberOf _.memoize.Cache
- * @param {string} key The key of the value to cache.
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache object.
- */
-function mapSet(key, value) {
-  if (key != '__proto__') {
-    this.__data__[key] = value;
-  }
-  return this;
-}
-
-module.exports = mapSet;
-
-},{}],14:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -343,7 +231,56 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],15:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+/* Native method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Checks if `n` is between `start` and up to but not including, `end`. If
+ * `end` is not specified it's set to `start` with `start` then set to `0`.
+ *
+ * @static
+ * @memberOf _
+ * @category Number
+ * @param {number} n The number to check.
+ * @param {number} [start=0] The start of the range.
+ * @param {number} end The end of the range.
+ * @returns {boolean} Returns `true` if `n` is in the range, else `false`.
+ * @example
+ *
+ * _.inRange(3, 2, 4);
+ * // => true
+ *
+ * _.inRange(4, 8);
+ * // => true
+ *
+ * _.inRange(4, 2);
+ * // => false
+ *
+ * _.inRange(2, 2);
+ * // => false
+ *
+ * _.inRange(1.2, 2);
+ * // => true
+ *
+ * _.inRange(5.2, 4);
+ * // => false
+ */
+function inRange(value, start, end) {
+  start = +start || 0;
+  if (end === undefined) {
+    end = start;
+    start = 0;
+  } else {
+    end = +end || 0;
+  }
+  return value >= nativeMin(start, end) && value < nativeMax(start, end);
+}
+
+module.exports = inRange;
+
+},{}],12:[function(require,module,exports){
 var isIterateeCall = require('../internal/isIterateeCall');
 
 /* Native method references for those with the same name as other `lodash` methods. */
@@ -411,7 +348,7 @@ function range(start, end, step) {
 
 module.exports = range;
 
-},{"../internal/isIterateeCall":8}],16:[function(require,module,exports){
+},{"../internal/isIterateeCall":8}],13:[function(require,module,exports){
 (function (process){
   /* globals require, module */
 
@@ -1034,7 +971,7 @@ module.exports = range;
   page.sameOrigin = sameOrigin;
 
 }).call(this,require('_process'))
-},{"_process":18,"path-to-regexp":17}],17:[function(require,module,exports){
+},{"_process":15,"path-to-regexp":14}],14:[function(require,module,exports){
 var isArray = require('isarray');
 
 /**
@@ -1238,7 +1175,7 @@ function pathToRegexp (path, keys, options) {
   return attachKeys(new RegExp('^' + route, flags(options)), keys);
 }
 
-},{"isarray":1}],18:[function(require,module,exports){
+},{"isarray":1}],15:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1331,7 +1268,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],19:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1443,7 +1380,7 @@ function createLogger() {
 
 exports["default"] = createLogger;
 module.exports = exports["default"];
-},{}],20:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1461,7 +1398,7 @@ function thunkMiddleware(_ref) {
 }
 
 module.exports = exports['default'];
-},{}],21:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1619,7 +1556,7 @@ function createStore(reducer, initialState) {
     replaceReducer: replaceReducer
   };
 }
-},{"./utils/isPlainObject":27}],22:[function(require,module,exports){
+},{"./utils/isPlainObject":24}],19:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1651,7 +1588,7 @@ exports.combineReducers = _utilsCombineReducers2['default'];
 exports.bindActionCreators = _utilsBindActionCreators2['default'];
 exports.applyMiddleware = _utilsApplyMiddleware2['default'];
 exports.compose = _utilsCompose2['default'];
-},{"./createStore":21,"./utils/applyMiddleware":23,"./utils/bindActionCreators":24,"./utils/combineReducers":25,"./utils/compose":26}],23:[function(require,module,exports){
+},{"./createStore":18,"./utils/applyMiddleware":20,"./utils/bindActionCreators":21,"./utils/combineReducers":22,"./utils/compose":23}],20:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1713,7 +1650,7 @@ function applyMiddleware() {
 }
 
 module.exports = exports['default'];
-},{"./compose":26}],24:[function(require,module,exports){
+},{"./compose":23}],21:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1769,7 +1706,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 module.exports = exports['default'];
-},{"../utils/mapValues":28}],25:[function(require,module,exports){
+},{"../utils/mapValues":25}],22:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1900,7 +1837,7 @@ function combineReducers(reducers) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"../createStore":21,"../utils/isPlainObject":27,"../utils/mapValues":28,"../utils/pick":29,"_process":18}],26:[function(require,module,exports){
+},{"../createStore":18,"../utils/isPlainObject":24,"../utils/mapValues":25,"../utils/pick":26,"_process":15}],23:[function(require,module,exports){
 /**
  * Composes single-argument functions from right to left.
  *
@@ -1926,7 +1863,7 @@ function compose() {
 }
 
 module.exports = exports["default"];
-},{}],27:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1957,7 +1894,7 @@ function isPlainObject(obj) {
 }
 
 module.exports = exports['default'];
-},{}],28:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * Applies a function to every key-value pair inside an object.
  *
@@ -1978,7 +1915,7 @@ function mapValues(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],29:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /**
  * Picks key-value pairs from an object where values satisfy a predicate.
  *
@@ -2001,7 +1938,7 @@ function pick(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],30:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 function SoundCloud (clientId) {
@@ -2183,7 +2120,7 @@ SoundCloud.prototype.seek = function (e) {
 
 module.exports = SoundCloud;
 
-},{}],31:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2313,7 +2250,7 @@ function changeBackground(_ref) {
     };
 }
 
-},{"./constants":33,"soundcloud-audio":30}],32:[function(require,module,exports){
+},{"./constants":30,"soundcloud-audio":27}],29:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -2361,7 +2298,7 @@ store.dispatch((0, _actions.fetchTracks)(player));
 
 (0, _visualizer2['default'])(player, store);
 
-},{"./actions":31,"./constants":33,"./dom":34,"./reducer":35,"./router":36,"./visualizer":38,"redux":22,"redux-logger":19,"redux-thunk":20,"soundcloud-audio":30}],33:[function(require,module,exports){
+},{"./actions":28,"./constants":30,"./dom":31,"./reducer":32,"./router":33,"./visualizer":35,"redux":19,"redux-logger":16,"redux-thunk":17,"soundcloud-audio":27}],30:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2372,7 +2309,7 @@ exports.RESOLVE_URL = RESOLVE_URL;
 var CLIENT_ID = "287e0a470aceec7d505ab41e1892fddc";
 exports.CLIENT_ID = CLIENT_ID;
 
-},{}],34:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2565,7 +2502,7 @@ function bindClasses(player, store) {
     });
 }
 
-},{"./actions":31}],35:[function(require,module,exports){
+},{"./actions":28}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2638,7 +2575,7 @@ exports['default'] = function (state, action) {
 
 module.exports = exports['default'];
 
-},{"./actions":31}],36:[function(require,module,exports){
+},{"./actions":28}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2674,7 +2611,7 @@ function createRouter() {
 
 module.exports = exports['default'];
 
-},{"page":16}],37:[function(require,module,exports){
+},{"page":13}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2683,13 +2620,19 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _lodashFunctionOnce = require('lodash/function/once');
+
+var _lodashFunctionOnce2 = _interopRequireDefault(_lodashFunctionOnce);
+
 var _sphere = require('./sphere');
 
 var _sphere2 = _interopRequireDefault(_sphere);
 
-var _simpleWave = require('./simpleWave');
+var _mountains = require('./mountains');
 
-var _simpleWave2 = _interopRequireDefault(_simpleWave);
+var _mountains2 = _interopRequireDefault(_mountains);
+
+var _actions = require('../actions');
 
 var POINTS = 256;
 exports.POINTS = POINTS;
@@ -2716,11 +2659,18 @@ exports['default'] = {
 
     // Ghost
     "1": {
-        visualizer: _simpleWave2['default'],
-        hue: 7,
-        saturation: 50,
-        lightness: 69,
-        strokeColor: 'hsla(213, 50, 29, 0.8)'
+        visualizer: _mountains2['default'],
+        hue: 32,
+        saturation: 76,
+        lightness: 67,
+        hitpoints: [89], //89
+        "89": (0, _lodashFunctionOnce2['default'])(function (dispatch) {
+            dispatch((0, _actions.changeBackground)({
+                hue: 26,
+                saturation: 80,
+                lightness: 67
+            }));
+        })
     },
 
     // Second Skin
@@ -2780,7 +2730,7 @@ exports['default'] = {
     }
 };
 
-},{"./simpleWave":39,"./sphere":40}],38:[function(require,module,exports){
+},{"../actions":28,"./mountains":36,"./sphere":37,"lodash/function/once":3}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2794,29 +2744,34 @@ var _lodashUtilityRange = require('lodash/utility/range');
 
 var _lodashUtilityRange2 = _interopRequireDefault(_lodashUtilityRange);
 
+var _lodashNumberInRange = require('lodash/number/inRange');
+
+var _lodashNumberInRange2 = _interopRequireDefault(_lodashNumberInRange);
+
+var _lodashFunctionOnce = require('lodash/function/once');
+
+var _lodashFunctionOnce2 = _interopRequireDefault(_lodashFunctionOnce);
+
 var _sphere = require('./sphere');
 
 var _sphere2 = _interopRequireDefault(_sphere);
 
 var _actions = require('../actions');
 
-var _simpleWave = require('./simpleWave');
-
-var _simpleWave2 = _interopRequireDefault(_simpleWave);
-
 var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-function render(player, store, analyser, freqByteData, path) {
+function render(player, store, analyser, freqByteData, paper) {
 
     //requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path));
     //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
     var state = store.getState();
     var currentTrackIndex = state.currentTrackIndex;
     var trackConfig = _config2['default'][currentTrackIndex];
-    var visualizer = trackConfig.visualizer;
+    var createVisualizer = trackConfig.visualizer;
     var strokeColor = trackConfig.strokeColor;
+    var hitpoints = trackConfig.hitpoints;
 
     store.dispatch((0, _actions.changeBackground)({
         hue: trackConfig.hue,
@@ -2825,13 +2780,35 @@ function render(player, store, analyser, freqByteData, path) {
     }));
 
     function run() {
+        var visualizer = createVisualizer(paper);
+
         return paper.view.onFrame = function (event) {
-            analyser.getByteFrequencyData(freqByteData);
 
-            path.segments = visualizer(freqByteData, path, paper, event);
-            path.strokeColor = strokeColor;
+            if (event.count % 5 === 0) {
+                (function () {
 
-            paper.view.draw();
+                    var currentTime = player.audio.currentTime;
+                    var hits = hitpoints.filter(function (hitpoint) {
+                        return !isNaN(player.audio.duration) && (0, _lodashNumberInRange2['default'])(currentTime, hitpoint, player.audio.duration);
+                    });
+
+                    if (hits.length) {
+                        hits.forEach(function (hit) {
+                            var hitFn = trackConfig[hit];
+
+                            if (hitFn) {
+                                hitFn(store.dispatch);
+                            }
+                        });
+                    }
+
+                    analyser.getByteFrequencyData(freqByteData);
+
+                    visualizer(freqByteData, event, hits);
+
+                    paper.view.draw();
+                })();
+            }
         };
     }
 
@@ -2841,7 +2818,7 @@ function render(player, store, analyser, freqByteData, path) {
         if (currentTrackIndex !== state.currentTrackIndex) {
             currentTrackIndex = state.currentTrackIndex;
             trackConfig = _config2['default'][currentTrackIndex];
-            visualizer = trackConfig.visualizer;
+            createVisualizer = trackConfig.visualizer;
             strokeColor = trackConfig.strokeColor;
 
             store.dispatch((0, _actions.changeBackground)({
@@ -2851,12 +2828,12 @@ function render(player, store, analyser, freqByteData, path) {
             }));
 
             paper.view.off('frame');
+
+            run();
         }
 
         if (!state.isPlaying) {
             paper.view.off('frame');
-        } else {
-            run();
         }
     });
 
@@ -2881,7 +2858,7 @@ function initPath(totalWidth, totalHeight) {
     }
 
     (0, _lodashUtilityRange2['default'])(_config.POINTS).map(function (i, idx) {
-        var point = new paper.Point(i, midY);
+        var point = new paper.Point(0, 0);
 
         path.add(point);
     });
@@ -2893,7 +2870,9 @@ function initPaper(canvas) {
     paper.setup(canvas);
     paper.view.fillColor = 'rgb(255,255,233)';
 
-    return initPath(paper.view.size.width, paper.view.size.height);
+    return paper;
+
+    //return initPath(paper.view.size.width, paper.view.size.height);
 }
 
 function createVisualizer(player, store) {
@@ -2908,7 +2887,7 @@ function createVisualizer(player, store) {
     source.connect(analyser);
     analyser.connect(context.destination);
 
-    var path = initPaper(canvas);
+    var paper = initPaper(canvas);
 
     var dispose = store.subscribe(function () {
         var state = store.getState();
@@ -2918,59 +2897,171 @@ function createVisualizer(player, store) {
             // after that.
             dispose();
 
-            render(player, store, analyser, freqByteData, path);
+            render(player, store, analyser, freqByteData, paper);
         }
     });
 }
 
 module.exports = exports['default'];
 
-},{"../actions":31,"./config":37,"./simpleWave":39,"./sphere":40,"lodash/utility/range":15}],39:[function(require,module,exports){
+},{"../actions":28,"./config":34,"./sphere":37,"lodash/function/once":3,"lodash/number/inRange":11,"lodash/utility/range":12}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
-exports['default'] = generateSimpleWave;
+exports['default'] = generateMountains;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _lodashFunctionMemoize = require('lodash/function/memoize');
+var _lodashUtilityRange = require('lodash/utility/range');
 
-var _lodashFunctionMemoize2 = _interopRequireDefault(_lodashFunctionMemoize);
+var _lodashUtilityRange2 = _interopRequireDefault(_lodashUtilityRange);
 
 var _config = require('./config');
 
-var getInterval = (0, _lodashFunctionMemoize2['default'])(function getInterval(width, count) {
-    return Math.ceil(width / count);
-});
+var heightOffset = 0;
+var widthOffset = 50;
+var maxAlpha = 0.3;
+var red = 36;
+var sunRed = 144;
 
-var getStartX = (0, _lodashFunctionMemoize2['default'])(function getStartX(width, count, interval) {
-    var halfW = width / 2;
-    var halfCount = count / 2;
+function initPath(paper) {
+    var mirrored = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
-    return halfW - halfCount * interval;
-});
-
-function generateSimpleWave(data, path, paper, event) {
+    var path = new paper.Path();
     var width = paper.view.size.width;
     var height = paper.view.size.height;
-    var interval = getInterval(width, path.segments.length);
-    var startX = getStartX(width, path.segments.length, interval);
+
+    red += 20;
+
+    path.closed = false;
+    path.position.x = 0;
+    path.position.y = paper.view.size.height;
+    path.strokeColor = 'rgba(' + red + ', 70, 111, 0.3)';
+    path.fillColor = 'rgba(' + red + ', 70, 111, 0)';
+    path.mirrored = mirrored;
+
+    path.add(new paper.Point(mirrored ? width + widthOffset : -widthOffset, height));
+
+    path.position.y = paper.view.size.height;
+
     path.smooth();
 
-    return path.segments.map(function (segment, i) {
+    return path;
+}
 
-        segment.point.x = i * interval;
-        segment.point.y = height * .75 + data[i] * (_config.amplitude / 10);
+function initSun(paper) {
+    var path = new paper.Path();
+    var width = paper.view.size.width;
+    var height = paper.view.size.height;
+    var radius = 100;
 
-        return segment;
-    });
+    path.strokeColor = 'rgba(144, 92, 90, 0.5)';
+    path.fillColor = 'rgba(144, 92, 90, 0)';
+    path.strokeWidth = 1;
+
+    path.position.x = width * 0.25;
+    path.position.y = 100;
+
+    //let xPos = width * .25;
+    //let yPos = height / 2;
+
+    //range(POINTS).map(i => {
+    //let x = radius * Math.cos(radius * i) + xPos;
+    //let y = radius * Math.sin(radius * i) + yPos;
+    //let point = new paper.Point(x, y);
+
+    //path.add(point);
+    //});
+
+    return path;
+}
+
+function generateMountains(paper) {
+
+    var width = paper.view.size.width;
+    var height = paper.view.size.height;
+    var paths = [initPath(paper)];
+    var interval = width / _config.POINTS;
+    var sun = initSun(paper);
+
+    var currentPathIndex = 0;
+
+    return function (data, event, hits) {
+        var path = paths[currentPathIndex];
+        var lastPath = paths[currentPathIndex - 1];
+        var length = path.segments.length;
+
+        if (lastPath && lastPath.animatingFill) {
+            if (lastPath.fillColor.alpha < maxAlpha) {
+                lastPath.fillColor.alpha += 0.01;
+            } else {
+                lastPath.animatingFill = false;
+            }
+        }
+
+        mountains: if (hits.length >= 0) {
+
+            if (paths.length > 4) {
+                break mountains;
+            }
+
+            if (event.count !== 0 && event.count % _config.POINTS === 0) {
+                heightOffset += 20;
+                paths.push(initPath(paper, !path.mirrored));
+
+                ++currentPathIndex;
+            }
+
+            if (length + 1 >= _config.POINTS) {
+                var x = path.mirrored ? 0 : width;
+                var point = new paper.Point(x, height);
+                path.add(point);
+                path.animatingFill = true;
+            } else {
+                var i = length + 1;
+                var x = path.mirrored ? width - i * interval : i * interval;
+                var y = height - data[i] * (_config.amplitude / 20) - heightOffset;
+                var point = new paper.Point(x, y);
+                path.add(point);
+            }
+        }
+
+        if (hits.length >= 1) {
+            var xPos = width * 0.25;
+            var yPos = 200;
+            var segs = sun.segments.length;
+            var i = segs + 1;
+            var radius = 75;
+
+            if (i >= _config.POINTS) {
+                //let x = radius * Math.cos(radius * i) + xPos;
+                //let y = radius * Math.sin(radius * i) + yPos;
+                //let point = new paper.Point(x, y);
+
+                //path.add(point);
+
+                return;
+            }
+
+            var x = radius * Math.cos(radius * i) + xPos;
+            var y = radius * Math.sin(radius * i) + yPos;
+            var point = new paper.Point(x, y);
+
+            if (segs > 30 && sun.fillColor.alpha < 0.5) {
+                sun.fillColor.red += 1;
+                sun.fillColor.alpha += 0.01;
+            }
+
+            sun.add(point);
+        }
+    };
 }
 
 module.exports = exports['default'];
 
-},{"./config":37,"lodash/function/memoize":2}],40:[function(require,module,exports){
+},{"./config":34,"lodash/utility/range":12}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3002,4 +3093,4 @@ function generateSphere(data, path) {
 
 module.exports = exports['default'];
 
-},{"./config":37}]},{},[32]);
+},{"./config":34}]},{},[29]);
