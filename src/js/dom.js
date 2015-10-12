@@ -6,6 +6,7 @@ var nextBtn = document.getElementById('next');
 var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('listen');
 var scrubber = document.getElementById('scrubber');
+const scrubberPlayed = document.getElementById('scrubber__played');
 var overlay = document.getElementById('overlay');
 const body = document.body;
 const nav = document.getElementById('nav');
@@ -55,6 +56,13 @@ export function bindEvents(player, dispatch, getState) {
 
     });
 
+    player.on('timeupdate', e => {
+        let duration = player.audio.duration;
+        let currentTime = player.audio.currentTime;
+        let percent = (currentTime / duration) * 100;
+        scrubberPlayed.style.width = `${percent}%`;
+    });
+
     playBtn.addEventListener('click', e => {
         let state = getState();
         const isPlaying = state.isPlaying;
@@ -84,7 +92,10 @@ export function bindEvents(player, dispatch, getState) {
     });
 
     scrubber.addEventListener('click', e => {
-        player.seek(e);
+        let offset = e.offsetX;
+        let width = scrubber.offsetWidth;
+        let percent = offset / width;
+        player.audio.currentTime = percent * (player.audio.duration || 0);
     });
 
     navTracklist.addEventListener('click', e => {
@@ -103,7 +114,7 @@ export function bindEvents(player, dispatch, getState) {
     nav.addEventListener('click', e => {
         if (e.target && e.target.nodeName === 'A') {
             let hash = e.target.hash;
-            let id = hash.slice(1);
+            let id = (hash && hash.slice(1) || 'listen');
 
             //activateEl(pageNavs, el => el.hash === hash);
             //activateEl(sections, el => el.getAttribute('id') === id);
@@ -122,6 +133,8 @@ export function bindEvents(player, dispatch, getState) {
 
         if (activeSection) {
             setActiveSection(activeSection);
+        } else {
+            setActiveSection('listen');
         }
     });
 
@@ -155,6 +168,7 @@ export function bindClasses(player, store) {
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
+            scrubber.style.width = '100%';
 
             trackList
                 .map(list => {

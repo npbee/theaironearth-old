@@ -16,10 +16,11 @@
 
 .visualizer {
     display: none;
+    transition: opacity 500ms;
     @include desktop-and-up {
         /*background: rgba(0, 0, 0, 0.5);*/
         display: flex;
-        position: absolute;
+        position: fixed;
         height: 100%;
         width: 100%;
         justify-content: center;
@@ -28,10 +29,11 @@
         left: 0;
         top: 0;
         right: 0;
+        opacity: 1;
     }
 }
 
-body :not(.listen--active) {
+body:not(.listen--active) {
     .visualizer {
         opacity: 0.2;
     }

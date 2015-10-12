@@ -1,17 +1,29 @@
 /******************************
 * LAYOUT
 ******************************/
-.scrubber {
+.scrubber,
+.scrubber__played {
+    cursor: pointer;
     display: block;
     height: 10px;
+    transition: width 100ms;
+    top: 0;
+    left: 0;
+    position: absolute;
     width: 100%;
     @include desktop-and-up {
-        top: 0;
-        left: 0;
-        background: $black;
         position: fixed;
-        width: 100%;
     }
+}
+
+.scrubber {
+    background: rgba($black, 0.8);
+    width: 0%;
+}
+
+.scrubber__played {
+    background: rgba($primary, 0.8);
+    width: 0%;
 }
 
 .player {
