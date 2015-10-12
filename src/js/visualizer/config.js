@@ -1,7 +1,6 @@
 import once from 'lodash/function/once';
 import generateSphere from './sphere';
 import generateMountains from './mountains';
-import { changeBackground } from '../actions';
 
 export const POINTS = 256;
 export const INIT_POINTS = 50;
@@ -26,14 +25,7 @@ export default {
         hue: 32,
         saturation: 76,
         lightness: 67,
-        hitpoints: [89], //89
-        "89": once(function(dispatch) {
-            dispatch(changeBackground({
-                hue: 26,
-                saturation: 80,
-                lightness: 67
-            }));
-        })
+        hitpoints: [1]
     },
 
     // Second Skin

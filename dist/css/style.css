@@ -1,251 +1,350 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+}
 
 button {
   background: none;
   border: none;
-  outline: none; }
+  outline: none;
+}
 
 svg {
   -webkit-transition: fill 200ms;
-  transition: fill 200ms;
-  fill: #444; }
+          transition: fill 200ms;
+  fill: #444;
+}
 
 .icon-theaironearth {
   stroke: #444;
   stroke-width: 20;
   width: 260px;
-  height: 50px; }
+  height: 50px;
+}
 
 .icon-listen {
   width: 100%;
-  height: 60px; }
-  @media only screen and (min-width: 1025px) {
-    .icon-listen {
-      width: 75px;
-      margin-top: -15px; } }
+  height: 60px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-listen {
+    width: 75px;
+    margin-top: -15px;
+  }
+}
 
 .icon-download {
   width: 80%;
-  height: 60px; }
-  @media only screen and (min-width: 1025px) {
-    .icon-download {
-      width: 100px;
-      margin-top: -10px; } }
+  height: 60px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-download {
+    width: 100px;
+    margin-top: -10px;
+  }
+}
 
 .icon-about {
   width: 100%;
-  height: 65px; }
-  @media only screen and (min-width: 1025px) {
-    .icon-about {
-      width: 70px;
-      margin-top: -20px; } }
+  height: 65px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-about {
+    width: 70px;
+    margin-top: -20px;
+  }
+}
 
 .icon-exit {
   width: 40px;
   height: 40px;
-  margin-top: -15px; }
+  margin-top: -15px;
+}
 
 .icon-ghost {
   width: 60px;
   height: 40px;
-  margin-top: -5px; }
+  margin-top: -5px;
+}
 
 .icon-second-skin {
   width: 130px;
   height: 45px;
-  margin-top: -10px; }
+  margin-top: -10px;
+}
 
 .icon-reflection {
   width: 80px;
   height: 50px;
-  margin-top: -10px; }
+  margin-top: -10px;
+}
 
 .icon-farewell {
   width: 70px;
   height: 40px;
-  margin-top: -10px; }
+  margin-top: -10px;
+}
 
 .icon-stillness {
   width: 70px;
   height: 35px;
-  margin-top: -3px; }
+  margin-top: -3px;
+}
 
 .icon-young-guns {
   width: 90px;
-  height: 50px; }
+  height: 50px;
+}
 
 .icon-innocent {
   width: 100px;
   height: 50px;
-  margin-top: -15px; }
+  margin-top: -15px;
+}
 
 .icon-wake {
   width: 50px;
   height: 40px;
-  margin-top: -8px; }
+  margin-top: -8px;
+}
 
 .icon-prev,
 .icon-next {
-  width: 25%; }
+  width: 25%;
+}
+
+.icon-prev svg,
+.icon-next svg {
+  width: 90px;
+  height: 90px;
+}
+
+@media only screen and (min-width: 1025px) {
   .icon-prev svg,
   .icon-next svg {
-    width: 90px;
-    height: 90px; }
-    @media only screen and (min-width: 1025px) {
-      .icon-prev svg,
-      .icon-next svg {
-        width: 20px;
-        height: 25px; } }
+    width: 20px;
+    height: 25px;
+  }
+}
 
 .icon-play,
 .icon-pause {
-  width: 50%; }
+  width: 50%;
+}
+
+.icon-play svg,
+.icon-pause svg {
+  width: 150px;
+  height: 160px;
+}
+
+@media only screen and (min-width: 1025px) {
   .icon-play svg,
   .icon-pause svg {
-    width: 150px;
-    height: 160px; }
-    @media only screen and (min-width: 1025px) {
-      .icon-play svg,
-      .icon-pause svg {
-        width: 30px;
-        height: 40px; } }
+    width: 30px;
+    height: 40px;
+  }
+}
 
 .icon-pause svg {
   width: 140px;
-  height: 160px; }
-  @media only screen and (min-width: 1025px) {
-    .icon-pause svg {
-      width: 20px;
-      height: 40px; } }
+  height: 160px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-pause svg {
+    width: 20px;
+    height: 40px;
+  }
+}
 
 html,
 body {
-  height: 100%; }
+  height: 100%;
+}
 
 body {
   background: url("/src/img/bg.png");
-  margin: 0; }
+  margin: 0;
+}
 
 body {
-  padding: 16px; }
+  font-family: "Chronicle Display A", "Chronicle Display B";
+  font-style: normal;
+  font-weight: 200;
+}
+
+body {
+  padding: 16px;
+}
 
 @media only screen and (min-width: 1025px) {
   nav {
     float: right;
-    width: 15%; } }
+    width: 15%;
+  }
+}
 
 @media only screen and (min-width: 1025px) {
   main {
     float: left;
-    width: 85%; } }
+    width: 85%;
+  }
+}
 
 .section {
-  display: none; }
-  .section.active {
-    display: block; }
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
 
 /******************************
 * LOGO
 ******************************/
 .logo {
   display: block;
-  text-align: center; }
+  text-align: center;
+}
+
+.logo svg {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
   .logo svg {
-    width: 100%; }
-    @media only screen and (min-width: 1025px) {
-      .logo svg {
-        max-height: 50px;
-        width: auto; } }
+    max-height: 50px;
+    width: auto;
+  }
+}
 
 /******************************
 * NAV
 ******************************/
 nav {
-  margin-bottom: 32px; }
-  nav svg {
-    max-width: 100%;
-    pointer-events: none; }
-  nav a {
-    display: block; }
-    nav a svg {
-      -webkit-transition: fill 200ms;
-      transition: fill 200ms; }
-    nav a:hover {
-      cursor: pointer; }
-      nav a:hover svg {
-        fill: #CC8D8A; }
-  nav .active svg {
-    stroke: #CC8D8A;
-    stroke-width: 20; }
+  margin-bottom: 32px;
+}
+
+nav svg {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+nav a {
+  display: block;
+}
+
+nav a svg {
+  -webkit-transition: fill 200ms;
+          transition: fill 200ms;
+}
+
+nav a:hover {
+  cursor: pointer;
+}
+
+nav a:hover svg {
+  fill: #CC8D8A;
+}
+
+nav .active svg {
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
 
 .subnav > li {
   display: inline-block;
   vertical-align: middle;
   width: 33.33%;
   /*flex: 1;*/
-  text-align: center; }
-  @media only screen and (min-width: 1025px) {
-    .subnav > li {
-      text-align: left;
-      display: block;
-      width: 100%; } }
+  text-align: center;
+}
+
+@media only screen and (min-width: 1025px) {
+  .subnav > li {
+    text-align: left;
+    display: block;
+    width: 100%;
+  }
+}
+
 .subnav > li:nth-child(2) {
-  display: none; }
-  @media only screen and (min-width: 1025px) {
-    .subnav > li:nth-child(2) {
-      display: block; } }
+  display: none;
+}
+
+@media only screen and (min-width: 1025px) {
+  .subnav > li:nth-child(2) {
+    display: block;
+  }
+}
 
 .tracklist {
-  display: none; }
-  .tracklist li a {
-    display: block; }
-  @media only screen and (min-width: 1025px) {
-    .tracklist {
-      display: block;
-      padding-left: 32px; } }
+  display: none;
+}
+
+.tracklist li a {
+  display: block;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tracklist {
+    display: block;
+    padding-left: 32px;
+  }
+}
 
 .overlay {
-  z-index: -2; }
+  z-index: -2;
+}
 
 .visualizer {
-  z-index: -1; }
+  z-index: -1;
+}
 
 .overlay {
   -webkit-transition: background 1s;
-  transition: background 1s;
+          transition: background 1s;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 .visualizer {
-  display: none; }
-  @media only screen and (min-width: 1025px) {
-    .visualizer {
-      /*background: rgba(0, 0, 0, 0.5);*/
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-          -ms-flex-pack: center;
-              justify-content: center;
-      /*position: absolute;*/
-      bottom: 0;
-      left: 0;
-      top: 0;
-      right: 0; } }
+  display: none;
+}
+
+@media only screen and (min-width: 1025px) {
+  .visualizer {
+    /*background: rgba(0, 0, 0, 0.5);*/
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    /*position: absolute;*/
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+  }
+}
 
 /******************************
 * LAYOUT
@@ -253,45 +352,69 @@ nav {
 .player button {
   display: inline-block;
   vertical-align: middle;
-  cursor: pointer; }
-  .player button:hover svg {
-    fill: #CC8D8A; }
+  cursor: pointer;
+}
+
+.player button:hover svg {
+  fill: #CC8D8A;
+}
+
 .player .controls {
   display: block;
-  width: 100%; }
-  @media only screen and (min-width: 1025px) {
-    .player .controls {
-      max-width: 150px;
-      display: inline-block;
-      vertical-align: middle; } }
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .controls {
+    max-width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 .player .scrubber {
   display: block;
   height: 10px;
-  width: 100%; }
-  @media only screen and (min-width: 1025px) {
-    .player .scrubber {
-      top: 0;
-      left: 0;
-      background: #444;
-      position: fixed;
-      width: 100%; } }
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .scrubber {
+    top: 0;
+    left: 0;
+    background: #444;
+    position: fixed;
+    width: 100%;
+  }
+}
+
 .player .status > div {
   display: inline-block;
-  vertical-align: middle; }
+  vertical-align: middle;
+}
+
 @media only screen and (min-width: 1025px) {
   .player .status {
     width: 10%;
     display: inline-block;
-    vertical-align: middle; } }
+    vertical-align: middle;
+  }
+}
+
 .player .tracklist {
   display: block;
-  width: 100%; }
-  @media only screen and (min-width: 1025px) {
-    .player .tracklist {
-      display: none; } }
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .tracklist {
+    display: none;
+  }
+}
 
 button.icon-pause {
-  display: none; }
+  display: none;
+}
 
 /******************************
 * TRACKLIST (Mobile only)
@@ -300,19 +423,28 @@ button.icon-pause {
   border-bottom: 1px solid #d9d9d9;
   display: block;
   padding: 16px;
-  cursor: pointer; }
+  cursor: pointer;
+}
+
 .player .tracklist svg {
-  margin-top: 0; }
+  margin-top: 0;
+}
 
 /******************************
 * STATES
 ******************************/
 .isPlaying .icon-play {
-  display: none; }
+  display: none;
+}
+
 .isPlaying .icon-pause {
-  display: inline-block; }
+  display: inline-block;
+}
 
 .isPaused .icon-play {
-  display: inline-block; }
+  display: inline-block;
+}
+
 .isPaused .icon-pause {
-  display: none; }
+  display: none;
+}

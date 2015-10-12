@@ -6,7 +6,7 @@
 }
 
 .overlay {
-    @include transition(background 1s);
+    transition: background 1s;
     position: fixed;
     top: 0;
     left: 0;

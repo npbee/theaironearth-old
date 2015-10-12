@@ -18,8 +18,16 @@
   },
   "devDependencies": {
     "babelify": "^6.3.0",
+    "browser-sync": "^2.9.11",
     "browserify": "^11.2.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.6",
     "redux-logger": "^2.0.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   }
 }
