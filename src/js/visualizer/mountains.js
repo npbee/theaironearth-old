@@ -54,8 +54,7 @@ const dimLights = once(function(store) {
     let state = store.getState();
 
     store.dispatch(changeBackground({
-        hue: state.hue - 5,
-        lightness: 67
+        hue: state.hue - 5
     }));
 });
 

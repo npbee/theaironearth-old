@@ -22,9 +22,9 @@ export default {
     // Ghost
     "1": {
         visualizer: generateMountains,
-        hue: 32,
-        saturation: 76,
-        lightness: 67,
+        hue: 30,
+        saturation: 84,
+        lightness: 84,
         hitpoints: [89]
     },
 

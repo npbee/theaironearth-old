@@ -359,12 +359,19 @@ svg {
   stroke: #444;
   stroke-width: 20;
   width: 260px;
-  height: 50px;
+  height: 60px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-theaironearth {
+    height: 28px;
+  }
 }
 
 .icon-listen {
   width: 100%;
   height: 60px;
+  max-width: 90px;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -376,6 +383,7 @@ svg {
 
 .icon-download {
   width: 80%;
+  max-width: 130px;
   height: 60px;
 }
 
@@ -389,6 +397,7 @@ svg {
 .icon-about {
   width: 100%;
   height: 65px;
+  max-width: 90px;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -399,14 +408,14 @@ svg {
 }
 
 .icon-exit {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   margin-top: -15px;
 }
 
 .icon-ghost {
-  width: 60px;
-  height: 40px;
+  width: 63px;
+  height: 42px;
   margin-top: -5px;
 }
 
@@ -417,8 +426,8 @@ svg {
 }
 
 .icon-reflection {
-  width: 80px;
-  height: 50px;
+  width: 88px;
+  height: 55px;
   margin-top: -10px;
 }
 
@@ -429,8 +438,8 @@ svg {
 }
 
 .icon-stillness {
-  width: 70px;
-  height: 35px;
+  width: 80px;
+  height: 40px;
   margin-top: -3px;
 }
 
@@ -565,10 +574,6 @@ main {
   display: block;
 }
 
-.visualizer {
-  display: block !important;
-}
-
 /******************************
 * LOGO
 ******************************/
@@ -600,6 +605,7 @@ main {
 
 nav {
   margin-bottom: 32px;
+  padding: 16px 0;
 }
 
 nav svg {
@@ -690,6 +696,8 @@ nav .active svg {
 
 .visualizer {
   display: none;
+  -webkit-transition: opacity 500ms;
+          transition: opacity 500ms;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -699,7 +707,7 @@ nav .active svg {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     -webkit-box-pack: center;
@@ -711,30 +719,45 @@ nav .active svg {
     left: 0;
     top: 0;
     right: 0;
+    opacity: 1;
   }
 }
 
-body :not(.listen--active) .visualizer {
+body:not(.listen--active) .visualizer {
   opacity: 0.2;
 }
 
 /******************************
 * LAYOUT
 ******************************/
-.scrubber {
+.scrubber,
+.scrubber__played {
+  cursor: pointer;
   display: block;
   height: 10px;
+  -webkit-transition: width 100ms;
+          transition: width 100ms;
+  top: 0;
+  left: 0;
+  position: absolute;
   width: 100%;
 }
 
 @media only screen and (min-width: 1025px) {
-  .scrubber {
-    top: 0;
-    left: 0;
-    background: #444;
+  .scrubber,
+  .scrubber__played {
     position: fixed;
-    width: 100%;
   }
+}
+
+.scrubber {
+  background: rgba(68, 68, 68, 0.8);
+  width: 0%;
+}
+
+.scrubber__played {
+  background: rgba(204, 141, 138, 0.8);
+  width: 0%;
 }
 
 .player button {
