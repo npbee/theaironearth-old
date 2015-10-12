@@ -1,1 +1,822 @@
-*{box-sizing:border-box}ul{margin:0;padding:0;list-style:none}button{background:none;border:none;outline:none}svg{-webkit-transition:fill 200ms;transition:fill 200ms;fill:#444}.icon-theaironearth{stroke:#444;stroke-width:20;width:260px;height:50px}.icon-listen{width:100%;height:60px}@media only screen and (min-width: 1025px){.icon-listen{width:75px;margin-top:-15px}}.icon-download{width:80%;height:60px}@media only screen and (min-width: 1025px){.icon-download{width:100px;margin-top:-10px}}.icon-about{width:100%;height:65px}@media only screen and (min-width: 1025px){.icon-about{width:70px;margin-top:-20px}}.icon-exit{width:40px;height:40px;margin-top:-15px}.icon-ghost{width:60px;height:40px;margin-top:-5px}.icon-second-skin{width:130px;height:45px;margin-top:-10px}.icon-reflection{width:80px;height:50px;margin-top:-10px}.icon-farewell{width:70px;height:40px;margin-top:-10px}.icon-stillness{width:70px;height:35px;margin-top:-3px}.icon-young-guns{width:90px;height:50px}.icon-innocent{width:100px;height:50px;margin-top:-15px}.icon-wake{width:50px;height:40px;margin-top:-8px}.icon-prev,.icon-next{width:25%}.icon-prev svg,.icon-next svg{width:90px;height:90px}@media only screen and (min-width: 1025px){.icon-prev svg,.icon-next svg{width:20px;height:25px}}.icon-play,.icon-pause{width:50%}.icon-play svg,.icon-pause svg{width:150px;height:160px}@media only screen and (min-width: 1025px){.icon-play svg,.icon-pause svg{width:30px;height:40px}}.icon-pause svg{width:140px;height:160px}@media only screen and (min-width: 1025px){.icon-pause svg{width:20px;height:40px}}html,body{height:100%}body{background:url("/src/img/bg.png");margin:0}body{font-family:"Chronicle Display A", "Chronicle Display B";font-style:normal;font-weight:200}body{padding:16px}@media only screen and (min-width: 1025px){nav{float:right;width:15%}}@media only screen and (min-width: 1025px){main{float:left;width:85%}}.section{display:none}.section.active{display:block}.logo{display:block;text-align:center}.logo svg{width:100%}@media only screen and (min-width: 1025px){.logo svg{max-height:50px;width:auto}}nav{margin-bottom:32px}nav svg{max-width:100%;pointer-events:none}nav a{display:block}nav a svg{-webkit-transition:fill 200ms;transition:fill 200ms}nav a:hover{cursor:pointer}nav a:hover svg{fill:#CC8D8A}nav .active svg{stroke:#CC8D8A;stroke-width:20}.subnav>li{display:inline-block;vertical-align:middle;width:33.33%;text-align:center}@media only screen and (min-width: 1025px){.subnav>li{text-align:left;display:block;width:100%}}.subnav>li:nth-child(2){display:none}@media only screen and (min-width: 1025px){.subnav>li:nth-child(2){display:block}}.tracklist{display:none}.tracklist li a{display:block}@media only screen and (min-width: 1025px){.tracklist{display:block;padding-left:32px}}.overlay{z-index:-2}.visualizer{z-index:-1}.overlay{-webkit-transition:background 1s;transition:background 1s;position:fixed;top:0;left:0;width:100%;height:100%}.visualizer{display:none}@media only screen and (min-width: 1025px){.visualizer{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:absolute;height:100%;width:100%;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;bottom:0;left:0;top:0;right:0}}.player button{display:inline-block;vertical-align:middle;cursor:pointer}.player button:hover svg{fill:#CC8D8A}.player .controls{display:block;width:100%}@media only screen and (min-width: 1025px){.player .controls{max-width:150px;display:inline-block;vertical-align:middle}}.player .scrubber{display:block;height:10px;width:100%}@media only screen and (min-width: 1025px){.player .scrubber{top:0;left:0;background:#444;position:fixed;width:100%}}.player .status>div{display:inline-block;vertical-align:middle}@media only screen and (min-width: 1025px){.player .status{width:10%;display:inline-block;vertical-align:middle}}.player .tracklist{display:block;width:100%}@media only screen and (min-width: 1025px){.player .tracklist{display:none}}button.icon-pause{display:none}.player .tracklist a{border-bottom:1px solid #d9d9d9;display:block;padding:16px;cursor:pointer}.player .tracklist svg{margin-top:0}.isPlaying .icon-play{display:none}.isPlaying .icon-pause{display:inline-block}.isPaused .icon-play{display:inline-block}.isPaused .icon-pause{display:none}
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/*!
+Typeplate : Starter Kit
+URL ........... http://typeplate.com
+Version ....... 2.1.0
+Github ........ https://github.com/typeplate/starter-kit
+Authors ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+License ....... Creative Commmons Attribution 3.0
+License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+*/
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia"), local("Garamond"), local("Palatino"), local("Book Antiqua");
+  unicode-range: U26;
+}
+
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia");
+  unicode-range: U270C;
+}
+
+.typl8-tera, .typl8-giga, .typl8-mega, h1, .typl8-alpha, h2, .typl8-beta, h3, .typl8-gamma, h4, .typl8-delta, h5, .typl8-epsilon, .typl8-zeta, h6 {
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0;
+  color: #222;
+}
+
+blockquote + figcaption cite {
+  display: block;
+  font-size: inherit;
+  text-align: right;
+}
+
+body {
+  word-wrap: break-word;
+}
+
+pre code {
+  word-wrap: normal;
+}
+
+html {
+  font: normal 112.5%/1.65 serif;
+}
+
+body {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  color: #444;
+}
+
+.typl8-tera {
+  font-size: 117px;
+  font-size: 6.5rem;
+  margin-bottom: 70.90909px;
+  margin-bottom: 3.93939rem;
+}
+
+.typl8-giga {
+  font-size: 90px;
+  font-size: 5rem;
+  margin-bottom: 54.54545px;
+  margin-bottom: 3.0303rem;
+}
+
+.typl8-mega, h1 {
+  font-size: 72px;
+  font-size: 4rem;
+  margin-bottom: 43.63636px;
+  margin-bottom: 2.42424rem;
+}
+
+.typl8-alpha, h2 {
+  font-size: 60px;
+  font-size: 3.33333rem;
+  margin-bottom: 36.36364px;
+  margin-bottom: 2.0202rem;
+}
+
+.typl8-beta, h3 {
+  font-size: 48px;
+  font-size: 2.66667rem;
+  margin-bottom: 29.09091px;
+  margin-bottom: 1.61616rem;
+}
+
+.typl8-gamma, h4 {
+  font-size: 36px;
+  font-size: 2rem;
+  margin-bottom: 21.81818px;
+  margin-bottom: 1.21212rem;
+}
+
+.typl8-delta, h5 {
+  font-size: 24px;
+  font-size: 1.33333rem;
+  margin-bottom: 14.54545px;
+  margin-bottom: 0.80808rem;
+}
+
+.typl8-epsilon {
+  font-size: 21px;
+  font-size: 1.16667rem;
+  margin-bottom: 12.72727px;
+  margin-bottom: 0.70707rem;
+}
+
+.typl8-zeta, h6 {
+  font-size: 18px;
+  font-size: 1rem;
+  margin-bottom: 10.90909px;
+  margin-bottom: 0.60606rem;
+}
+
+p {
+  margin: auto auto 1.5em;
+}
+
+p + p {
+  text-indent: 1.5em;
+  margin-top: -1.5em;
+}
+
+small {
+  font-size: 65%;
+}
+
+input,
+abbr,
+acronym,
+blockquote,
+code,
+kbd,
+q,
+samp,
+var {
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre {
+  white-space: pre;
+}
+
+pre code {
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+}
+
+code {
+  white-space: pre;
+  font-family: monospace;
+}
+
+abbr {
+  -webkit-font-variant: small-caps;
+  -moz-font-variant: small-caps;
+  -ms-font-variant: small-caps;
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: gray;
+}
+
+abbr[title]:hover {
+  cursor: help;
+}
+
+.typl8-drop-cap:first-letter {
+  float: left;
+  margin: 10px 10px 0 0;
+  padding: 0 20px;
+  font-size: 4em;
+  font-family: inherit;
+  line-height: 1;
+  text-indent: 0;
+  background: transparent;
+  color: inherit;
+}
+
+p + .typl8-drop-cap {
+  text-indent: 0;
+  margin-top: 0;
+}
+
+/**
+ * Lining Definition Style Markup
+ *
+  <dl class="typl8-lining">
+    <dt><b></b></dt>
+    <dd></dd>
+  </dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.typl8-lining dt,
+.typl8-lining dd {
+  display: inline;
+  margin: 0;
+}
+
+.typl8-lining dt + dt:before,
+.typl8-lining dd + dt:before {
+  content: "\A";
+  white-space: pre;
+}
+
+.typl8-lining dd + dd:before {
+  content: ", ";
+}
+
+.typl8-lining dd:before {
+  content: ": ";
+  margin-left: -0.2rem;
+}
+
+/**
+ * Dictionary Definition Style Markup
+ *
+  <dl class="typl8-dictionary-style">
+    <dt><b></b></dt>
+    <dd></dd>
+  </dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.typl8-dictionary-style dt {
+  display: inline;
+  counter-reset: definitions;
+}
+
+.typl8-dictionary-style dt + dt:before {
+  content: ", ";
+  margin-left: -0.2rem;
+}
+
+.typl8-dictionary-style dd {
+  display: block;
+  counter-increment: definitions;
+}
+
+.typl8-dictionary-style dd:before {
+  content: counter(definitions, decimal) ". ";
+}
+
+/**
+ * Blockquote Markup
+ *
+    <figure>
+      <blockquote cite="">
+        <p></p>
+      </blockquote>
+      <figcaption>
+        <cite>
+          <small><a href=""></a></small>
+        </cite>
+      </figcaption>
+    </figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Pull Quotes Markup
+ *
+  <aside class="typl8-pull-quote">
+    <blockquote>
+      <p></p>
+    </blockquote>
+  </aside>
+ *
+ * Extend this object into your custom stylesheet.
+ *
+ */
+.typl8-pull-quote {
+  position: relative;
+  padding: 1em;
+}
+
+.typl8-pull-quote:before,
+.typl8-pull-quote:after {
+  height: 1em;
+  opacity: 0.5;
+  position: absolute;
+  font-size: 4em;
+  color: #dc976e;
+}
+
+.typl8-pull-quote:before {
+  content: '“';
+  top: 0;
+  left: 0;
+}
+
+.typl8-pull-quote:after {
+  content: '”';
+  bottom: 0;
+  right: 0;
+}
+
+/**
+ * Figures Markup
+ *
+  <figure>
+    <figcaption>
+      <strong>Fig. X.X | </strong><cite title=""></cite>
+    </figcaption>
+  </figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Footnote Markup : Replace 'X' with your unique number for each footnote
+ *
+  <article>
+    <p><sup><a href="#fn-itemX" id="fn-returnX"></a></sup></p>
+    <footer>
+      <ol class="foot-notes">
+        <li id="fn-itemX"><a href="#fn-returnX">↩</a></li>
+      </ol>
+    </footer>
+  </article>
+ *
+ * Extend this object into your markup.
+ *
+ */
+svg {
+  -webkit-transition: fill 200ms;
+          transition: fill 200ms;
+  fill: #444;
+}
+
+.icon-theaironearth {
+  stroke: #444;
+  stroke-width: 20;
+  width: 260px;
+  height: 50px;
+}
+
+.icon-listen {
+  width: 100%;
+  height: 60px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-listen {
+    width: 75px;
+    margin-top: -15px;
+  }
+}
+
+.icon-download {
+  width: 80%;
+  height: 60px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-download {
+    width: 100px;
+    margin-top: -10px;
+  }
+}
+
+.icon-about {
+  width: 100%;
+  height: 65px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-about {
+    width: 70px;
+    margin-top: -20px;
+  }
+}
+
+.icon-exit {
+  width: 40px;
+  height: 40px;
+  margin-top: -15px;
+}
+
+.icon-ghost {
+  width: 60px;
+  height: 40px;
+  margin-top: -5px;
+}
+
+.icon-second-skin {
+  width: 130px;
+  height: 45px;
+  margin-top: -10px;
+}
+
+.icon-reflection {
+  width: 80px;
+  height: 50px;
+  margin-top: -10px;
+}
+
+.icon-farewell {
+  width: 70px;
+  height: 40px;
+  margin-top: -10px;
+}
+
+.icon-stillness {
+  width: 70px;
+  height: 35px;
+  margin-top: -3px;
+}
+
+.icon-young-guns {
+  width: 90px;
+  height: 50px;
+}
+
+.icon-innocent {
+  width: 100px;
+  height: 50px;
+  margin-top: -15px;
+}
+
+.icon-wake {
+  width: 50px;
+  height: 40px;
+  margin-top: -8px;
+}
+
+.icon-prev,
+.icon-next {
+  width: 25%;
+}
+
+.icon-prev svg,
+.icon-next svg {
+  width: 90px;
+  height: 90px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-prev svg,
+  .icon-next svg {
+    width: 20px;
+    height: 25px;
+  }
+}
+
+.icon-play,
+.icon-pause {
+  width: 50%;
+}
+
+.icon-play svg,
+.icon-pause svg {
+  width: 150px;
+  height: 160px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-play svg,
+  .icon-pause svg {
+    width: 30px;
+    height: 40px;
+  }
+}
+
+.icon-pause svg {
+  width: 140px;
+  height: 160px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .icon-pause svg {
+    width: 20px;
+    height: 40px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: url("/src/img/bg.png");
+  margin: 0;
+}
+
+body {
+  font-family: "Chronicle Display A", "Chronicle Display B";
+  font-style: normal;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding: 16px;
+}
+
+@media only screen and (min-width: 1025px) {
+  nav {
+    float: right;
+    width: 15%;
+  }
+}
+
+main {
+  padding: 16px;
+}
+
+@media only screen and (min-width: 1025px) {
+  main {
+    float: left;
+    width: 85%;
+  }
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.section > p {
+  margin-left: 0;
+  max-width: 600px;
+}
+
+.listen--active .section-player {
+  display: block;
+}
+
+.download--active .section-download {
+  display: block;
+}
+
+.about--active .section-about {
+  display: block;
+}
+
+.visualizer {
+  display: block !important;
+}
+
+/******************************
+* LOGO
+******************************/
+.logo {
+  display: block;
+  text-align: center;
+}
+
+.logo svg {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .logo svg {
+    max-height: 50px;
+    width: auto;
+  }
+}
+
+/******************************
+* NAV
+******************************/
+.listen--active .icon-listen,
+.download--active .icon-download,
+.about--active .icon-about {
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
+
+nav {
+  margin-bottom: 32px;
+}
+
+nav svg {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+nav a {
+  display: block;
+}
+
+nav a svg {
+  -webkit-transition: fill 200ms;
+          transition: fill 200ms;
+}
+
+nav a:hover {
+  cursor: pointer;
+}
+
+nav a:hover svg {
+  fill: #CC8D8A;
+}
+
+nav .active svg {
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
+
+.subnav > li {
+  display: inline-block;
+  vertical-align: middle;
+  width: 33.33%;
+  /*flex: 1;*/
+  text-align: center;
+}
+
+@media only screen and (min-width: 1025px) {
+  .subnav > li {
+    text-align: left;
+    display: block;
+    width: 100%;
+  }
+}
+
+.subnav > li:nth-child(2) {
+  display: none;
+}
+
+@media only screen and (min-width: 1025px) {
+  .subnav > li:nth-child(2) {
+    display: block;
+  }
+}
+
+.tracklist {
+  display: none;
+}
+
+.tracklist li a {
+  display: block;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tracklist {
+    display: block;
+    padding-left: 32px;
+  }
+}
+
+.overlay {
+  z-index: -2;
+}
+
+.visualizer {
+  z-index: -1;
+}
+
+.overlay {
+  -webkit-transition: background 1s;
+          transition: background 1s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.visualizer {
+  display: none;
+}
+
+@media only screen and (min-width: 1025px) {
+  .visualizer {
+    /*background: rgba(0, 0, 0, 0.5);*/
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    /*position: absolute;*/
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+  }
+}
+
+body :not(.listen--active) .visualizer {
+  opacity: 0.2;
+}
+
+/******************************
+* LAYOUT
+******************************/
+.scrubber {
+  display: block;
+  height: 10px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .scrubber {
+    top: 0;
+    left: 0;
+    background: #444;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.player button {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.player button:hover svg {
+  fill: #CC8D8A;
+}
+
+.player .controls {
+  display: block;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .controls {
+    max-width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.player .status > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .status {
+    width: 10%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.player .tracklist {
+  display: block;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+  .player .tracklist {
+    display: none;
+  }
+}
+
+button.icon-pause {
+  display: none;
+}
+
+/******************************
+* TRACKLIST (Mobile only)
+******************************/
+.player .tracklist a {
+  border-bottom: 1px solid #d9d9d9;
+  display: block;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.player .tracklist svg {
+  margin-top: 0;
+}
+
+/******************************
+* STATES
+******************************/
+.isPlaying .icon-play {
+  display: none;
+}
+
+.isPlaying .icon-pause {
+  display: inline-block;
+}
+
+.isPaused .icon-play {
+  display: inline-block;
+}
+
+.isPaused .icon-pause {
+  display: none;
+}
