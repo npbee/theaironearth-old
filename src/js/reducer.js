@@ -61,9 +61,9 @@ export default function(state = initialState, action) {
         });
     case CHANGE_BACKGROUND:
         return Object.assign({}, state, {
-            hue: action.payload.hue,
-            saturation: action.payload.saturation,
-            lightness: action.payload.lightness
+            hue: action.payload.hue || state.hue,
+            saturation: action.payload.saturation || state.saturation,
+            lightness: action.payload.lightness || state.lightness
         });
     default:
         return state;

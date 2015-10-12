@@ -28,32 +28,15 @@ function render(player, store, analyser, freqByteData, paper) {
     }));
 
     function run() {
-        var visualizer = createVisualizer(paper);
+        var visualizer = createVisualizer(paper, player, store, trackConfig);
 
         return paper.view.onFrame = (event) => {
 
             if (event.count % 5 === 0) {
 
-                let currentTime = player.audio.currentTime;
-                let hits = hitpoints.filter(hitpoint => {
-                    return !isNaN(player.audio.duration) &&
-                        inRange(currentTime, hitpoint, player.audio.duration);
-                });
-
-                if (hits.length) {
-                    hits.forEach(hit => {
-                        let hitFn = trackConfig[hit];
-
-                        if (hitFn) {
-                            hitFn(store.dispatch);
-                        }
-
-                    });
-                }
-
                 analyser.getByteFrequencyData(freqByteData);
 
-                visualizer(freqByteData, event, hits);
+                visualizer(freqByteData, event);
 
                 paper.view.draw();
             }
