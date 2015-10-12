@@ -25,7 +25,7 @@ export default {
         hue: 32,
         saturation: 76,
         lightness: 67,
-        hitpoints: [1]
+        hitpoints: [89]
     },
 
     // Second Skin

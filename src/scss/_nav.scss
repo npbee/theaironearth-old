@@ -17,6 +17,13 @@
 /******************************
 * NAV
 ******************************/
+.listen--active .icon-listen,
+.download--active .icon-download,
+.about--active .icon-about {
+    stroke: $primary;
+    stroke-width: 20;
+}
+
 nav {
     margin-bottom: $base-spacing-unit * 2;
     svg {

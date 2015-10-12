@@ -1,6 +1,19 @@
 /******************************
 * LAYOUT
 ******************************/
+.scrubber {
+    display: block;
+    height: 10px;
+    width: 100%;
+    @include desktop-and-up {
+        top: 0;
+        left: 0;
+        background: $black;
+        position: fixed;
+        width: 100%;
+    }
+}
+
 .player {
     button {
         display: inline-block;
@@ -17,18 +30,6 @@
             max-width: 150px;
             display: inline-block;
             vertical-align: middle;
-        }
-    }
-    .scrubber {
-        display: block;
-        height: 10px;
-        width: 100%;
-        @include desktop-and-up {
-            top: 0;
-            left: 0;
-            background: $black;
-            position: fixed;
-            width: 100%;
         }
     }
     .status {

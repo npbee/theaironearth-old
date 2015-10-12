@@ -150,7 +150,7 @@ export default function generateMountains(paper, player, store, trackConfig) {
                     sun.fillColor.alpha += 0.01;
                 }
             } else if (sun.position.y < height - 200) {
-                sun.position.y += 0.5;
+                sun.position.y += 0.1;
             }
 
         }

@@ -7,6 +7,7 @@ var prevBtn = document.getElementById('prev');
 var playerEl = document.getElementById('listen');
 var scrubber = document.getElementById('scrubber');
 var overlay = document.getElementById('overlay');
+const body = document.body;
 const nav = document.getElementById('nav');
 const pageNavs = Array.from(document.querySelectorAll('.subnav > li > a'));
 const navTracklist = document.getElementById('nav-tracklist');
@@ -17,6 +18,14 @@ function getIndex(li) {
     let children = Array.from(li.parentNode.children);
 
     return children.indexOf(li);
+}
+
+function setActiveSection(id) {
+    let classList = Array.from(body.classList).find(cls => /--active/.test(cls));
+
+    body.classList.remove(classList);
+    body.classList.add(`${id}--active`);
+
 }
 
 function activateEl(els, filterFn) {
@@ -93,12 +102,12 @@ export function bindEvents(player, dispatch, getState) {
 
     nav.addEventListener('click', e => {
         if (e.target && e.target.nodeName === 'A') {
-            console.log('hi');
             let hash = e.target.hash;
             let id = hash.slice(1);
 
-            activateEl(pageNavs, el => el.hash === hash);
-            activateEl(sections, el => el.getAttribute('id') === id);
+            //activateEl(pageNavs, el => el.hash === hash);
+            //activateEl(sections, el => el.getAttribute('id') === id);
+            setActiveSection(id);
 
             if (window.history) {
                 window.history.pushState({ activeSection: id }, null, hash);
@@ -112,16 +121,14 @@ export function bindEvents(player, dispatch, getState) {
         let activeSection = e.state.activeSection;
 
         if (activeSection) {
-            activateEl(sections, el => el.getAttribute('id') === activeSection);
-            activateEl(pageNavs, el => el.hash === `#${activeSection}`);
+            setActiveSection(activeSection);
         }
     });
 
     if (document.location.hash) {
         let hash = document.location.hash;
 
-        activateEl(pageNavs, el => el.hash === hash);
-        activateEl(sections, el => el.getAttribute('id') === hash.slice(1));
+        setActiveSection(hash.slice(1));
     }
 
 }
