@@ -9,6 +9,7 @@ import watchify from 'watchify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import browserSync from 'browser-sync';
+import uglify from 'gulp-uglify';
 
 let reload = browserSync.reload;
 
@@ -18,6 +19,9 @@ let reload = browserSync.reload;
  */
 const sassOptions = {
     outputStyle: 'expanded'
+};
+const sassProdOpts = {
+    outputStyle: 'compressed'
 };
 
 gulp.task('sass', () => {
@@ -29,23 +33,41 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('sass:build', () => {
+    return gulp
+        .src('./src/scss/**/*.scss')
+        .pipe(sass(sassProdOpts).on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('dist/css'));
+});
+
 
 /**
  * JS
  */
-const customOpts = {
+
+const browserifyOpts = {
     entries: ['src/js/app.js'],
     transform: [babelify]
 };
-const opts = Object.assign({}, watchify.args, customOpts);
-let b = watchify(browserify(opts));
+const watchifyOpts = Object.assign({}, watchify.args, browserifyOpts);
 
-gulp.task('js', bundle);
-b.on('update', bundle);
-b.on('log', gutil.log);
+let devBuild = watchify(browserify(browserifyOpts));
+let prodBuild = browserify(browserifyOpts);
 
-function bundle() {
-    return b.bundle()
+devBuild.on('update', bundleDev);
+devBuild.on('log', gutil.log);
+
+function bundleProd() {
+    return prodBuild.bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/js'));
+}
+
+function bundleDev() {
+    return devBuild.bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('bundle.js'))
         .pipe(buffer())
@@ -53,6 +75,9 @@ function bundle() {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dist/js'));
 }
+
+gulp.task('js', bundleDev);
+gulp.task('js:build', bundleProd);
 
 
 
@@ -66,3 +91,5 @@ gulp.task('default', ['js'], () => {
     gulp.watch(['*.html', 'dist/**/*'], { cwd: './' }, reload);
     gulp.watch('./src/scss/**/*.scss', ['sass']);
 });
+
+gulp.task('build', ['js:build', 'sass:build']);
