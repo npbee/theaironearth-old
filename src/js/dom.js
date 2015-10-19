@@ -1,4 +1,5 @@
 import { play, pause, next, prev, end, resume } from './actions';
+import { TRACK_NAMES } from './constants';
 
 var playBtn = document.getElementById('play');
 var pauseBtn = document.getElementById('pause');
@@ -27,6 +28,14 @@ function setActiveSection(id) {
     body.classList.remove(classList);
     body.classList.add(`${id}--active`);
 
+}
+
+function setActiveTrackClass(currentTrackIndex) {
+    let trackClass = Array.from(body.classList).find(cls => /track--/.test(cls));
+    let trackName = TRACK_NAMES[currentTrackIndex];
+
+    body.classList.remove(trackClass);
+    body.classList.add(`track--${trackName}`);
 }
 
 function activateEl(els, filterFn) {
@@ -169,6 +178,8 @@ export function bindClasses(player, store) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
             scrubber.style.width = '100%';
+
+            setActiveTrackClass(currentTrackIndex);
 
             trackList
                 .map(list => {

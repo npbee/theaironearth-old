@@ -11,3 +11,29 @@ $mq-desktop: 1382px !default;
         @content;
     }
 }
+
+
+// Map the active track to the color for the active text
+// Some backgrounds are dark
+$tracks: (
+    exit: $primary,
+    ghost: $primary,
+    second_skin: $white
+);
+
+@mixin svg-colors {
+    @each $name, $color in $tracks {
+        .track--#{$name}.listen--active .icon-listen,
+        .track--#{$name}.download--active .icon-download,
+        .track--#{$name}.about--active .icon-about {
+            fill: #{$color};
+            stroke: #{$color};
+            stroke-width: 20;
+        }
+        .track--#{$name} nav .active svg {
+            stroke: #{$color};
+            fill: #{$color};
+        }
+    }
+}
+            

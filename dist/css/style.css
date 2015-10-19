@@ -689,6 +689,48 @@ nav .active svg {
   }
 }
 
+/******************************
+* TRACK OVERRIDES
+******************************/
+.track--exit.listen--active .icon-listen,
+.track--exit.download--active .icon-download,
+.track--exit.about--active .icon-about {
+  fill: #CC8D8A;
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
+
+.track--exit nav .active svg {
+  stroke: #CC8D8A;
+  fill: #CC8D8A;
+}
+
+.track--ghost.listen--active .icon-listen,
+.track--ghost.download--active .icon-download,
+.track--ghost.about--active .icon-about {
+  fill: #CC8D8A;
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
+
+.track--ghost nav .active svg {
+  stroke: #CC8D8A;
+  fill: #CC8D8A;
+}
+
+.track--second_skin.listen--active .icon-listen,
+.track--second_skin.download--active .icon-download,
+.track--second_skin.about--active .icon-about {
+  fill: #f9f9f9;
+  stroke: #f9f9f9;
+  stroke-width: 20;
+}
+
+.track--second_skin nav .active svg {
+  stroke: #f9f9f9;
+  fill: #f9f9f9;
+}
+
 .overlay {
   z-index: -2;
 }
