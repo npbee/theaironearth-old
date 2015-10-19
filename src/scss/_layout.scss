@@ -29,6 +29,11 @@ main {
 
 }
 
+.section-about,
+.section-download {
+    max-width: 600px;
+}
+
 .listen--active .section-player { display: block; }
 .download--active .section-download { display: block; }
 .about--active .section-about { display: block; }
