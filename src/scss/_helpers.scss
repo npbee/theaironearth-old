@@ -1,0 +1,12 @@
+.no-text-indent p {
+    text-indent: 0;
+}
+
+.hr--small {
+    border: none;
+    outline: none;
+    background: $black;
+    height: 1px;
+    width: 20px;
+    margin-bottom: $base-spacing-unit;
+}

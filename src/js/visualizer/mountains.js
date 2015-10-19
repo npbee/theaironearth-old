@@ -50,6 +50,23 @@ function initSun(paper) {
     return path;
 }
 
+function initRays(paper) {
+    let path = new paper.Path();
+    let width = paper.view.size.width;
+    let height = paper.view.size.height;
+    let radius = 100;
+
+    path.strokeColor = 'rgba(144, 92, 90, 0.4)';
+    path.fillColor = 'rgba(144, 92, 90, 0.4)';
+    path.strokeWidth = 1;
+    path.smooth();
+
+    path.position.x = width * 0.25;
+    path.position.y = 100;
+
+    return path;
+}
+
 const dimLights = once(function(store) {
     let state = store.getState();
 
@@ -73,6 +90,7 @@ export default function generateMountains(paper, player, store, trackConfig) {
     let heightOffset = 0;
 
     let sun = initSun(paper);
+    let rays = initRays(paper);
 
     return function(data, event) {
 
@@ -81,7 +99,7 @@ export default function generateMountains(paper, player, store, trackConfig) {
         if (currentHitpoint && player.audio.currentTime > currentHitpoint) {
             if (hits.indexOf(currentHitpoint) === -1) {
                 hits.push(currentHitpoint);
-                ++currentHitpoint;
+                ++currentHitpointIndex;
             }
         }
 
@@ -148,9 +166,33 @@ export default function generateMountains(paper, player, store, trackConfig) {
                     sun.fillColor.red += 1;
                     sun.fillColor.alpha += 0.01;
                 }
-            } else if (sun.position.y < height - 200) {
-                sun.position.y += 0.1;
+            } else if (sun.position.y < height - 100) {
+                sun.position.y += 0.2;
             }
+        }
+
+        if (hits.length > 1) {
+            let xPos = width * 0.25;
+            let yPos = 200;
+            let segs = sun.segments.length;
+            let i = segs + 1;
+            let radius = 75;
+
+            let x = width * Math.cos(radius * i) + xPos;
+            let y = height * Math.sin(radius * i) + yPos;
+            let point = new paper.Point(x, y);
+
+            //sun.fillColor.red += 1;
+            if (sun.strokeColor.alpha > 0.1) {
+                sun.strokeColor.alpha -= 0.01;
+                sun.fillColor.alpha -= 0.01;
+            }
+
+            if (sun.fillColor.alpha > 0.1) {
+                sun.fillColor.alpha -= 0.01;
+            }
+
+            sun.add(point);
 
         }
 
