@@ -1,4 +1,4 @@
-export const RESOLVE_URL = "https://soundcloud.com/theaironearth/sets/test";
+export const RESOLVE_URL = "https://soundcloud.com/theaironearth/sets/the-air-on-earth/s-RibTB";
 export const CLIENT_ID = "287e0a470aceec7d505ab41e1892fddc";
 
 export const TRACK_NAMES = {
