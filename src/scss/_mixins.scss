@@ -16,15 +16,15 @@ $mq-desktop: 1382px !default;
 // Map the active track to the color for the active text
 // Some backgrounds are dark
 $tracks: (
-    exit: ($primary, $black),
-    ghost: ($primary, $black),
-    second_skin: ($white, $grey),
-    reflection: ($white, lighten($black, 30%)),
-    farewell: ($white, lighten($black, 30%)),
-    stillness: ($grey, $black),
-    young_guns: ($grey, $black),
-    innocent: ($primary, $black),
-    wake: ($primary, $black)
+    exit: ($primary, $black, $black),
+    ghost: ($primary, $black, $black),
+    second_skin: ($white, $grey, $grey),
+    reflection: ($white, lighten($black, 30%), $white),
+    farewell: ($white, lighten($black, 30%), $white),
+    stillness: ($grey, $black, $grey),
+    young_guns: ($grey, $black, $black),
+    innocent: ($primary, $black, $black),
+    wake: ($primary, $black, $black)
 );
 
 @mixin svg-colors {
@@ -32,6 +32,11 @@ $tracks: (
 
         $active: nth($color, 1);
         $inActive: nth($color, 2);
+        $body: nth($color, 3);
+
+        .track--#{$name} {
+            color: $body;
+        }
         
         .track--#{$name} .controls,
         .track--#{$name} nav a {
