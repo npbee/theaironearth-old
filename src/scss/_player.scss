@@ -5,13 +5,14 @@
 .scrubber__played {
     cursor: pointer;
     display: block;
-    height: 10px;
+    height: 16px;
     transition: width 100ms;
     top: 0;
     left: 0;
     position: absolute;
     width: 100%;
     @include desktop-and-up {
+        height: 8px;
         position: fixed;
     }
 }

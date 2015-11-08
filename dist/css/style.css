@@ -999,7 +999,7 @@ body:not(.listen--active) .visualizer {
 .scrubber__played {
   cursor: pointer;
   display: block;
-  height: 10px;
+  height: 16px;
   -webkit-transition: width 100ms;
           transition: width 100ms;
   top: 0;
@@ -1011,6 +1011,7 @@ body:not(.listen--active) .visualizer {
 @media only screen and (min-width: 1025px) {
   .scrubber,
   .scrubber__played {
+    height: 8px;
     position: fixed;
   }
 }
