@@ -39,6 +39,7 @@
     .controls {
         display: block;
         width: 100%;
+        margin-bottom: $base-spacing-unit;
         @include desktop-and-up {
             max-width: 150px;
             display: inline-block;

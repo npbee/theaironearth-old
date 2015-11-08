@@ -13,6 +13,7 @@ const body = document.body;
 const nav = document.getElementById('nav');
 const pageNavs = Array.from(document.querySelectorAll('.subnav > li > a'));
 const navTracklist = document.getElementById('nav-tracklist');
+const mobileTracklist = document.getElementById('mobile-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
 const sections = Array.from(document.querySelectorAll('.section'));
 const visToggle = document.getElementById('vis-toggle');
@@ -123,6 +124,19 @@ export function bindEvents(player, dispatch, getState) {
         }
     });
 
+    mobileTracklist.addEventListener('click', e => {
+        if (e.target && e.target.nodeName === 'A') {
+            let target = e.target;
+            let parentNode = target.parentNode;
+            let index = getIndex(parentNode);
+
+            dispatch(play(player, index));
+
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    });
+
     nav.addEventListener('click', e => {
         if (e.target && e.target.nodeName === 'A') {
             let hash = e.target.hash;
@@ -162,6 +176,10 @@ export function bindEvents(player, dispatch, getState) {
         let hash = document.location.hash;
 
         setActiveSection(hash.slice(1));
+    }
+
+    if (window.matchMedia("(min-width: 1025px)").matches) {
+        dispatch(toggleVis(true));
     }
 
 }

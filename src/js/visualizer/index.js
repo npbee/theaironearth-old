@@ -67,7 +67,7 @@ function initPaper(canvas) {
 function initAudio(player) {
     const audio = player.audio;
     audio.crossOrigin = 'anonymous';
-    const context = new AudioContext();
+    const context = new (webkitAudioContext || AudioContext)();
     const analyser = context.createAnalyser();
     const source = context.createMediaElementSource(audio);
     const freqByteData = new Uint8Array(analyser.frequencyBinCount);
@@ -82,6 +82,7 @@ export default function createVisualizer(player, store) {
     const canvas = document.getElementById('visualizer');
     const [analyser, freqByteData] = initAudio(player);
     const paper = initPaper(canvas);
+
 
     return render(player, store, analyser, freqByteData, paper);
 }
