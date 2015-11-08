@@ -116,6 +116,16 @@ gulp.task('images', () => {
 
 
 /**
+ * Copy favicon
+ */
+gulp.task('favicon', () => {
+    return gulp.src('./src/img/favicon.ico')
+        .pipe(gulp.dest('./dist/img'));
+});
+
+
+
+/**
  * Deploy
  */
 const creds = JSON.parse(fs.readFileSync('./aws.json'));
@@ -136,7 +146,7 @@ gulp.task('default', ['js'], () => {
 
     gulp.watch(['dist/**/*'], { cwd: './' }, reload);
     gulp.watch('./src/scss/**/*.scss', ['sass']);
-    gulp.watch('./src/html', ['html']);
+    gulp.watch('./src/index.html', ['html']);
 });
 
 gulp.task('build', ['js:build', 'sass:build', 'html']);
