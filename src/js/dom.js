@@ -182,6 +182,29 @@ export function bindEvents(player, dispatch, getState) {
         dispatch(toggleVis(true));
     }
 
+    window.addEventListener('keydown', e => {
+        let keyCode = e.which || e.keyCode;
+        let state = getState();
+        const isPlaying = state.isPlaying;
+        const isPaused = state.isPaused;
+
+        if (keyCode === 32) {
+            if (isPaused) {
+                dispatch(resume(player));
+            } else if (!isPlaying) {
+                dispatch(play(player));
+            } else if (isPlaying) {
+                dispatch(pause(player));
+            }
+
+            e.preventDefault();
+        } else if (keyCode === 39) {
+            dispatch(next(player));
+        } else if (keyCode === 37) {
+            dispatch(prev(player));
+        }
+    });
+
 }
 
 export function bindClasses(player, store) {
