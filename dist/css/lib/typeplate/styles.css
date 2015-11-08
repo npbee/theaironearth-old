@@ -24,7 +24,7 @@ License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
   text-rendering: optimizeLegibility;
   line-height: 1;
   margin-top: 0;
-  color: #222;
+  /*color: $typl8-heading-color;*/
 }
 
 blockquote + figcaption cite {

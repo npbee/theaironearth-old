@@ -40,7 +40,7 @@ License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
   text-rendering: optimizeLegibility;
   line-height: 1;
   margin-top: 0;
-  color: #222;
+  /*color: $typl8-heading-color;*/
 }
 
 blockquote + figcaption cite {
@@ -692,6 +692,10 @@ nav .active svg {
 /******************************
 * TRACK OVERRIDES
 ******************************/
+.track--exit {
+  color: #444;
+}
+
 .track--exit .controls svg,
 .track--exit nav a svg {
   stroke: #444;
@@ -711,6 +715,10 @@ nav .active svg {
   fill: #CC8D8A;
   stroke: #CC8D8A;
   stroke-width: 20;
+}
+
+.track--ghost {
+  color: #444;
 }
 
 .track--ghost .controls svg,
@@ -734,6 +742,10 @@ nav .active svg {
   stroke-width: 20;
 }
 
+.track--second_skin {
+  color: #d9d9d9;
+}
+
 .track--second_skin .controls svg,
 .track--second_skin nav a svg {
   stroke: #d9d9d9;
@@ -753,6 +765,10 @@ nav .active svg {
   fill: #f9f9f9;
   stroke: #f9f9f9;
   stroke-width: 20;
+}
+
+.track--reflection {
+  color: #f9f9f9;
 }
 
 .track--reflection .controls svg,
@@ -776,6 +792,10 @@ nav .active svg {
   stroke-width: 20;
 }
 
+.track--farewell {
+  color: #f9f9f9;
+}
+
 .track--farewell .controls svg,
 .track--farewell nav a svg {
   stroke: #919191;
@@ -795,6 +815,10 @@ nav .active svg {
   fill: #f9f9f9;
   stroke: #f9f9f9;
   stroke-width: 20;
+}
+
+.track--stillness {
+  color: #d9d9d9;
 }
 
 .track--stillness .controls svg,
@@ -818,6 +842,10 @@ nav .active svg {
   stroke-width: 20;
 }
 
+.track--young_guns {
+  color: #444;
+}
+
 .track--young_guns .controls svg,
 .track--young_guns nav a svg {
   stroke: #444;
@@ -839,6 +867,10 @@ nav .active svg {
   stroke-width: 20;
 }
 
+.track--innocent {
+  color: #444;
+}
+
 .track--innocent .controls svg,
 .track--innocent nav a svg {
   stroke: #444;
@@ -858,6 +890,10 @@ nav .active svg {
   fill: #CC8D8A;
   stroke: #CC8D8A;
   stroke-width: 20;
+}
+
+.track--wake {
+  color: #444;
 }
 
 .track--wake .controls svg,
