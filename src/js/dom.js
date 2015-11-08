@@ -1,4 +1,4 @@
-import { play, pause, next, prev, end, resume } from './actions';
+import { play, pause, next, prev, end, resume, toggleVis } from './actions';
 import { TRACK_NAMES } from './constants';
 
 var playBtn = document.getElementById('play');
@@ -15,6 +15,9 @@ const pageNavs = Array.from(document.querySelectorAll('.subnav > li > a'));
 const navTracklist = document.getElementById('nav-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
 const sections = Array.from(document.querySelectorAll('.section'));
+const visToggle = document.getElementById('vis-toggle');
+const toggleVisOn = document.getElementById('toggle-vis-on');
+const toggleVisOff = document.getElementById('toggle-vis-off');
 
 function getIndex(li) {
     let children = Array.from(li.parentNode.children);
@@ -137,6 +140,14 @@ export function bindEvents(player, dispatch, getState) {
         }
     });
 
+    toggleVisOn.addEventListener('click', e => {
+        dispatch(toggleVis(true));
+    });
+
+    toggleVisOff.addEventListener('click', e => {
+        dispatch(toggleVis(false));
+    });
+
     window.addEventListener('popstate', e => {
         let activeSection = e.state.activeSection;
 
@@ -200,6 +211,14 @@ export function bindClasses(player, store) {
         } else {
             playerEl.classList.remove('isPlaying');
             playerEl.classList.remove('isPaused');
+        }
+
+        if (state.visualizerOn) {
+            visToggle.classList.remove('off');
+            visToggle.classList.add('on');
+        } else {
+            visToggle.classList.remove('on');
+            visToggle.classList.add('off');
         }
     });
 

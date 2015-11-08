@@ -7,13 +7,15 @@ import {
     NEXT,
     PREV,
     END,
-    CHANGE_BACKGROUND
+    CHANGE_BACKGROUND,
+    TOGGLE_VISUALIZER
 } from './actions';
 
 const initialState = {
     isFetching: false,
     isPlaying: false,
     isPaused: false,
+    visualizerOn: true,
     currentTrackIndex: 0,
     hue: 0,
     saturation: 0,
@@ -64,6 +66,10 @@ export default function(state = initialState, action) {
             hue: action.payload.hue || state.hue,
             saturation: action.payload.saturation || state.saturation,
             lightness: action.payload.lightness || state.lightness
+        });
+    case TOGGLE_VISUALIZER:
+        return Object.assign({}, state, {
+            visualizerOn: action.payload
         });
     default:
         return state;
