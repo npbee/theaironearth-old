@@ -1,10 +1,9 @@
 import range from 'lodash/utility/range';
 import once from 'lodash/function/once';
-import { amplitude, POINTS } from './config';
+import { amplitude, POINTS, MAX_ALPHA } from './config';
 import { changeBackground } from '../actions';
 import randomBetween from '../utils/randomBetween';
 
-const maxAlpha = 0.3;
 
 function initMountain(paper, mirrored = false) {
     let path = new paper.Path();
@@ -34,21 +33,27 @@ function initMountain(paper, mirrored = false) {
 }
 
 
-function initPath(paper) {
+function initPath(paper, config) {
     let path = new paper.Path();
     let width = paper.view.size.width;
     let height = paper.view.size.height;
     let radius = 100;
 
-    path.strokeColor = 'rgba(144, 92, 90, 0.5)';
-    path.fillColor = 'rgba(144, 92, 90, 0.5)';
+    //path.strokeColor = config.strokeColor || '#444';
+    //path.fillColor = config.fillColor || '#444';
     path.strokeWidth = 1;
     path.smooth();
 
     let interval = width / POINTS;
 
-    range(POINTS).map(pnt => {
-        path.add(new paper.Point(pnt * interval, 600));
+    range(POINTS).map((pnt, i) => {
+        if (i === 0) {
+            path.add(new paper.Point(-100, 0));
+        } else if (i === POINTS - 1) {
+            path.add(new paper.Point(width + 200, 0));
+        } else {
+            path.add(new paper.Point(pnt * interval, 0));
+        }
     });
 
     path.position.y = height;
@@ -56,25 +61,44 @@ function initPath(paper) {
     return path;
 }
 
-export default function generateMountains(paper, player, store, trackConfig) {
+function dimPath(path) {
+    return path.fillColor.alpha -= 0.01;
+}
+
+function shouldDim(path) {
+    return path.fillColor && path.fillColor.alpha && path.fillColor.alpha > MAX_ALPHA;
+}
+
+let heightChange = 1;
+let paths = [];
+let currentPathIndex = -1;
+let path;
+
+export default function generate(paper, player, store, trackConfig) {
 
     let width = paper.view.size.width;
     let height = paper.view.size.height;
-    let path = initPath(paper);
+
+    heightChange += 0.01;
+
+    paper.project.clear();
+
     let barHeight;
+    path = initPath(paper);
+    path.strokeColor = trackConfig.strokeColor || '#444';
+    path.fillColor = trackConfig.fillColor || '#444';
 
     return function(data, event) {
 
-        path.segments = path.segments.map((seg, idx) => {
-            if (idx !== 0 && idx !== path.segments.length - 1) {
-                barHeight = data[idx] / 2;
-                seg.point.y = height - barHeight;
 
-                return seg;
-            } else {
-                return seg;
+        for (let i = 0; i < POINTS; i++) {
+            if (i !== 0 && i !== POINTS - 1) {
+                let segment = path.segments[i];
+                barHeight = data[i] * amplitude * heightChange;
+                segment.point.y = height - barHeight;
             }
-        });
+        }
+
     };
 
 }
