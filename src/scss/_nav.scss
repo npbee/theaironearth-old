@@ -1,20 +1,4 @@
 /******************************
-* LOGO
-******************************/
-.logo {
-    display: block;
-    text-align: center;
-    svg {
-        width: 100%;
-        @include desktop-and-up {
-            max-height: 50px;
-            width: auto;
-        }
-    }
-}
-
-
-/******************************
 * NAV
 ******************************/
 .listen--active .icon-listen,
