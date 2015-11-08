@@ -12,6 +12,8 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const browserSync = require('browser-sync');
 const uglify = require('gulp-uglify');
+const minifyHtml = require('gulp-minify-html');
+const imagemin = require('gulp-imagemin');
 
 let reload = browserSync.reload;
 
@@ -85,15 +87,43 @@ gulp.task('js:build', bundleProd);
 
 
 
+/**
+ * HTML
+ */
+gulp.task('html', () => {
+    const opts = {};
+
+    return gulp.src('./src/index.html')
+        .pipe(minifyHtml(opts))
+        .pipe(gulp.dest('./dist/'));
+});
+
+
+
+/**
+ * Images
+ */
+gulp.task('images', () => {
+    const opts = {};
+
+    return gulp.src('./src/img/*')
+        .pipe(imagemin(opts))
+        .pipe(gulp.dest('./dist/img'))
+});
+
+
+
+
 gulp.task('default', ['js'], () => {
     browserSync({
         server: {
-            baseDir: './'
+            baseDir: './dist'
         }
     });
 
-    gulp.watch(['*.html', 'dist/**/*'], { cwd: './' }, reload);
+    gulp.watch(['dist/**/*'], { cwd: './' }, reload);
     gulp.watch('./src/scss/**/*.scss', ['sass']);
+    gulp.watch('./src/html', ['html']);
 });
 
 gulp.task('build', ['js:build', 'sass:build']);
