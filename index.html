@@ -183,10 +183,11 @@
         </nav>
 
         <main>
+                <div id="debug"></div>
+            <div id="scrubber" class="scrubber">
+                <div id="scrubber__played" class="scrubber__played"></div>
+            </div>
             <section class="player section section-player" id="listen">
-                <div id="scrubber" class="scrubber">
-                    <div id="scrubber__played" class="scrubber__played"></div>
-                </div>
                 <div class="controls">
                     <button class="icon-prev" id="prev">
                         <svg>
@@ -218,7 +219,7 @@
                     <div id="separator" class="status-separator">/</div>
                     <div id="total-time" class="time">4:03</div>
                 </div>
-                <ul class="tracklist">
+                <ul class="tracklist" id="mobile-tracklist">
                     <li>
                         <a>
                         <svg class="icon icon-exit icon--active">

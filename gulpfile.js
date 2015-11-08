@@ -1,15 +1,17 @@
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import sass from 'gulp-sass';
-import sourcemaps from 'gulp-sourcemaps';
-import autoprefixer from 'gulp-autoprefixer';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import watchify from 'watchify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
-import browserSync from 'browser-sync';
-import uglify from 'gulp-uglify';
+'use strict';
+
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const autoprefixer = require('gulp-autoprefixer');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const watchify = require('watchify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const browserSync = require('browser-sync');
+const uglify = require('gulp-uglify');
 
 let reload = browserSync.reload;
 
@@ -48,7 +50,9 @@ gulp.task('sass:build', () => {
 
 const browserifyOpts = {
     entries: ['src/js/app.js'],
-    transform: [babelify]
+    transform: [babelify.configure({
+        presets: ['es2015']
+    })]
 };
 const watchifyOpts = Object.assign({}, watchify.args, browserifyOpts);
 
