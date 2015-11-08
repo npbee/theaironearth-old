@@ -8,7 +8,6 @@ import reducer from './reducer';
 import { fetchTracks } from './actions';
 import { CLIENT_ID } from './constants';
 import { bindEvents, bindClasses } from './dom';
-import createVisualizer from './visualizer';
 import createRouter from './router';
 
 
@@ -20,6 +19,3 @@ store.dispatch(fetchTracks(player));
 
 bindEvents(player, store.dispatch, store.getState);
 bindClasses(player, store);
-
-createVisualizer(player, store);
-

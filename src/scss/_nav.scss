@@ -10,6 +10,9 @@
 
 nav {
     padding: $base-spacing-unit 0;
+    .logo {
+        margin-bottom: $base-spacing-unit;
+    }
     svg {
         max-width: 100%;
         pointer-events: none;
