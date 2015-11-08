@@ -13,23 +13,30 @@ function render(player, store, analyser, freqByteData, paper) {
     function run() {
         var visualizer = freq(paper, player, store, trackConfig);
 
-        return paper.view.onFrame = (event) => {
+        if (!state.isPlaying) {
+            paper.view.off('frame');
+        } else if (!state.visualizerOn) {
+            paper.project.clear();
+            paper.view.off('frame');
+        } else {
+            return paper.view.onFrame = (event) => {
 
-            if (event.count % FRAME_THROTTLE === 0) {
+                if (event.count % FRAME_THROTTLE === 0) {
 
-                analyser.getByteFrequencyData(freqByteData);
+                    analyser.getByteFrequencyData(freqByteData);
 
-                visualizer(freqByteData, event);
+                    visualizer(freqByteData, event);
 
-                paper.view.draw();
-            }
-        };
+                    paper.view.draw();
+                }
+            };
+        }
     }
 
     paper.view.onResize = run;
 
     let dispose = store.subscribe(() => {
-        let state = store.getState();
+        state = store.getState();
 
         if (currentTrackIndex !== state.currentTrackIndex) {
             currentTrackIndex = state.currentTrackIndex;
@@ -43,11 +50,8 @@ function render(player, store, analyser, freqByteData, paper) {
             }));
         }
 
-        if (!state.isPlaying) {
-            paper.view.off('frame');
-        } else {
-            run();
-        }
+        run();
+
     });
 
     return paper;

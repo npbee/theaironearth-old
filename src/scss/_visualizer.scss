@@ -38,3 +38,27 @@ body:not(.listen--active) {
         opacity: 0.2;
     }
 }
+
+.vis-toggle {
+    text-align: center;
+    color: lighten($black, 40%);
+    font-size: 0.8em;
+    margin-top: $base-spacing-unit / 2;
+    a {
+        text-transform: lowercase;
+        cursor: pointer;
+        &:hover {
+            color: $black;
+        }
+    }
+    &.on {
+        a:first-child {
+            color: $black;
+        }
+    }
+    &.off {
+        a:nth-child(2) {
+            color: $black;
+        }
+    }
+}

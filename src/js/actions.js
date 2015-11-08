@@ -92,3 +92,13 @@ export function changeBackground({ hue, saturation, lightness }) {
         }
     };
 }
+
+
+export const TOGGLE_VISUALIZER = 'TOGGLE_VISUALIZER';
+
+export function toggleVis(isOn) {
+    return {
+        type: TOGGLE_VISUALIZER,
+        payload: isOn
+    }
+}

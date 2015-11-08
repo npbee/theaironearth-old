@@ -968,6 +968,30 @@ body:not(.listen--active) .visualizer {
   opacity: 0.2;
 }
 
+.vis-toggle {
+  text-align: center;
+  color: #aaaaaa;
+  font-size: 0.8em;
+  margin-top: 8px;
+}
+
+.vis-toggle a {
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.vis-toggle a:hover {
+  color: #444;
+}
+
+.vis-toggle.on a:first-child {
+  color: #444;
+}
+
+.vis-toggle.off a:nth-child(2) {
+  color: #444;
+}
+
 /******************************
 * LAYOUT
 ******************************/
