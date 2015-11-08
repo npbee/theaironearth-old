@@ -2,7 +2,8 @@ import range from 'lodash/utility/range';
 import inRange from 'lodash/number/inRange';
 import once from 'lodash/function/once';
 
-import generateSphere from './sphere';
+import generateMountains from './mountains';
+import freq from './freq';
 import { changeBackground } from '../actions';
 
 import config, {
@@ -12,12 +13,9 @@ import config, {
 
 function render(player, store, analyser, freqByteData, paper) {
 
-    //requestAnimationFrame(render.bind(null, player, store, analyser, freqByteData, path));
-    //setInterval(() => render(player, store, analyser, freqByteData, path, r), 1000);
     let state = store.getState();
     let currentTrackIndex = state.currentTrackIndex;
     let trackConfig = config[currentTrackIndex];
-    let createVisualizer = trackConfig.visualizer;
     let strokeColor = trackConfig.strokeColor;
     let hitpoints = trackConfig.hitpoints;
 
@@ -28,7 +26,7 @@ function render(player, store, analyser, freqByteData, paper) {
     }));
 
     function run() {
-        var visualizer = createVisualizer(paper, player, store, trackConfig);
+        var visualizer = freq(paper, player, store, trackConfig);
 
         return paper.view.onFrame = (event) => {
 
@@ -49,7 +47,6 @@ function render(player, store, analyser, freqByteData, paper) {
         if (currentTrackIndex !== state.currentTrackIndex) {
             currentTrackIndex = state.currentTrackIndex;
             trackConfig = config[currentTrackIndex];
-            createVisualizer = trackConfig.visualizer;
             strokeColor = trackConfig.strokeColor;
 
             store.dispatch(changeBackground({
@@ -58,9 +55,9 @@ function render(player, store, analyser, freqByteData, paper) {
                 lightness: trackConfig.lightness
             }));
 
-            paper.view.off('frame');
+            //paper.view.off('frame');
 
-            run();
+            //run();
         }
 
         if (!state.isPlaying) {
@@ -102,8 +99,6 @@ function initPaper(canvas) {
     paper.view.fillColor = 'rgb(255,255,233)';
 
     return paper;
-
-    //return initPath(paper.view.size.width, paper.view.size.height);
 }
 
 export default function createVisualizer(player, store) {
