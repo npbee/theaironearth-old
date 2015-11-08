@@ -14,6 +14,8 @@ const browserSync = require('browser-sync');
 const uglify = require('gulp-uglify');
 const minifyHtml = require('gulp-minify-html');
 const imagemin = require('gulp-imagemin');
+const fs = require('fs');
+const s3 = require('gulp-s3');
 
 let reload = browserSync.reload;
 
@@ -113,6 +115,17 @@ gulp.task('images', () => {
 
 
 
+/**
+ * Deploy
+ */
+const creds = JSON.parse(fs.readFileSync('./aws.json'));
+gulp.task('deploy', ['build'], () => {
+    return gulp.src('./dist/**')
+        .pipe(s3(creds));
+});
+
+
+
 
 gulp.task('default', ['js'], () => {
     browserSync({
@@ -126,4 +139,4 @@ gulp.task('default', ['js'], () => {
     gulp.watch('./src/html', ['html']);
 });
 
-gulp.task('build', ['js:build', 'sass:build']);
+gulp.task('build', ['js:build', 'sass:build', 'html']);
