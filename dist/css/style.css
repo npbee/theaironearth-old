@@ -692,43 +692,193 @@ nav .active svg {
 /******************************
 * TRACK OVERRIDES
 ******************************/
+.track--exit .controls svg,
+.track--exit nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--exit .controls:hover svg,
+.track--exit nav a:hover svg {
+  stroke: #CC8D8A;
+  fill: #CC8D8A;
+}
+
 .track--exit.listen--active .icon-listen,
 .track--exit.download--active .icon-download,
-.track--exit.about--active .icon-about {
+.track--exit.about--active .icon-about,
+.track--exit .tracklist .active .icon {
   fill: #CC8D8A;
   stroke: #CC8D8A;
   stroke-width: 20;
 }
 
-.track--exit nav .active svg {
+.track--ghost .controls svg,
+.track--ghost nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--ghost .controls:hover svg,
+.track--ghost nav a:hover svg {
   stroke: #CC8D8A;
   fill: #CC8D8A;
 }
 
 .track--ghost.listen--active .icon-listen,
 .track--ghost.download--active .icon-download,
-.track--ghost.about--active .icon-about {
+.track--ghost.about--active .icon-about,
+.track--ghost .tracklist .active .icon {
   fill: #CC8D8A;
   stroke: #CC8D8A;
   stroke-width: 20;
 }
 
-.track--ghost nav .active svg {
-  stroke: #CC8D8A;
-  fill: #CC8D8A;
+.track--second_skin .controls svg,
+.track--second_skin nav a svg {
+  stroke: #d9d9d9;
+  fill: #d9d9d9;
+}
+
+.track--second_skin .controls:hover svg,
+.track--second_skin nav a:hover svg {
+  stroke: #f9f9f9;
+  fill: #f9f9f9;
 }
 
 .track--second_skin.listen--active .icon-listen,
 .track--second_skin.download--active .icon-download,
-.track--second_skin.about--active .icon-about {
+.track--second_skin.about--active .icon-about,
+.track--second_skin .tracklist .active .icon {
   fill: #f9f9f9;
   stroke: #f9f9f9;
   stroke-width: 20;
 }
 
-.track--second_skin nav .active svg {
+.track--reflection .controls svg,
+.track--reflection nav a svg {
+  stroke: #919191;
+  fill: #919191;
+}
+
+.track--reflection .controls:hover svg,
+.track--reflection nav a:hover svg {
   stroke: #f9f9f9;
   fill: #f9f9f9;
+}
+
+.track--reflection.listen--active .icon-listen,
+.track--reflection.download--active .icon-download,
+.track--reflection.about--active .icon-about,
+.track--reflection .tracklist .active .icon {
+  fill: #f9f9f9;
+  stroke: #f9f9f9;
+  stroke-width: 20;
+}
+
+.track--farewell .controls svg,
+.track--farewell nav a svg {
+  stroke: #919191;
+  fill: #919191;
+}
+
+.track--farewell .controls:hover svg,
+.track--farewell nav a:hover svg {
+  stroke: #f9f9f9;
+  fill: #f9f9f9;
+}
+
+.track--farewell.listen--active .icon-listen,
+.track--farewell.download--active .icon-download,
+.track--farewell.about--active .icon-about,
+.track--farewell .tracklist .active .icon {
+  fill: #f9f9f9;
+  stroke: #f9f9f9;
+  stroke-width: 20;
+}
+
+.track--stillness .controls svg,
+.track--stillness nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--stillness .controls:hover svg,
+.track--stillness nav a:hover svg {
+  stroke: #d9d9d9;
+  fill: #d9d9d9;
+}
+
+.track--stillness.listen--active .icon-listen,
+.track--stillness.download--active .icon-download,
+.track--stillness.about--active .icon-about,
+.track--stillness .tracklist .active .icon {
+  fill: #d9d9d9;
+  stroke: #d9d9d9;
+  stroke-width: 20;
+}
+
+.track--young_guns .controls svg,
+.track--young_guns nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--young_guns .controls:hover svg,
+.track--young_guns nav a:hover svg {
+  stroke: #d9d9d9;
+  fill: #d9d9d9;
+}
+
+.track--young_guns.listen--active .icon-listen,
+.track--young_guns.download--active .icon-download,
+.track--young_guns.about--active .icon-about,
+.track--young_guns .tracklist .active .icon {
+  fill: #d9d9d9;
+  stroke: #d9d9d9;
+  stroke-width: 20;
+}
+
+.track--innocent .controls svg,
+.track--innocent nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--innocent .controls:hover svg,
+.track--innocent nav a:hover svg {
+  stroke: #CC8D8A;
+  fill: #CC8D8A;
+}
+
+.track--innocent.listen--active .icon-listen,
+.track--innocent.download--active .icon-download,
+.track--innocent.about--active .icon-about,
+.track--innocent .tracklist .active .icon {
+  fill: #CC8D8A;
+  stroke: #CC8D8A;
+  stroke-width: 20;
+}
+
+.track--wake .controls svg,
+.track--wake nav a svg {
+  stroke: #444;
+  fill: #444;
+}
+
+.track--wake .controls:hover svg,
+.track--wake nav a:hover svg {
+  stroke: #CC8D8A;
+  fill: #CC8D8A;
+}
+
+.track--wake.listen--active .icon-listen,
+.track--wake.download--active .icon-download,
+.track--wake.about--active .icon-about,
+.track--wake .tracklist .active .icon {
+  fill: #CC8D8A;
+  stroke: #CC8D8A;
+  stroke-width: 20;
 }
 
 .overlay {
