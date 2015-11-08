@@ -18,7 +18,7 @@ function render(player, store, analyser, freqByteData, paper) {
         } else if (!state.visualizerOn) {
             paper.project.clear();
             paper.view.off('frame');
-        } else {
+        } else if (analyser) {
             return paper.view.onFrame = (event) => {
 
                 if (event.count % FRAME_THROTTLE === 0) {
@@ -51,7 +51,6 @@ function render(player, store, analyser, freqByteData, paper) {
         }
 
         run();
-
     });
 
     return paper;
@@ -65,24 +64,29 @@ function initPaper(canvas) {
 }
 
 function initAudio(player) {
-    const audio = player.audio;
-    audio.crossOrigin = 'anonymous';
-    const context = new (webkitAudioContext || AudioContext)();
-    const analyser = context.createAnalyser();
-    const source = context.createMediaElementSource(audio);
-    const freqByteData = new Uint8Array(analyser.frequencyBinCount);
 
-    source.connect(analyser);
-    analyser.connect(context.destination);
+    if (window.AudioContext || window.webkitAudioContext) {
+    //if (false) {
+        const audio = player.audio;
+        audio.crossOrigin = 'anonymous';
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = context.createAnalyser();
+        const source = context.createMediaElementSource(audio);
+        const freqByteData = new Uint8Array(analyser.frequencyBinCount);
 
-    return [analyser, freqByteData];
+        source.connect(analyser);
+        analyser.connect(context.destination);
+
+        return [analyser, freqByteData];
+    } else {
+        return [null, null];
+    }
 }
 
 export default function createVisualizer(player, store) {
     const canvas = document.getElementById('visualizer');
     const [analyser, freqByteData] = initAudio(player);
     const paper = initPaper(canvas);
-
 
     return render(player, store, analyser, freqByteData, paper);
 }

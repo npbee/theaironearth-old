@@ -1,5 +1,6 @@
 import { play, pause, next, prev, end, resume, toggleVis } from './actions';
 import { TRACK_NAMES } from './constants';
+import config from './visualizer/config';
 
 var playBtn = document.getElementById('play');
 var pauseBtn = document.getElementById('pause');
@@ -16,9 +17,6 @@ const navTracklist = document.getElementById('nav-tracklist');
 const mobileTracklist = document.getElementById('mobile-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
 const sections = Array.from(document.querySelectorAll('.section'));
-const visToggle = document.getElementById('vis-toggle');
-const toggleVisOn = document.getElementById('toggle-vis-on');
-const toggleVisOff = document.getElementById('toggle-vis-off');
 
 function getIndex(li) {
     let children = Array.from(li.parentNode.children);
@@ -154,16 +152,8 @@ export function bindEvents(player, dispatch, getState) {
         }
     });
 
-    toggleVisOn.addEventListener('click', e => {
-        dispatch(toggleVis(true));
-    });
-
-    toggleVisOff.addEventListener('click', e => {
-        dispatch(toggleVis(false));
-    });
-
     window.addEventListener('popstate', e => {
-        let activeSection = e.state.activeSection;
+        let activeSection = e.state && e.state.activeSection;
 
         if (activeSection) {
             setActiveSection(activeSection);
@@ -176,10 +166,6 @@ export function bindEvents(player, dispatch, getState) {
         let hash = document.location.hash;
 
         setActiveSection(hash.slice(1));
-    }
-
-    if (window.matchMedia("(min-width: 1025px)").matches) {
-        dispatch(toggleVis(true));
     }
 
     window.addEventListener('keydown', e => {
@@ -216,15 +202,12 @@ export function bindClasses(player, store) {
         let lightness = state.lightness;
         let opacity = state.opacity;
         let currentTrackIndex = state.currentTrackIndex;
+        let trackConfig = config[currentTrackIndex];
 
-        overlay.style.backgroundColor =
-            `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
-
-            //.filter((list, idx) => {
-                //console.log(idx);
-                //idx === currentTrackIndex;
-            //})
-            //.map(list => list.classList.add('active'));
+        if (state.isPlaying) {
+            overlay.style.backgroundColor =
+                `hsla(${trackConfig.hue}, ${trackConfig.saturation}%, ${trackConfig.lightness}%, ${opacity})`;
+        }
 
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
@@ -254,13 +237,6 @@ export function bindClasses(player, store) {
             playerEl.classList.remove('isPaused');
         }
 
-        if (state.visualizerOn) {
-            visToggle.classList.remove('off');
-            visToggle.classList.add('on');
-        } else {
-            visToggle.classList.remove('on');
-            visToggle.classList.add('off');
-        }
     });
 
 }
