@@ -1,15 +1,16 @@
 import { play, pause, next, prev, end, resume, toggleVis } from './actions';
 import { TRACK_NAMES } from './constants';
-import config from './visualizer/config';
+import config from './config';
 
-var playBtn = document.getElementById('play');
-var pauseBtn = document.getElementById('pause');
-var nextBtn = document.getElementById('next');
-var prevBtn = document.getElementById('prev');
-var playerEl = document.getElementById('listen');
-var scrubber = document.getElementById('scrubber');
+
+const playBtn = document.getElementById('play');
+const pauseBtn = document.getElementById('pause');
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
+const playerEl = document.getElementById('listen');
+const scrubber = document.getElementById('scrubber');
 const scrubberPlayed = document.getElementById('scrubber__played');
-var overlay = document.getElementById('overlay');
+const overlay = document.getElementById('overlay');
 const body = document.body;
 const nav = document.getElementById('nav');
 const pageNavs = Array.from(document.querySelectorAll('.subnav > li > a'));
@@ -18,6 +19,11 @@ const mobileTracklist = document.getElementById('mobile-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
 const sections = Array.from(document.querySelectorAll('.section'));
 
+
+
+/**
+ * Some helpers
+ */
 function getIndex(li) {
     let children = Array.from(li.parentNode.children);
 
@@ -52,8 +58,16 @@ function activateEl(els, filterFn) {
     });
 }
 
+
+/**
+ * Bind DOM events
+ *
+ * Binds various DOM events to the player for dispatching.
+ */
 export function bindEvents(player, dispatch, getState) {
 
+
+    // When a track ends, move on to the next one
     player.on('ended', e => {
         let trackList = player._playlist;
         let currentTrackIndex = getState().currentTrackIndex;
@@ -61,19 +75,13 @@ export function bindEvents(player, dispatch, getState) {
         if (currentTrackIndex + 1 >= trackList.length) {
             dispatch(end(player));
         } else {
-            //dispatch(end(player));
             dispatch(next(player));
         }
 
     });
 
-    player.on('timeupdate', e => {
-        let duration = player.audio.duration;
-        let currentTime = player.audio.currentTime;
-        let percent = (currentTime / duration) * 100;
-        scrubberPlayed.style.width = `${percent}%`;
-    });
 
+    // Play / Pause / Next / Prev
     playBtn.addEventListener('click', e => {
         let state = getState();
         const isPlaying = state.isPlaying;
@@ -102,6 +110,8 @@ export function bindEvents(player, dispatch, getState) {
         dispatch(prev(player));
     });
 
+
+    // Scrubber
     scrubber.addEventListener('click', e => {
         let offset = e.offsetX;
         let width = scrubber.offsetWidth;
@@ -109,6 +119,15 @@ export function bindEvents(player, dispatch, getState) {
         player.audio.currentTime = percent * (player.audio.duration || 0);
     });
 
+    player.on('timeupdate', e => {
+        let duration = player.audio.duration;
+        let currentTime = player.audio.currentTime;
+        let percent = (currentTime / duration) * 100;
+        scrubberPlayed.style.width = `${percent}%`;
+    });
+
+
+    // Nav controls
     navTracklist.addEventListener('click', e => {
         if (e.target && e.target.nodeName === 'A') {
             let target = e.target;
@@ -152,6 +171,8 @@ export function bindEvents(player, dispatch, getState) {
         }
     });
 
+
+    // Simple history navigation
     window.addEventListener('popstate', e => {
         let activeSection = e.state && e.state.activeSection;
 
@@ -168,6 +189,8 @@ export function bindEvents(player, dispatch, getState) {
         setActiveSection(hash.slice(1));
     }
 
+
+    // Keyboard controls
     window.addEventListener('keydown', e => {
         let keyCode = e.which || e.keyCode;
         let state = getState();
@@ -193,6 +216,12 @@ export function bindEvents(player, dispatch, getState) {
 
 }
 
+
+/**
+ * Bind Class
+ *
+ * Subscribe to the store and update classes for various pieces of the sites.
+ */
 export function bindClasses(player, store) {
 
     store.subscribe(() => {

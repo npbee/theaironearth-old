@@ -1,6 +1,9 @@
 import SoundCloudAudio from 'soundcloud-audio';
 import { RESOLVE_URL } from './constants';
 
+/**
+ * Fetch tracks from Soundcloud
+ */
 export const FETCH_TRACKS = 'FETCH_TRACKS';
 export const FETCH_TRACKS_ERROR = 'FETCH_TRACKS_ERROR';
 export const FETCH_TRACKS_SUCCESS = 'FETCH_TRACKS_SUCCESS';
@@ -26,6 +29,10 @@ export function fetchTracks(player) {
 }
 
 
+
+/**
+ * Player Controls
+ */
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
 export const PREV = 'PREV';
@@ -78,27 +85,4 @@ export function end(player) {
         type: END,
         payload: player
     };
-}
-
-export const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
-
-export function changeBackground({ hue, saturation, lightness }) {
-    return {
-        type: CHANGE_BACKGROUND,
-        payload: {
-            hue,
-            saturation,
-            lightness
-        }
-    };
-}
-
-
-export const TOGGLE_VISUALIZER = 'TOGGLE_VISUALIZER';
-
-export function toggleVis(isOn) {
-    return {
-        type: TOGGLE_VISUALIZER,
-        payload: isOn
-    }
 }

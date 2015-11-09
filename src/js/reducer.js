@@ -15,7 +15,6 @@ const initialState = {
     isFetching: false,
     isPlaying: false,
     isPaused: false,
-    visualizerOn: false,
     currentTrackIndex: 0,
     hue: 0,
     saturation: 0,
