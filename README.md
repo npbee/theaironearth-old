@@ -1,22 +1,9 @@
-# The Air On Earth
+# ![the air on earth logo](src/img/logo.png)
 
-## Goals
-
-- Audio player for playing sounds via Soundcloud
-- Simple visualizations tied to specific songs and specific points in the songs
-- Ability to pay for a download
-
-## Pages
-
-- Home page
-- About / Credits page
+Site files for [the air on earth](http://theaironearth.com).  
 
 ## Stack
 
-- Soundcloud Javascript SDK
-- React
-- SystemJS / JSPM
-- ES6
-- Stripe
-- Snap.svg
-
+- [Soundcloud Audio](https://github.com/voronianski/soundcloud-audio.js) :: For
+  playing Soundcloud streams
+- [Redux](https://github.com/rackt/redux) :: For some simple state management

@@ -1,15 +1,3 @@
-import once from 'lodash/function/once';
-
-export const POINTS = 256;
-export const INIT_POINTS = 50;
-export const amplitude = 0.5;
-export const ANGLE = 10;
-export const RADIUS = 200;
-export const COLOR_AMP = 0.4;
-export const MAX_ALPHA = 0.1;
-
-export const FRAME_THROTTLE = 5;
-
 export default {
 
     // Exit

@@ -11,10 +11,12 @@ import { bindEvents, bindClasses } from './dom';
 import createRouter from './router';
 
 
+// Some setup
 let logger = createLogger();
 let store = applyMiddleware(thunk, logger)(createStore)(reducer);
 let player = new SoundCloudAudio(CLIENT_ID);
 
+// Kick off track fetching
 store.dispatch(fetchTracks(player));
 
 bindEvents(player, store.dispatch, store.getState);
