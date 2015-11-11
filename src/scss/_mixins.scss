@@ -34,9 +34,15 @@ $tracks: (
         $inActive: nth($color, 2);
         $body: nth($color, 3);
 
-        .track--#{$name} {
+        .track--#{$name},
+        .track--#{$name} .text-link {
             color: $body;
         }
+
+        .track--#{$name} .text-link {
+            border-bottom: 1px solid $body;
+        }
+
         
         .track--#{$name} .controls,
         .track--#{$name} nav a {

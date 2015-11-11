@@ -24,3 +24,14 @@ body {
 .mini {
     font-size: 0.9em;
 }
+
+.text-link {
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid $primary;
+    color: $primary;
+    transition: color 300ms;
+    &:hover {
+        color: darken($primary, 15%);
+    }
+}
