@@ -1,23 +1,33 @@
 'use strict';
 
-const gulp = require('gulp');
-const gutil = require('gulp-util');
-const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
-const browserify = require('browserify');
-const babelify = require('babelify');
-const watchify = require('watchify');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const browserSync = require('browser-sync');
-const uglify = require('gulp-uglify');
-const minifyHtml = require('gulp-minify-html');
-const imagemin = require('gulp-imagemin');
-const fs = require('fs');
-const s3 = require('gulp-s3');
+import gulp from 'gulp';
+import gutil from 'gulp-util';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
+import autoprefixer from 'gulp-autoprefixer';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import watchify from 'watchify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import browserSync from 'browser-sync';
+import uglify from 'gulp-uglify';
+import minifyHtml from 'gulp-minify-html';
+import imagemin from 'gulp-imagemin';
+import fs from 'fs';
+import s3 from 'gulp-s3';
+import del from 'del';
 
 let reload = browserSync.reload;
+
+/**
+ * Clean
+ */
+gulp.task('clean', () => {
+    return del([
+        './dist/**/*'
+    ]);
+});
 
 
 /**
@@ -54,9 +64,7 @@ gulp.task('sass:build', () => {
 
 const browserifyOpts = {
     entries: ['src/js/app.js'],
-    transform: [babelify.configure({
-        presets: ['es2015']
-    })]
+    transform: [babelify]
 };
 const watchifyOpts = Object.assign({}, watchify.args, browserifyOpts);
 
@@ -135,9 +143,12 @@ gulp.task('deploy', ['build'], () => {
 });
 
 
-
-
-gulp.task('default', ['js'], () => {
+/**
+ * Default
+ *
+ * Runs all tasks first then watches for changes.
+ */
+gulp.task('default', ['clean', 'sass', 'html', 'images', 'js'], () => {
     browserSync({
         server: {
             baseDir: './dist'
@@ -149,4 +160,4 @@ gulp.task('default', ['js'], () => {
     gulp.watch('./src/index.html', ['html']);
 });
 
-gulp.task('build', ['js:build', 'sass:build', 'html', 'images']);
+gulp.task('build', ['clean', 'js:build', 'sass:build', 'html', 'images']);
