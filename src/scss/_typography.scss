@@ -5,6 +5,18 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.no-p-margin p {
+    margin-bottom: 0;
+}
+
+.lyric-group {
+    margin-bottom: 1em;
+    p {
+        margin-bottom: 0;
+    }
+
+}
+
 .push {
     margin-bottom: 2.5em;
 }
