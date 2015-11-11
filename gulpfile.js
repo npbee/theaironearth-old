@@ -149,4 +149,4 @@ gulp.task('default', ['js'], () => {
     gulp.watch('./src/index.html', ['html']);
 });
 
-gulp.task('build', ['js:build', 'sass:build', 'html']);
+gulp.task('build', ['js:build', 'sass:build', 'html', 'images']);
