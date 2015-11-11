@@ -18,7 +18,7 @@ const initialState = {
     currentTrackIndex: 0,
     hue: 0,
     saturation: 0,
-    opacity: 0.6
+    opacity: 0.5
 };
 
 export default function(state = initialState, action) {

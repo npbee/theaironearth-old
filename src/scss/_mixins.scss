@@ -18,11 +18,11 @@ $mq-desktop: 1382px !default;
 $tracks: (
     exit: ($primary, $black, $black),
     ghost: ($primary, $black, $black),
-    second_skin: ($white, $grey, $grey),
-    reflection: ($white, lighten($black, 30%), $white),
-    farewell: ($white, lighten($black, 30%), $white),
-    stillness: ($grey, $black, $grey),
-    young_guns: ($grey, $black, $black),
+    second_skin: ($white, $grey, $white),
+    reflection: ($white, $grey, $white),
+    farewell: ($white, $grey, $white),
+    stillness: ($primary, $black, $black),
+    young_guns: ($primary, $black, $black),
     innocent: ($primary, $black, $black),
     wake: ($primary, $black, $black)
 );
