@@ -23,12 +23,11 @@ svg {
         margin-top: -15px;
     }
 }
-.icon-download {
+.icon-own {
     width: 80%;
-    max-width: 110px;
+    max-width: 50px;
     height: 60px;
     @include desktop-and-up {
-        width: 100px;
         margin-top: -10px;
     }
 }

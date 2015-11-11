@@ -50,7 +50,7 @@ $tracks: (
             }
         }
         .track--#{$name}.listen--active .icon-listen,
-        .track--#{$name}.download--active .icon-download,
+        .track--#{$name}.own--active .icon-own,
         .track--#{$name}.about--active .icon-about,
         .track--#{$name} .tracklist .active .icon {
             fill: #{$active};

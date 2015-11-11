@@ -2,10 +2,10 @@
 * NAV
 ******************************/
 .listen--active .icon-listen,
-.download--active .icon-download,
+.own--active .icon-own,
 .about--active .icon-about {
-    stroke: $primary;
-    stroke-width: 20;
+    fill: $primary;
+    /*stroke-width: 20;*/
 }
 
 nav {
