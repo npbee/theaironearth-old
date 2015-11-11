@@ -17,6 +17,7 @@ import imagemin from 'gulp-imagemin';
 import fs from 'fs';
 import s3 from 'gulp-s3';
 import del from 'del';
+import envify from 'envify';
 
 let reload = browserSync.reload;
 
@@ -64,7 +65,7 @@ gulp.task('sass:build', () => {
 
 const browserifyOpts = {
     entries: ['src/js/app.js'],
-    transform: [babelify]
+    transform: [babelify, envify]
 };
 const watchifyOpts = Object.assign({}, watchify.args, browserifyOpts);
 
@@ -132,6 +133,12 @@ gulp.task('favicon', () => {
 });
 
 
+/**
+ * BUILD
+ */
+gulp.task('build', ['clean', 'js:build', 'sass:build', 'html', 'images']);
+
+
 
 /**
  * Deploy
@@ -141,6 +148,7 @@ gulp.task('deploy', ['build'], () => {
     return gulp.src('./dist/**')
         .pipe(s3(creds));
 });
+
 
 
 /**
@@ -160,4 +168,3 @@ gulp.task('default', ['clean', 'sass', 'html', 'images', 'js'], () => {
     gulp.watch('./src/index.html', ['html']);
 });
 
-gulp.task('build', ['clean', 'js:build', 'sass:build', 'html', 'images']);

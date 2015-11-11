@@ -11,7 +11,9 @@ import createRouter from './router';
 
 
 // Some setup
-let logger = createLogger();
+let logger = createLogger({
+    predicate: () => process.env.NODE_ENV !== 'production'
+});
 let store = applyMiddleware(thunk, logger)(createStore)(reducer);
 let player = new SoundCloudAudio(CLIENT_ID);
 
