@@ -116,6 +116,7 @@ export function bindEvents(player, dispatch, getState) {
         let offset = e.offsetX;
         let width = scrubber.offsetWidth;
         let percent = offset / width;
+        console.log(percent);
         player.audio.currentTime = percent * (player.audio.duration || 0);
     });
 
@@ -241,7 +242,7 @@ export function bindClasses(player, store) {
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
-            scrubber.style.width = '100%';
+            //scrubber.style.width = '100%';
 
             setActiveTrackClass(currentTrackIndex);
 

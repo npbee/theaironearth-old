@@ -9,9 +9,16 @@
 }
 
 nav {
-    padding: $base-spacing-unit 0;
-    .logo {
+    margin-bottom: $base-spacing-unit * 2;
+    @include desktop-and-up {
         margin-bottom: $base-spacing-unit;
+    }
+    .logo {
+        height: 50px;
+        margin-bottom: $base-spacing-unit;
+        @include desktop-and-up {
+            height: 30px;
+        }
     }
     svg {
         max-width: 100%;
