@@ -126,8 +126,33 @@ svg {
     }
 }
 
-.sc-logo {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 75px;
+
+.icon-itunes {
+    max-width: 110px;
+    @include desktop-and-up {
+        max-width: 80px;
+    }
 }
+
+.icon-loudr {
+    max-width: 150px;
+    @include desktop-and-up {
+        max-width: 100px;
+    }
+}
+
+.icon-spotify {
+    max-width: 120px;
+    @include desktop-and-up {
+        max-width: 100px;
+    }
+}
+
+.icon-soundcloud {
+    max-width: 165px;
+    @include desktop-and-up {
+        max-width: 175px;
+    }
+}
+
+

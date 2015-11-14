@@ -37,3 +37,21 @@ main {
 .listen--active .section-player { display: block; }
 .own--active .section-own { display: block; }
 .about--active .section-about { display: block; }
+
+.two-by-two {
+    a {
+        display: inline-block;
+        margin-bottom: $base-spacing-unit * 2;
+        vertical-align: middle;
+        text-align: center;
+        width: 50%;
+        @include desktop-and-up {
+            width: auto;
+            text-align: left;
+            margin-right: $base-spacing-unit;
+        }
+        img {
+            vertical-align: middle;
+        }
+    }
+}

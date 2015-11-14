@@ -7,3 +7,10 @@ body {
     background: url('/img/bg.png');
     margin: 0;
 }
+
+hr {
+    border: none;
+    height: 1px;
+    background: $grey;
+    margin: $base-spacing-unit 0;
+}
