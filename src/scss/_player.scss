@@ -1,94 +1,120 @@
 /******************************
 * LAYOUT
 ******************************/
-.scrubber,
-.scrubber__played {
-    cursor: pointer;
-    display: block;
-    height: 16px;
-    transition: width 100ms;
-    top: 0;
-    left: 0;
-    position: absolute;
+.player {
+    margin-bottom: $base-spacing-unit;
     width: 100%;
     @include desktop-and-up {
-        height: 8px;
-        position: fixed;
+        height: $player_height;
+        top: 0;
+        left: 0;
     }
-}
-
-.scrubber {
-    background: rgba($black, 0.8);
-    width: 0%;
-}
-
-.scrubber__played {
-    background: rgba($primary, 0.8);
-    width: 0%;
-}
-
-.player {
-    button {
-        display: inline-block;
-        vertical-align: middle;
-        cursor: pointer;
-        &:hover svg {
-            fill: $primary;
+    .logo,
+    .controls,
+    .scrubber {
+        @include desktop-and-up {
+            display: inline-block;
+            vertical-align: middle;
         }
     }
     .controls {
-        display: block;
-        width: 100%;
         margin-bottom: $base-spacing-unit;
         @include desktop-and-up {
-            max-width: 150px;
-            display: inline-block;
-            vertical-align: middle;
+            width: 100px;
+            margin-right: $base-spacing-unit;
+            margin-bottom: 0;
         }
     }
-    .status {
-        > div {
-            display: inline-block;
-            vertical-align: middle;
-        }
+    .scrubber {
         @include desktop-and-up {
-            width: 10%;
-            display: inline-block;
-            vertical-align: middle;
+            width: calc(100% - 100px - #{$base-spacing-unit});
         }
     }
-    .tracklist {
+}
+
+
+.tracklist--mobile {
+    display: block;
+    text-align: center;
+    a {
+        border-bottom: 1px solid $grey;
         display: block;
-        width: 100%;
-        @include desktop-and-up {
-            display: none;
-        }
+        padding: $base-spacing-unit;
+        cursor: pointer;
+    }
+    svg {
+        margin-top: 0;
     }
     @include desktop-and-up {
+        display: none;
+    }
+}
+
+.controls {
+    button {
+        padding: 0;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .icon-pause,
+    .icon-play {
+        width: 33.33%;
+        @include desktop-and-up {
+            /*width: auto;*/
+        }
+    }
+    .icon-next,
+    .icon-prev {
+        width: 33.33%;
+        @include desktop-and-up {
+            /*width: auto;*/
+        }
+    }
+}
+
+
+.scrubber,
+.scrubber__played {
+    border-radius: 10px;
+}
+
+
+.scrubber {
+    position: relative;
+    height: $player_height;
+}
+
+.scrubber__inner {
+    background: rgba($black, 0.8);
+    height: 1px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+}
+
+.scrubber__played {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    background: rgba($primary, 0.8);
+    height: 100%;
+    &:after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        right: 0;
+        width: 2px;
+        height: 11px;
+        background: $primary;
+        border-radius: 3px;
     }
 }
 
 button.icon-pause {
     display: none;
 }
-
-/******************************
-* TRACKLIST (Mobile only)
-******************************/
-.player {
-    .tracklist {
-        a {
-            border-bottom: 1px solid $grey;
-            display: block;
-            padding: $base-spacing-unit;
-            cursor: pointer;
-        }
-        svg {
-            margin-top: 0;
-        }
-    }
-}
-
 
 /******************************
 * STATES

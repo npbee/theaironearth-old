@@ -4,16 +4,27 @@ body {
 
 nav {
     @include desktop-and-up {
-        float: right;
+        float: left;
         width: 15%;
+        margin-right: 3%;
     }
 }
 
 main {
-    padding: $base-spacing-unit;
     @include desktop-and-up {
-        float: left;
-        width: 85%;
+        float: right;
+        width: 82%;
+    }
+}
+
+.flowers {
+    display: none; 
+    @include desktop-and-up {
+        display: block;
+        z-index: -1;
+        position: fixed;
+        right: 0;
+        bottom: 0;
     }
 }
 

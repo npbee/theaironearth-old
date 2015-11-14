@@ -106,6 +106,7 @@
 </defs>
 </svg>
 
+
         <nav id="nav">
             <a class="logo" href="/">
                 <svg class="icon icon-theaironearth">
@@ -206,11 +207,7 @@
         </nav>
 
         <main>
-                <div id="debug"></div>
-            <div id="scrubber" class="scrubber">
-                <div id="scrubber__played" class="scrubber__played"></div>
-            </div>
-            <section class="player section section-player" id="listen">
+            <section class="player xsection section-player" id="listen">
                 <div class="controls">
                     <button class="icon-prev" id="prev">
                         <svg>
@@ -233,12 +230,19 @@
                         </svg>
                     </button>
                 </div><!--
+                --><div id="scrubber" class="scrubber">
+                    <div class="scrubber__inner">
+                        <div id="scrubber__played" class="scrubber__played"></div>
+                    </div>
+                </div><!--
                 --><div style="display: none" id="status" class="status">
                     <div id="current-time" class="time">1:07</div>
                     <div id="separator" class="status-separator">/</div>
                     <div id="total-time" class="time">4:03</div>
                 </div>
-                <ul class="tracklist" id="mobile-tracklist">
+            </section>
+            <section class="section section-player">
+                <ul class="tracklist tracklist--mobile" id="mobile-tracklist">
                     <li>
                         <a>
                         <svg class="icon icon-exit icon--active">
@@ -321,7 +325,8 @@
 
                 <div class="push">
                     <h2 class="typl8-delta">credits</h2>
-                    <p>The songs were recorded sparsely between the years of 2011
+                    <p>Songs written and recorded by Nick Ball.</p>
+                    <p>Captured between the years of 2011
                     and 2015, mostly in a bedroom in either Eau Claire, WI or San
                     Francisco, CA.</p>
                     <p>Mixed and mastered by Zach Hanson.</p>
@@ -663,6 +668,7 @@
             </section>
         </main>
         <div class="overlay" id="overlay"></div>
+        <img class="flowers" src="img/flowers.png" />
         <script src="js/bundle.js"></script>
     </body>
 </html>
