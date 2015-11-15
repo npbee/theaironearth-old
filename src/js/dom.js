@@ -9,6 +9,7 @@ const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
 const playerEl = document.getElementById('listen');
 const scrubber = document.getElementById('scrubber');
+const scrubberInner = document.getElementById('scrubber__inner');
 const scrubberPlayed = document.getElementById('scrubber__played');
 const overlay = document.getElementById('overlay');
 const body = document.body;
@@ -242,7 +243,8 @@ export function bindClasses(player, store) {
         if (state.isPlaying) {
             playerEl.classList.add('isPlaying');
             playerEl.classList.remove('isPaused');
-            //scrubber.style.width = '100%';
+            scrubberInner.style.width = '100%';
+            scrubberPlayed.style.display = 'block';
 
             setActiveTrackClass(currentTrackIndex);
 

@@ -52,9 +52,13 @@
 
 .controls {
     button {
+        cursor:  pointer;
         padding: 0;
         display: inline-block;
         vertical-align: middle;
+        &:hover svg {
+            fill: $primary;
+        }
     }
     .icon-pause,
     .icon-play {
@@ -80,20 +84,24 @@
 
 
 .scrubber {
+    cursor: pointer;
     position: relative;
     height: $player_height;
 }
 
 .scrubber__inner {
+    transition: width 300ms;
     background: rgba($black, 0.8);
     height: 1px;
     position: absolute;
-    width: 100%;
+    width: 0%;
     left: 0;
     top: 50%;
 }
 
 .scrubber__played {
+    transition: width 100ms;
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
