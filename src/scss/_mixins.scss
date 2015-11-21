@@ -15,10 +15,12 @@ $mq-desktop: 1382px !default;
 
 // Map the active track to the color for the active text
 // Some backgrounds are dark
+$mid: darken($white, 8%);
+
 $tracks: (
     exit: ($primary, $black, $black),
     ghost: ($primary, $black, $black),
-    second_skin: ($white, $grey, $white),
+    second_skin: ($white, $black, $black),
     reflection: ($white, $grey, $white),
     farewell: ($white, $grey, $white),
     stillness: ($primary, $black, $black),
