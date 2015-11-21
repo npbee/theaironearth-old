@@ -1,3 +1,4 @@
+import 'array.from';
 import SoundCloudAudio from 'soundcloud-audio';
 import { createStore, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
