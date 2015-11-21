@@ -1,5 +1,8 @@
 body {
-    padding: $base-spacing-unit;
+    padding: $base-spacing-unit $base-spacing-unit * 2;
+    @include desktop-and-up {
+        padding: $base-spacing-unit;
+    }
 }
 
 nav {

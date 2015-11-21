@@ -55,6 +55,15 @@ nav {
             width: 100%;
         }
     }
+    >li:first-child {
+        text-align: left;
+    }
+    >li:last-child {
+        text-align: right;
+        @include desktop-and-up {
+            text-align: left;
+        }
+    }
     >li:nth-child(2) {
         display: none;
         @include desktop-and-up {

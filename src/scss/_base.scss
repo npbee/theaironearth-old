@@ -5,7 +5,11 @@ body {
 
 body {
     background: url('/img/bg.png');
-    margin: 0;
+    margin: 0 auto;
+    max-width: 700px;
+    @include desktop-and-up {
+        max-width: none;
+    }
 }
 
 hr {
