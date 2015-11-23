@@ -1,3 +1,6 @@
+.icon {
+    pointer-events: none;
+}
 svg {
     transition: fill 200ms;
     fill: $black;
