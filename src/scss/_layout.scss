@@ -14,7 +14,9 @@ nav {
 }
 
 main {
+    margin-bottom: $base-spacing-unit * 2;
     @include desktop-and-up {
+        margin-bottom: 0;
         float: right;
         width: 82%;
     }
