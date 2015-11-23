@@ -1,4 +1,5 @@
 .icon {
+    position: relative;
     pointer-events: none;
 }
 svg {
@@ -48,39 +49,71 @@ svg {
 .icon-ghost {
     width: 55px;
     height: 35px;
+    top: 6px;
+    @include desktop-and-up {
+        top: 0px;
+    }
 }
 .icon-second-skin {
     width: 110px;
     height: 35px;
     margin-top: -10px;
+    top: 2px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-reflection {
     width: 78px;
     height: 35px;
+    top: 5px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-farewell {
     width: 60px;
     height: 35px;
+    top: 4px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-stillness {
     width: 70px;
     height: 35px;
     margin-top: -3px;
+    top: 2px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-young-guns {
     width: 80px;
     height: 35px;
     margin-top: 3px;
+    top: 9px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-innocent {
     width: 80px;
     height: 35px;
     margin-top: -5px;
+    top: 4px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 .icon-wake {
     width: 42px;
     height: 35px;
     margin-top: -8px;
+    top: 4px;
+    @include desktop-and-up {
+        top: 0;
+    }
 }
 
 .icon-prev,
