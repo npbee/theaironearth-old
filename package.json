@@ -30,6 +30,7 @@
     "envify": "^3.4.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
+    "gulp-file-include": "^0.13.7",
     "gulp-imagemin": "^2.4.0",
     "gulp-minify-html": "^1.0.4",
     "gulp-s3": "^0.3.0",

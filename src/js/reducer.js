@@ -3,6 +3,7 @@ import {
     FETCH_TRACKS_ERROR,
     FETCH_TRACKS_SUCCESS,
     PLAY,
+    PLAY_ERROR,
     PAUSE,
     NEXT,
     PREV,
@@ -37,6 +38,10 @@ export default function(state = initialState, action) {
             isPlaying: true,
             isPaused: false,
             currentTrackIndex: action.payload._playlistIndex
+        });
+    case PLAY_ERROR:
+        return Object.assign({}, state, {
+            playError: action.payload
         });
     case PAUSE:
         return Object.assign({}, state, {

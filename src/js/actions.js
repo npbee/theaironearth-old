@@ -34,6 +34,7 @@ export function fetchTracks(player) {
  * Player Controls
  */
 export const PLAY = 'PLAY';
+export const PLAY_ERROR = 'PLAY_ERROR';
 export const PAUSE = 'PAUSE';
 export const PREV = 'PREV';
 export const NEXT = 'NEXT';
@@ -42,9 +43,14 @@ export const END = 'END';
 export function play(player, index) {
     return (dispatch, getState) => {
         let trackIndex = index !== undefined ? index : getState().currentTrackIndex;
-        player.play({ playlistIndex: trackIndex });
 
-        dispatch({ type: PLAY, payload: player });
+        try {
+            player.play({ playlistIndex: trackIndex });
+            dispatch({ type: PLAY, payload: player });
+        } catch (e) {
+            dispatch({ type: PLAY_ERROR, payload: e });
+        }
+
     };
 }
 
