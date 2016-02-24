@@ -18,17 +18,14 @@ import fs from 'fs';
 import s3 from 'gulp-s3';
 import del from 'del';
 import envify from 'envify';
+import fileInclude from 'gulp-file-include';
 
 let reload = browserSync.reload;
 
 /**
  * Clean
  */
-gulp.task('clean', () => {
-    return del([
-        './dist/**/*'
-    ]);
-});
+gulp.task('clean', () => del(['./dist/**/*']));
 
 
 /**
@@ -105,10 +102,17 @@ gulp.task('html', () => {
     const opts = {};
 
     return gulp.src('./src/index.html')
+        .pipe(fileInclude())
         .pipe(minifyHtml(opts))
         .pipe(gulp.dest('./dist/'));
 });
 
+
+/**
+ * Copy
+ */
+gulp.task('copy', () => {
+});
 
 
 /**

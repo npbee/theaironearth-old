@@ -19,6 +19,7 @@ const navTracklist = document.getElementById('nav-tracklist');
 const mobileTracklist = document.getElementById('mobile-tracklist');
 const trackList = Array.from(document.querySelectorAll('.tracklist'));
 const sections = Array.from(document.querySelectorAll('.section'));
+const playError = document.getElementById('play-error');
 
 
 
@@ -234,6 +235,12 @@ export function bindClasses(player, store) {
         let opacity = state.opacity;
         let currentTrackIndex = state.currentTrackIndex;
         let trackConfig = config[currentTrackIndex];
+
+        if (state.playError) {
+            playError.classList.add('play-error--error');
+        } else {
+            playError.classList.remove('play-error--error');
+        }
 
         if (state.isPlaying) {
             overlay.style.backgroundColor =

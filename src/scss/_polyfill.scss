@@ -1,0 +1,33 @@
+.svg-fill {
+    display: none;
+}
+
+.no-svg {
+    svg { display: none; }
+    nav a {
+        color: $black;
+        text-decoration: none;
+        &:hover {
+            color: $primary;
+        }
+    }
+    .logo {
+        font-size: 1.3em;
+    }
+}
+
+.audio-fill {
+    display: none;
+}
+
+.no-audio {
+    .player,
+    .icon-listen,
+    .tracklist
+    {
+        display: none;
+    }
+    .audio-fill {
+        display: block;
+    }
+}

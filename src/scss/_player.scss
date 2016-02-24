@@ -150,3 +150,13 @@ button.icon-pause {
         display: none;
     }
 }
+
+.play-error {
+    display: none;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: $base-spacing-unit;
+    &.play-error--error {
+        display: block;
+    }
+}
