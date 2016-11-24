@@ -147,8 +147,9 @@ gulp.task('build', ['clean', 'js:build', 'sass:build', 'html', 'images']);
 /**
  * Deploy
  */
-const creds = JSON.parse(fs.readFileSync('./aws.json'));
 gulp.task('deploy', ['build'], () => {
+    const creds = JSON.parse(fs.readFileSync('./aws.json'));
+
     return gulp.src('./dist/**')
         .pipe(s3(creds));
 });
