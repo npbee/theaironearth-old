@@ -1,0 +1,9 @@
+{
+    "libs": [],
+    "loadEagerly": [
+        "./src/js/actions.js"
+    ],
+    "plugins": {
+        "es_modules": {}
+    }
+}
