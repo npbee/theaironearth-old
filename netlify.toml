@@ -8,25 +8,25 @@
 
 [[redirects]]
   from = "/img/tiny/*"
-  to = "https://the-air-on-earth.netlify.com/img/:splat?nf_resize=fit&w=20"
+  to = "https://master--theaironearth.netlify.com/img/:splat?nf_resize=fit&w=20"
   status = 302
 
 [[redirects]]
   from = "/img/small/*"
-  to = "https://the-air-on-earth.netlify.com/img/:splat?nf_resize=fit&w=500"
+  to = "https://master--theaironearth.netlify.com/img/:splat?nf_resize=fit&w=500"
   status = 302
 
 [[redirects]]
   from = "/img/medium/*"
-  to = "https://the-air-on-earth.netlify.com/img/:splat?nf_resize=fit&w=800"
+  to = "https://master--theaironearth.netlify.com/img/:splat?nf_resize=fit&w=800"
   status = 302
 
 [[redirects]]
   from = "/img/large/*"
-  to = "https://the-air-on-earth.netlify.com/img/:splat?nf_resize=fit&w=1200"
+  to = "https://master--theaironearth.netlify.com/img/:splat?nf_resize=fit&w=1200"
   status = 302
 
 [[redirects]]
   from = "/img/original/*"
-  to = "https://the-air-on-earth.netlify.com/img/:splat"
+  to = "https://master--theaironearth.netlify.com/img/:splat"
   status = 302
