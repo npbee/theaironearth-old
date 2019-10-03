@@ -1,0 +1,140 @@
+@tailwind base;
+
+:root {
+  --accent-bg: theme("colors.grey.600");
+}
+
+* {
+  max-width: 60ch;
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+  border-style: solid;
+  border-width: 0;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+section,
+a,
+footer {
+  max-width: none;
+}
+
+html {
+  font-family: avenir next, avenir, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family: ff-meta-web-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: hsla(36, 64%, 99%, 1);
+  color: theme("colors.grey.800");
+}
+
+h1,
+h2,
+h3,
+.headline {
+  font-family: ff-meta-serif-web-pro, serif;
+  font-weight: 300;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh",
+    "pnum";
+  font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh", "pnum";
+}
+
+@tailwind components;
+
+.icon-btn {
+  @apply flex p-1 rounded-sm;
+  transition: background-color 200ms;
+}
+
+.icon-btn:focus {
+  @apply shadow-outline outline-none;
+}
+
+.icon-btn:active {
+  background-color: theme("colors.blue.100");
+}
+
+.icon-btn:hover {
+  background-color: theme("colors.grey.100");
+}
+
+.icon-btn > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-btn--apple-music > svg {
+  width: 80px;
+}
+
+.icon-btn--spotify > svg {
+  width: 20px;
+}
+
+@tailwind utilities;
+
+.ctr {
+  padding-left: theme("spacing.6");
+  padding-right: theme("spacing.6");
+  width: 100%;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
+
+.small-caps {
+  font-variant-caps: small-caps;
+  -moz-font-feature-settings: "smcp";
+  -webkit-font-feature-settings: "smcp";
+  font-feature-settings: "smcp";
+  letter-spacing: 0.05em;
+}
+
+.decorated-link {
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 theme("colors.grey.200");
+  box-shadow: inset 0 -1px 0 var(--accent-color, theme("colors.grey.200"));
+  border-bottom: 1px solid theme("colors.grey.200");
+  border-bottom: 1px solid var(--accent-color, theme("colors.grey.200"));
+  transition: background-color 200ms;
+}
+
+.decorated-link:hover {
+  background-color: theme("colors.grey.200");
+  background-color: var(--accent-bg, theme("colors.grey.200"));
+  color: theme("colors.grey.50");
+  color: var(--accent-contrast, theme("colors.grey.50"));
+}
+
+.serif {
+  font-family: ff-meta-serif-web-pro, serif;
+  font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh";
+}

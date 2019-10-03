@@ -1,0 +1,67 @@
+<script>
+  import { store, send, nextTrack } from "../store";
+  import PlayIcon from "./Play.svelte";
+  import PauseIcon from "./Pause.svelte";
+  import { canPlay } from "../utils";
+
+  export let album;
+  export let trackId;
+
+  $: activeTrackId = $store.context.trackId;
+  $: isPlaying =
+    $store.value === "playing" && activeTrackId === trackId ? true : false;
+  $: isPaused =
+    $store.value === "paused" && activeTrackId === trackId ? true : false;
+  $: handler = () => {
+    if (isPlaying) {
+      send("pause");
+    } else if (isPaused) {
+      send("play");
+    } else {
+      send({ type: "play-track", trackId });
+    }
+  };
+</script>
+
+<style>
+  button {
+    max-width: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+  }
+
+  button > .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: background 200ms, opacity 200ms;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0.3;
+  }
+
+  button:hover > .icon {
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+</style>
+
+{#if canPlay()}
+  <button on:click={handler}>
+    <img src={album.artwork} alt={`Artwork for ${album.title}`} />
+    <div class="icon">
+      {#if isPlaying}
+        <PauseIcon size="25%" />
+      {:else}
+        <PlayIcon size="25%" />
+      {/if}
+    </div>
+  </button>
+{:else}
+  <img src={album.artwork} alt={`Artwork for ${album.title}`} />
+{/if}
