@@ -1,5 +1,12 @@
-*sass-cache*
-dist/*
-aws.json
-*DS_Store*
+.DS_Store
+/node_modules/
+/src/node_modules/@sapper/
+yarn-error.log
+/cypress/screenshots/
+/__sapper__/
+.env
+/static/audio/
+/static/global.css
 
+# Local Netlify folder
+.netlify
