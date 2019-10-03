@@ -1,29 +1,41 @@
-# ![the air on earth logo](src/img/logo.png)
+[![The Air on Earth logo](static/docs-logo.svg)](https://theaironearth.com)
 
-Site files for [the air on earth](http://theaironearth.com).  
+> Source code for my musical alias site
 
-## Stack
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c8aca06d-d9cf-442d-9e92-469dbd0c50dc/deploy-status)](https://app.netlify.com/sites/the-air-on-earth/deploys)
 
-- [Soundcloud Audio](https://github.com/voronianski/soundcloud-audio.js) :: For
-  playing Soundcloud streams
-- [Redux](https://github.com/rackt/redux) :: For some simple state management
+Built with:
 
-## Development
+- [Netlify](https://www.netlify.com)
+- [Svelte/Sapper](https://sapper.svelte.dev/)
+- [PostCSS](https://github.com/postcss/postcss)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-Install dependencies:
+# Setup
+
+1. Install the [Netlify CLI](https://www.netlify.com/docs/cli)
+1. Follow the docs to get set up with [Netlify Large Media](https://www.netlify.com/docs/large-media/)
+1. Ensure [Yarn](https://yarnpkg.com/lang/en/) is installed
+1. Run `yarn install`
+
+# Development
+
+Start the dev server with:
 
 ```bash
-$ npm install
+netlify dev
 ```
 
-Start up the dev server with:
+# Deployment
+
+Deployment will happen automatically when pushed to GitHub
+
+# Scripts
+
+## Image Conversion
+
+Jpegs can be conerted to webp with the following command:
 
 ```bash
-$ npm start
-```
-
-Build and deploy with:
-
-```bash
-$ npm run deploy
+node ./scripts/image.js
 ```

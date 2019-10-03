@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="theme-color" content="#333333" />
+
+    %sapper.base%
+
+    <link rel="stylesheet" href="https://use.typekit.net/njz6hdv.css" />
+    <link rel="stylesheet" href="global.css" />
+
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- generics -->
+    <link rel="icon" href="favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="favicon-57.png" sizes="57x57" />
+    <link rel="icon" href="favicon-76.png" sizes="76x76" />
+    <link rel="icon" href="favicon-96.png" sizes="96x96" />
+    <link rel="icon" href="favicon-128.png" sizes="128x128" />
+    <link rel="icon" href="favicon-196.png" sizes="196x196" />
+    <link rel="icon" href="favicon-228.png" sizes="228x228" />
+    <!-- Android -->
+    <link rel="shortcut icon" href="favicon-196.png" sizes="196x196" />
+    <!-- iOS -->
+    <link rel="apple-touch-icon" href="favicon-120.png" sizes="120x120" />
+    <link rel="apple-touch-icon" href="favicon-152.png" sizes="152x152" />
+    <link rel="apple-touch-icon" href="favicon-180.png" sizes="180x180" />
+    <!-- Windows -->
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="favicon-144.png" />
+
+    <!-- Sapper generates a <style> tag containing critical CSS
+	     for the current page. CSS for the rest of the app is
+	     lazily loaded when it precaches secondary pages -->
+    %sapper.styles%
+
+    <!-- This contains the contents of the <svelte:head> component, if
+	     the current page has one -->
+    %sapper.head%
+    <!-- prettier-ignore -->
+    <script>
+      /*! modernizr 3.6.0 (Custom Build) | MIT *
+ * https://modernizr.com/download/?-audio-setclasses !*/
+!function(e,n,a){function o(e,n){return typeof e===n}function s(){var e,n,a,s,t,c,r;for(var u in l)if(l.hasOwnProperty(u)){if(e=[],n=l[u],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(a=0;a<n.options.aliases.length;a++)e.push(n.options.aliases[a].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,t=0;t<e.length;t++)c=e[t],r=c.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),i.push((s?"":"no-")+r.join("-"))}}function t(e){var n=u.className,a=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+a+"no-js(\\s|$)");n=n.replace(o,"$1"+a+"js$2")}Modernizr._config.enableClasses&&(n+=" "+a+e.join(" "+a),p?u.className.baseVal=n:u.className=n)}function c(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}var i=[],l=[],r={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var a=this;setTimeout(function(){n(a[e])},0)},addTest:function(e,n,a){l.push({name:e,fn:n,options:a})},addAsyncTest:function(e){l.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=r,Modernizr=new Modernizr;var u=n.documentElement,p="svg"===u.nodeName.toLowerCase();Modernizr.addTest("audio",function(){var e=c("audio"),n=!1;try{n=!!e.canPlayType,n&&(n=new Boolean(n),n.ogg=e.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,""),n.mp3=e.canPlayType('audio/mpeg; codecs="mp3"').replace(/^no$/,""),n.opus=e.canPlayType('audio/ogg; codecs="opus"')||e.canPlayType('audio/webm; codecs="opus"').replace(/^no$/,""),n.wav=e.canPlayType('audio/wav; codecs="1"').replace(/^no$/,""),n.m4a=(e.canPlayType("audio/x-m4a;")||e.canPlayType("audio/aac;")).replace(/^no$/,""))}catch(a){}return n}),s(),t(i),delete r.addTest,delete r.addAsyncTest;for(var f=0;f<Modernizr._q.length;f++)Modernizr._q[f]();e.Modernizr=Modernizr}(window,document);
+    </script>
+  </head>
+  <body>
+    <!-- The application will be rendered inside this element,
+	     because `src/client.js` references it -->
+    <div id="sapper" class="root">%sapper.html%</div>
+
+    <!-- Sapper creates a <script> tag containing `src/client.js`
+	     and anything else it needs to hydrate the app and
+	     initialise the router -->
+    %sapper.scripts%
+  </body>
+</html>
