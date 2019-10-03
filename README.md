@@ -1,8 +1,10 @@
+> This is the info for the next version. It's not live yet!
+
 [![The Air on Earth logo](static/docs-logo.svg)](https://theaironearth.com)
 
 > Source code for my musical alias site
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c8aca06d-d9cf-442d-9e92-469dbd0c50dc/deploy-status)](https://app.netlify.com/sites/the-air-on-earth/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4879131f-d651-4c34-9310-608d99c94974/deploy-status)](https://app.netlify.com/sites/theaironearth/deploys)
 
 Built with:
 
