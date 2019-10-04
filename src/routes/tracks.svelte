@@ -1,13 +1,10 @@
 <script>
   import PageTransition from "../components/PageTransition.svelte";
   import AlbumRef from "../components/AlbumRef.svelte";
-  import { tracks as _tracks, albums } from "../data";
+  import { tracks as _tracks, preloadAlbums } from "../data";
   import Cover from "../player/components/Cover.svelte";
 
-  let tracks = Object.values(_tracks).map(track => ({
-    ...track,
-    album: albums[track.albumId],
-  }));
+  let tracks = preloadAlbums(_tracks);
 </script>
 
 <svelte:head>

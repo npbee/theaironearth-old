@@ -1176,6 +1176,7 @@ function registerTrack(props) {
   const { id, title, ...rest } = props;
 
   const Track = {
+    type: "track",
     id,
     title,
     lyrics: [],
@@ -1201,6 +1202,7 @@ function registerTrack(props) {
 function registerAlbum(props) {
   const { id, title, ...rest } = props;
   const Album = {
+    type: "album",
     id,
     title,
     tracks: [],
@@ -1226,3 +1228,10 @@ export const playlistOrder = [/*GoodSport*/ TheAirOnEarth].reduce(
   },
   []
 );
+
+export function preloadAlbums(tracks) {
+  return Object.values(tracks).map(track => ({
+    ...track,
+    album: albums[track.albumId],
+  }));
+}
