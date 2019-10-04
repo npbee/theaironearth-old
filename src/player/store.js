@@ -74,7 +74,10 @@ let onEnd;
 export const store = writable(currentState);
 
 export function send(event) {
+  currentState = machine.transition(currentState, event);
+
   const { actions } = currentState;
+
   actions.forEach(action => {
     if (action.type === "ASSIGN") {
       currentState.context = runAssignment(
