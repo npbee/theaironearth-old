@@ -6,6 +6,7 @@
   import TrackList from "../../components/TrackList.svelte";
   import Image from "../../components/Image.svelte";
   import CreditSource from "../../components/CreditSource.svelte";
+  import FixedAccentImage from "../../components/FixedAccentImage.svelte";
 
   export async function preload({ params }) {
     return {
@@ -26,14 +27,14 @@
     name="description"
     content={`See the track listing, credits, and purchase/streaming links for the album ${album.title} by The Air on Earth`} />
 </svelte:head>
+
 <PageTransition>
   <div class="container ctr max-w-6xl">
+
     {#if album.accentImg}
-      <img
-        class="accent-img fixed right-0 bottom-0 opacity-25 -z-1"
-        alt={album.accentImg.alt}
-        src={album.accentImg.src} />
+      <FixedAccentImage alt={album.accentImg.alt} src={album.accentImg.src} />
     {/if}
+
     <div class="mb-20 max-w-4xl mx-auto">
       <time
         dateTime={album.date}
@@ -43,15 +44,20 @@
       <h2 class="text-3xl leading-none">{album.title}</h2>
       <QuickLinks links={album.links} />
     </div>
+
     <div class="flex flex-wrap -mx-2 mb-48">
       <div class="md:mr-16 md:max-w-md mb-6">
-        <img src={album.artwork} alt="album art" class="rounded-sm shadow" />
+        <img
+          src={album.artwork}
+          alt={`Album artwork for ${album.title}`}
+          class="rounded-sm shadow" />
       </div>
       <div class="flex-grow my-auto">
         <h3 class="text-3xl mb-2">Tracks</h3>
         <TrackList tracks={album.tracks} {store} />
       </div>
     </div>
+
     <div class="mb-48 w-full max-w-4xl mx-auto">
       <h3 class="text-3xl">About</h3>
       <div class="flex flex-col md:flex-row">
@@ -67,9 +73,7 @@
     {#each album.imgs as img}
       <div class="mb-16 md:mb-32">
         {#if img.size === 'full'}
-          <div
-            style="margin-left: calc(50% - 50vw); margin-right: calc(50% -
-            50vw);">
+          <div class="breakout">
             <Image src={img.src} alt={img.alt} ratio={img.ratio} />
           </div>
         {:else}

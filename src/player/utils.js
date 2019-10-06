@@ -31,6 +31,13 @@ export function ejectTrackTheme() {
   removeCustomProp("--accent-bg");
 }
 
+export function formatTime(seconds) {
+  const min = Math.floor(seconds / 60);
+  const sec = `${Math.floor(seconds % 60)}`.padStart(2, "0");
+
+  return `${min}:${sec}`;
+}
+
 function setCustomProp(prop, value) {
   document.documentElement.style.setProperty(prop, value);
 }

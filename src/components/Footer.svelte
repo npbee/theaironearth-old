@@ -2,6 +2,7 @@
   import { slide } from "svelte/transition";
   import { tracks, albums } from "../data";
   import { send, nextTrack, prevTrack } from "../player/store";
+  import { formatTime } from "../player/utils";
   import NextIcon from "../player/components/Next.svelte";
   import PrevIcon from "../player/components/Prev.svelte";
   import PlayPause from "../player/components/PlayPause.svelte";
@@ -10,20 +11,11 @@
   $: activeTrack = tracks[$store.context.trackId];
   $: activeAlbum = albums[activeTrack && activeTrack.albumId];
   $: percentPlayed = $store.context.percentPlayed;
-  $: currentTime = $store.context.currentTime;
+  $: currentTime = formatTime($store.context.currentTime);
   $: duration = $store.context.duration;
-  $: formattedDuration = formatTimeCode($store.context.duration);
+  $: formattedDuration = formatTime($store.context.duration);
   $: isErrored = $store.value === "error-playing";
   $: scLink = activeTrack.links.find(link => link.type === "soundcloud");
-
-  function formatTimeCode(num) {
-    if (!num) return "-";
-
-    const min = Math.floor(num / 60);
-    const sec = `${Math.floor(num % 60)}`.padStart(2, "0");
-
-    return `${min}:${sec}`;
-  }
 
   let scrubber;
   let nextSeek = 0;
@@ -37,7 +29,7 @@
     send({ type: "seek", to: nextTime });
   }
 
-  function hintSeek(evt) {
+  function previewSeek(evt) {
     const offset = evt.offsetX;
     const width = scrubber.offsetWidth;
     const percent = offset / width;
@@ -45,14 +37,14 @@
   }
 
   function onMouseMove(evt) {
-    raf = requestAnimationFrame(() => hintSeek(evt));
+    raf = requestAnimationFrame(() => previewSeek(evt));
   }
 
-  function trackSeek() {
+  function trackMouseSeek() {
     window.addEventListener("mousemove", onMouseMove);
   }
 
-  function untrackSeek() {
+  function untrackMouseSeek() {
     nextSeek = 0;
     window.removeEventListener("mousemove", onMouseMove);
     cancelAnimationFrame(raf);
@@ -185,8 +177,8 @@
         {:else}
           <div
             class="progress flex-1 mr-8"
-            on:mouseover={trackSeek}
-            on:mouseleave={untrackSeek}
+            on:mouseover={trackMouseSeek}
+            on:mouseleave={untrackMouseSeek}
             on:click={seek}
             bind:this={scrubber}>
             <span

@@ -76,6 +76,11 @@ let audio;
 let onTimeUpdate;
 let onEnd;
 
+if (typeof window !== "undefined") {
+  audio = new Audio();
+  audio.setAttribute("preload", "auto");
+}
+
 export const store = writable(currentState);
 
 export function send(event) {
@@ -99,9 +104,31 @@ export function send(event) {
   store.set(currentState);
 }
 
-if (typeof window !== "undefined") {
-  audio = new Audio();
-  audio.setAttribute("preload", "auto");
+export function nextTrack(currentTrackId) {
+  if (currentTrackId) {
+    const currentTrackIndex = Data.playlistOrder.indexOf(currentTrackId);
+    const nextTrackIndex = (currentTrackIndex + 1) % Data.playlistOrder.length;
+    const nextTrackId = Data.playlistOrder[nextTrackIndex];
+    return nextTrackId;
+    //
+  } else {
+    const nextTrackId = Data.playlistOrder[0];
+    return nextTrackId;
+  }
+}
+
+export function prevTrack(currentTrackId) {
+  if (currentTrackId) {
+    const currentTrackIndex = Data.playlistOrder.indexOf(currentTrackId);
+    const count = Data.playlistOrder.length;
+    const nextTrackIndex = (currentTrackIndex - 1 + count) % count;
+    const nextTrackId = Data.playlistOrder[nextTrackIndex];
+    return nextTrackId;
+  } else {
+    const nextTrackId = Data.playlistOrder[0];
+    const nextTrack = Data.tracks[nextTrackId];
+    return nextTrack;
+  }
 }
 
 async function play(context) {
@@ -156,11 +183,7 @@ async function load(context) {
 }
 
 function updateCurrentTime(_context, evt) {
-  const { currentTime } = evt;
-  const min = Math.floor(currentTime / 60);
-  const sec = `${Math.floor(currentTime % 60)}`.padStart(2, "0");
-
-  return `${min}:${sec}`;
+  return evt.currentTime;
 }
 
 function updateDuration(_context, evt) {
@@ -190,31 +213,4 @@ function runAssignment(assignment, context, event) {
   });
 
   return nextContext;
-}
-
-export function nextTrack(currentTrackId) {
-  if (currentTrackId) {
-    const currentTrackIndex = Data.playlistOrder.indexOf(currentTrackId);
-    const nextTrackIndex = (currentTrackIndex + 1) % Data.playlistOrder.length;
-    const nextTrackId = Data.playlistOrder[nextTrackIndex];
-    return nextTrackId;
-    //
-  } else {
-    const nextTrackId = Data.playlistOrder[0];
-    return nextTrackId;
-  }
-}
-
-export function prevTrack(currentTrackId) {
-  if (currentTrackId) {
-    const currentTrackIndex = Data.playlistOrder.indexOf(currentTrackId);
-    const count = Data.playlistOrder.length;
-    const nextTrackIndex = (currentTrackIndex - 1 + count) % count;
-    const nextTrackId = Data.playlistOrder[nextTrackIndex];
-    return nextTrackId;
-  } else {
-    const nextTrackId = Data.playlistOrder[0];
-    const nextTrack = Data.tracks[nextTrackId];
-    return nextTrack;
-  }
 }

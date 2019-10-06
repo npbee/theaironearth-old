@@ -4,6 +4,7 @@
   import Links from "../../components/Links.svelte";
   import AlbumRef from "../../components/AlbumRef.svelte";
   import PlayPause from "../../player/components/PlayPause.svelte";
+  import FixedAccentImage from "../../components/FixedAccentImage.svelte";
   import { injectTrackTheme } from "../../player/utils";
 
   export async function preload({ params }) {
@@ -41,12 +42,6 @@
 </script>
 
 <style>
-  .breakout {
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    width: 100vw;
-  }
-
   .title {
     position: relative;
   }
@@ -100,49 +95,39 @@
     content={`See the lyrics, credits, and purchase/streaming links for the track ${track.title} by The Air on Earth`} />
 </svelte:head>
 
-<section id="track-root">
-  <PageTransition>
-    <div class={`breakout relative track track:${track.id}`}>
-      <div
-        class={`track-bg track-bg:${track.id} ${trackThemed ? 'track-bg--ready' : ''}`} />
-      <div class="container ctr max-w-3xl py-12 mb-8">
-        {#if album.accentImg}
-          <img
-            class="accent-img fixed right-0 bottom-0 opacity-25 -z-1"
-            alt={album.accentImg.alt}
-            src={album.accentImg.src} />
-        {/if}
-        <div class={`track:${track.id}`} />
-        <div class="flex md:items-center flex-col md:flex-row">
-          <div class="mb-12 md:mb-0" style="flex: 3">
-            <div class="title flex items-baseline">
-              <img
-                src={album.artwork}
-                alt={`Album artwork for ${album.title}`} />
-              <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
-              <PlayPause {store} trackId={track.id} />
-            </div>
-            <div class="mb-4">
-              <AlbumRef {album} />
-            </div>
-            <Links links={track.links} />
-          </div>
+<PageTransition>
+  <div class={`breakout relative track track:${track.id}`}>
+    <div class={`track-bg ${trackThemed ? 'track-bg--ready' : ''}`} />
+    <div class="container ctr max-w-3xl py-12 mb-8">
+      {#if album.accentImg}
+        <FixedAccentImage alt={album.accentImg.alt} src={album.accentImg.src} />
+      {/if}
 
-          <div class="text-xs">
-            <Credits credits={track.credits} />
+      <div class="flex md:items-center flex-col md:flex-row">
+        <div class="mb-12 md:mb-0" style="flex: 3">
+          <div class="title flex items-baseline">
+            <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
+            <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
+            <PlayPause {store} trackId={track.id} />
           </div>
+          <AlbumRef {album} className="mb-4" />
+          <Links links={track.links} />
+        </div>
+
+        <div class="text-xs">
+          <Credits credits={track.credits} className="text-xs" />
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="text-grey-600 serif mb-12 container ctr max-w-3xl">
-      {#each track.lyrics as stanza, i}
-        <div class={`mb-6 stanza stanza-${i}`}>
-          {#each stanza as line}
-            <p>{line}</p>
-          {/each}
-        </div>
-      {/each}
-    </div>
-  </PageTransition>
-</section>
+  <div class="text-grey-600 serif mb-12 container ctr max-w-3xl">
+    {#each track.lyrics as stanza, i}
+      <div class={`mb-6 stanza-${i}`}>
+        {#each stanza as line}
+          <p>{line}</p>
+        {/each}
+      </div>
+    {/each}
+  </div>
+</PageTransition>
