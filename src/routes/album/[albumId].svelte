@@ -30,7 +30,7 @@
   <div class="container ctr max-w-6xl">
     {#if album.accentImg}
       <img
-        class="accent-img fixed right-0 bottom-0 opacity-25 md:opacity-50 -z-1"
+        class="accent-img fixed right-0 bottom-0 opacity-25 -z-1"
         alt={album.accentImg.alt}
         src={album.accentImg.src} />
     {/if}

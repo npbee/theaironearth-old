@@ -106,6 +106,12 @@
       <div
         class={`track-bg track-bg:${track.id} ${trackThemed ? 'track-bg--ready' : ''}`} />
       <div class="container ctr max-w-3xl py-12 mb-8">
+        {#if album.accentImg}
+          <img
+            class="accent-img fixed right-0 bottom-0 opacity-25 -z-1"
+            alt={album.accentImg.alt}
+            src={album.accentImg.src} />
+        {/if}
         <div class={`track:${track.id}`} />
         <div class="flex md:items-center flex-col md:flex-row">
           <div class="mb-12 md:mb-0" style="flex: 3">
