@@ -68,7 +68,8 @@ h3,
 }
 
 .icon-btn:focus {
-  @apply shadow-outline outline-none;
+  @apply outline-none;
+  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.4);
 }
 
 .icon-btn:active {
