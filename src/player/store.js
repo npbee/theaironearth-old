@@ -1,5 +1,6 @@
 import { FSM } from "@xstate/fsm";
 import { writable } from "svelte/store";
+import log from "loglevel";
 import * as Data from "../data";
 import { streamUrlFor } from "./sc";
 import { injectTrackTheme } from "./utils";
@@ -43,7 +44,11 @@ export const machine = FSM({
       on: {
         started: "playing",
         "play-track": "loading",
+        failed: "error-playing",
       },
+    },
+    "error-playing": {
+      on: {},
     },
     playing: {
       on: {
@@ -74,6 +79,7 @@ let onEnd;
 export const store = writable(currentState);
 
 export function send(event) {
+  log.debug("Event received", event);
   currentState = machine.transition(currentState, event);
 
   const { actions } = currentState;
@@ -125,7 +131,8 @@ async function play(context) {
     };
     audio.addEventListener("ended", onEnd);
   } catch (err) {
-    console.dir(err);
+    log.error(err);
+    send("failed");
   }
 }
 

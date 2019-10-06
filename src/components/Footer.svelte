@@ -13,6 +13,8 @@
   $: currentTime = $store.context.currentTime;
   $: duration = $store.context.duration;
   $: formattedDuration = formatTimeCode($store.context.duration);
+  $: isErrored = $store.value === "error-playing";
+  $: scLink = activeTrack.links.find(link => link.type === "soundcloud");
 
   function formatTimeCode(num) {
     if (!num) return "-";
@@ -167,22 +169,39 @@
             </a>
           </div>
         </div>
-        <div
-          class="progress flex-1 mr-8"
-          on:mouseover={trackSeek}
-          on:mouseleave={untrackSeek}
-          on:click={seek}
-          bind:this={scrubber}>
-          <span class="seek bg-grey-200" style={`width: ${nextSeek * 100}%`} />
-          <span
-            class="played bg-grey-700"
-            style={`width: ${percentPlayed * 100}%`} />
-          <span class="bg-grey-100" />
-          <div class="time">
-            <p>{currentTime || '-'}</p>
-            <p>{formattedDuration || '-'}</p>
+        {#if isErrored}
+          <div class="flex-1 text-red-700">
+            Could not play this track! Try playing again or listening directly
+            from
+            <a
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              class="decorated-link"
+              href={scLink.url}>
+              Soundcloud
+            </a>
+            .
           </div>
-        </div>
+        {:else}
+          <div
+            class="progress flex-1 mr-8"
+            on:mouseover={trackSeek}
+            on:mouseleave={untrackSeek}
+            on:click={seek}
+            bind:this={scrubber}>
+            <span
+              class="seek bg-grey-200"
+              style={`width: ${nextSeek * 100}%`} />
+            <span
+              class="played bg-grey-700"
+              style={`width: ${percentPlayed * 100}%`} />
+            <span class="bg-grey-100" />
+            <div class="time">
+              <p>{currentTime || '-'}</p>
+              <p>{formattedDuration || '-'}</p>
+            </div>
+          </div>
+        {/if}
         <div class="controls">
           <button
             class="mr-3"
