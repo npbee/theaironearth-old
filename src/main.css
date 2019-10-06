@@ -139,3 +139,9 @@ h3,
   font-family: ff-meta-serif-web-pro, serif;
   font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh";
 }
+
+.breakout {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+}
