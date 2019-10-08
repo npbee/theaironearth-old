@@ -12,6 +12,7 @@
     "dev:css": "npm run build:css -- --watch",
     "build:css": "postcss ./src/main.css -o ./static/global.css --verbose",
     "build:sapper": "sapper export --legacy",
+    "build:service-worker": "workbox injectManifest",
     "prebuild": "npm run check",
     "build": "NODE_ENV=production run-s build:** && bundlesize",
     "prettier": "prettier 'src/**/*.{svelte,js}'",
@@ -69,6 +70,7 @@
     "sharp": "^0.23.1",
     "svelte": "^3.12.1",
     "svelte-loader": "^2.13.6",
-    "tailwindcss": "^1.1.2"
+    "tailwindcss": "^1.1.2",
+    "workbox-cli": "^4.3.1"
   }
 }
