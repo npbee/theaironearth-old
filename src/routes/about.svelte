@@ -45,7 +45,7 @@
         distinctio quibusdam exercitationem. Vitae debitis doloribus
       </p>
 
-      <Links links={site.links} />
+      <Links links={Object.values(site.links)} />
 
     </div>
   </section>
