@@ -5,6 +5,7 @@
   import AppleMusic from "./icons/AppleMusic.svelte";
 
   export let links;
+  export let category = "quick";
 
   function linkTitle(link) {
     switch (link.type) {
@@ -35,6 +36,9 @@
         throw new Error(`No icon defined for link type ${type}`);
     }
   }
+
+  const quickLinks = links.filter(link => link.type !== "apple-music");
+  const filteredLinks = category === "quick" ? quickLinks : links;
 </script>
 
 <style>
@@ -43,13 +47,13 @@
   }
 </style>
 
-<div class="-mx-1 flex items-center flex-wrap">
-  {#each links as link, i}
+<div class="-mx-2 flex items-center flex-wrap">
+  {#each filteredLinks as link, i}
     <a
       href={link.url}
       target="_blank"
       rel="noreferrer noopener nofollow"
-      class={`icon-btn mx-1 icon-btn--${link.type}`}
+      class={`icon-btn m-2 icon-btn--${link.type}`}
       title={linkTitle(link)}>
       <span class="visually-hidden">{linkTitle(link)}</span>
       <svelte:component this={icon(link.type)} />

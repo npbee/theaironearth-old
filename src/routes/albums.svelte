@@ -1,6 +1,6 @@
 <script>
   import PageTransition from "../components/PageTransition.svelte";
-  import QuickLinks from "../components/Links.svelte";
+  import Links from "../components/Links.svelte";
   import { albums } from "../data";
 </script>
 
@@ -28,7 +28,7 @@
               {album.title}
             </h2>
           </a>
-          <QuickLinks links={album.links} />
+          <Links links={album.links} category="quick" />
         </div>
       </div>
     {/each}
