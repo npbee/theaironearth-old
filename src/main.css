@@ -63,8 +63,8 @@ h3,
 @tailwind components;
 
 .icon-btn {
-  @apply flex p-1 rounded-sm;
-  transition: background-color 200ms;
+  @apply flex rounded-sm text-gray-600 justify-center;
+  transition: color 200ms;
 }
 
 .icon-btn:focus {
@@ -77,10 +77,20 @@ h3,
 }
 
 .icon-btn:hover {
-  background-color: theme("colors.grey.100");
+  @apply text-gray-900;
 }
 
 .icon-btn > svg {
+  width: 1em;
+  height: 1em;
+}
+
+.icon-btn--bandcamp > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-btn--soundcloud > svg {
   width: 24px;
   height: 24px;
 }
@@ -89,8 +99,12 @@ h3,
   width: 80px;
 }
 
+.icon-btn--spotify {
+  width: 18px;
+}
+
 .icon-btn--spotify > svg {
-  width: 20px;
+  width: 16px;
 }
 
 @tailwind utilities;
