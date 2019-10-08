@@ -6,6 +6,7 @@
   import { canPlay } from "../utils";
   export let store;
   export let trackId;
+  export let size = "";
 
   $: activeTrackId = $store.context.trackId;
   $: isBusy =
@@ -35,7 +36,7 @@
 
 {#if canPlay()}
   <button
-    class="icon-btn c-grey-700 flex"
+    class={`icon-btn c-grey-700 flex text-${size}`}
     data-testid={isPlaying ? 'pause' : 'play'}
     on:click={handler}>
     {#if isBusy}

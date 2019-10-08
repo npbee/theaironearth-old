@@ -1,5 +1,5 @@
 <script>
-  import { store, send, nextTrack } from "../store";
+  import { store, send } from "../store";
   import PlayIcon from "./Play.svelte";
   import PauseIcon from "./Pause.svelte";
   import { canPlay } from "../utils";
@@ -54,11 +54,11 @@
 {#if canPlay()}
   <button on:click={handler}>
     <img src={album.artwork} alt={`Artwork for ${album.title}`} />
-    <div class="icon">
+    <div class="icon text-2xl">
       {#if isPlaying}
-        <PauseIcon size="25%" />
+        <PauseIcon />
       {:else}
-        <PlayIcon size="25%" />
+        <PlayIcon />
       {/if}
     </div>
   </button>

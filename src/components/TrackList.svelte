@@ -23,8 +23,8 @@
 <ol>
   {#each tracks as track}
     <li class="mb-2">
-      <div class="mr-1 flex">
-        <PlayPause trackId={track.id} {store} />
+      <div class="mr-1 flex mr-2">
+        <PlayPause trackId={track.id} {store} size="3xl" />
       </div>
       <a
         href={`/track/${track.id}`}

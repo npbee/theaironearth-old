@@ -108,7 +108,7 @@
           <div class="title flex items-baseline">
             <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
             <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
-            <PlayPause {store} trackId={track.id} />
+            <PlayPause {store} trackId={track.id} size="2xl" />
           </div>
           <AlbumRef {album} className="mb-4" />
           <Links links={track.links} />

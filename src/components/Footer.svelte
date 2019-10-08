@@ -196,7 +196,7 @@
         {/if}
         <div class="controls">
           <button
-            class="mr-3"
+            class="mr-3 icon-btn text-sm"
             on:click={() => send({
                 type: 'play-track',
                 trackId: prevTrack(activeTrack.id),
@@ -204,9 +204,10 @@
             <PrevIcon />
           </button>
           <div class="mr-3">
-            <PlayPause trackId={activeTrack.id} {store} />
+            <PlayPause trackId={activeTrack.id} {store} size="2xl" />
           </div>
           <button
+            class="icon-btn text-sm"
             on:click={() => send({
                 type: 'play-track',
                 trackId: nextTrack(activeTrack.id),
