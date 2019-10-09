@@ -17,17 +17,19 @@
         <a href={`/album/${album.id}`} class="mb-4">
           <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
         </a>
-        <div>
-          <time
-            dateTime={album.date}
-            class="text-xs text-grey-400 small-caps block">
-            {album.date}
-          </time>
-          <a href={`/album/${album.id}`} class="hover:underline inline-block">
-            <h2 class="headline text-3xl leading-tight text-grey-700">
-              {album.title}
-            </h2>
-          </a>
+        <time
+          dateTime={album.date}
+          class="text-xs text-grey-400 small-caps block">
+          {album.date}
+        </time>
+        <div class="flex justify-between">
+          <div>
+            <a href={`/album/${album.id}`} class="hover:underline inline-block">
+              <h2 class="headline text-3xl leading-tight text-grey-700">
+                {album.title}
+              </h2>
+            </a>
+          </div>
           <Links links={album.links} category="quick" />
         </div>
       </div>
