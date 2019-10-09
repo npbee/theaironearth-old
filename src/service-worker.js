@@ -1,4 +1,10 @@
+import logger from "loglevel";
 import { timestamp, files, shell } from "@sapper/service-worker";
+
+const mode = process.env.NODE_ENV;
+const dev = mode === "development";
+
+logger.setDefaultLevel(dev ? "debug" : "error");
 
 const ASSETS = `cache${timestamp}`;
 
@@ -7,7 +13,13 @@ const ASSETS = `cache${timestamp}`;
 const to_cache = shell.concat(files);
 const cached = new Set(to_cache);
 
+log("Asset cache: ", ASSETS);
+
 self.addEventListener("install", event => {
+  for (let item of to_cache) {
+    log(`Caching ${item} in ${ASSETS}`);
+  }
+
   event.waitUntil(
     caches
       .open(ASSETS)
@@ -23,7 +35,10 @@ self.addEventListener("activate", event => {
     caches.keys().then(async keys => {
       // delete old caches
       for (const key of keys) {
-        if (key !== ASSETS) await caches.delete(key);
+        if (key !== ASSETS) {
+          log(`Deleting cache ${key}`);
+          await caches.delete(key);
+        }
       }
 
       self.clients.claim();
@@ -32,8 +47,10 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET" || event.request.headers.has("range"))
+  if (event.request.method !== "GET" || event.request.headers.has("range")) {
+    log(`Not handling ${event.request}`);
     return;
+  }
 
   const url = new URL(event.request.url);
 
@@ -44,24 +61,26 @@ self.addEventListener("fetch", event => {
   if (
     url.hostname === self.location.hostname &&
     url.port !== self.location.port
-  )
-    return;
-
-  // always serve static files and bundler-generated assets from cache
-  if (url.host === self.location.host && cached.has(url.pathname)) {
-    event.respondWith(caches.match(event.request));
+  ) {
+    warn(`Not handling ${url} because it's a dev server request`);
     return;
   }
 
-  // for pages, you might want to serve a shell `service-worker-index.html` file,
-  // which Sapper has generated for you. It's not right for every
-  // app, but if it's right for yours then uncomment this section
-  /*
-	if (url.origin === self.origin && routes.find(route => route.pattern.test(url.pathname))) {
-		event.respondWith(caches.match('/service-worker-index.html'));
-		return;
-	}
-	*/
+  if (url.host === self.location.host) {
+    if (isBundlerGeneratedAsset(url)) {
+      log(`Serving ${url.pathname} from cache`);
+      event.respondWith(caches.match(event.request));
+      return;
+    } else {
+      warn(`${url.pathname} not found in cache`);
+    }
+  } else {
+    warn(
+      `Not handling ${url.pathname} because the url host doesn't match the location host`
+    );
+  }
+
+  // always serve static files and bundler-generated assets from cache
 
   if (event.request.cache === "only-if-cached") return;
 
@@ -73,9 +92,13 @@ self.addEventListener("fetch", event => {
       try {
         const response = await fetch(event.request);
         cache.put(event.request, response.clone());
+        log(
+          `Fetched ${url.pathname} from the network and put it into the offline cache`
+        );
         return response;
       } catch (err) {
         const response = await cache.match(event.request);
+        log(`Could not fetch ${url} from the network, trying offline cache`);
         if (response) return response;
 
         throw err;
@@ -83,3 +106,46 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+self.addEventListener("message", event => {
+  const { data } = event;
+
+  if (data.command === "set-log-level") {
+    const { level } = data;
+    logger.setLevel(level);
+  }
+});
+
+function isBundlerGeneratedAsset(url) {
+  const pathname = url.pathname;
+  const cacheKey = pathname.startsWith("/") ? pathname.slice(1) : pathname;
+
+  return cached.has(cacheKey);
+}
+
+function styles(level) {
+  const methodToColorMap = {
+    debug: `#7f8c8d`, // Gray
+    log: `#2ecc71`, // Green
+    warn: `#f39c12`, // Yellow
+    error: `#c0392b`, // Red
+    groupCollapsed: `#3498db`, // Blue
+    groupEnd: null, // No colored prefix on groupEnd
+  };
+
+  return [
+    `background-color: ${methodToColorMap[level]}`,
+    "border-radius: 0.5em",
+    "color: white",
+    "font-weight: bold",
+    "padding: 2px 0.5em",
+  ].join(";");
+}
+
+function log(...args) {
+  logger.log("%csw", styles("log"), ...args);
+}
+
+function warn(...args) {
+  logger.warn("%csw", styles("warn"), ...args);
+}

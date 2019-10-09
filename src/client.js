@@ -12,4 +12,13 @@ if (typeof window !== "undefined") {
   window.log = log;
 
   log.setDefaultLevel(dev ? "debug" : "error");
+
+  if ("serviceWorker" in navigator) {
+    window.setSwLogLevel = level => {
+      navigator.serviceWorker.controller.postMessage({
+        command: "set-log-level",
+        level,
+      });
+    };
+  }
 }

@@ -1,6 +1,12 @@
 const purgecss = require("@fullhuman/postcss-purgecss")({
   content: ["./src/**/*.svelte", "./src/**/*.html"],
   defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+  whitelist: [
+    "icon-btn",
+    "icon-btn--bandcamp",
+    "icon-btn--soundcloud",
+    "icon-btn--spotify",
+  ],
 });
 
 const cssnano = require("cssnano")({
