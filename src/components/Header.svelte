@@ -5,7 +5,8 @@
   export let segment;
 
   function currentClass(segment, path, cls) {
-    if (segment && segment.includes(path)) return `text-red-700 ${cls}`;
+    if (segment && segment.includes(path))
+      return `text-grey-900 underline ${cls}`;
     return `text-grey-500 ${cls}`;
   }
 </script>
