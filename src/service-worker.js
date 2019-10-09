@@ -1,10 +1,7 @@
 import logger from "loglevel";
 import { timestamp, files, shell } from "@sapper/service-worker";
 
-const mode = process.env.NODE_ENV;
-const dev = mode === "development";
-
-logger.setDefaultLevel(dev ? "debug" : "error");
+logger.setDefaultLevel("error");
 
 const ASSETS = `cache${timestamp}`;
 
