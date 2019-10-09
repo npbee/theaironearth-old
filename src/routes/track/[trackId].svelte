@@ -115,7 +115,7 @@
         </div>
 
         <div class="text-xs">
-          <Credits credits={track.credits} className="text-xs" />
+          <Credits credits={track.credits} />
         </div>
       </div>
     </div>
