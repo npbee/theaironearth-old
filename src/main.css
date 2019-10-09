@@ -159,3 +159,7 @@ h3,
   margin-right: calc(50% - 50vw);
   width: 100vw;
 }
+
+.trans {
+  transition: all 200ms;
+}
