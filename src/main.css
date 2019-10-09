@@ -63,7 +63,7 @@ h3,
 @tailwind components;
 
 .icon-btn {
-  @apply flex rounded-sm text-gray-600 justify-center;
+  @apply flex rounded-sm text-gray-700 justify-center;
   transition: color 200ms;
 }
 
