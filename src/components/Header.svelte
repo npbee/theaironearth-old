@@ -11,7 +11,7 @@
   }
 </script>
 
-<header class="ctr py-4 mb-16">
+<header class="ctr py-4 mb-10">
   <div class="flex items-center justify-between flex-wrap">
     <nav class="links">
       <a href="/" class="logo">
