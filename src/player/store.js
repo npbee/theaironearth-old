@@ -15,6 +15,12 @@ export const machine = FSM({
     trackId: Data.playlistOrder[0],
   },
   states: {
+    stopped: {
+      entry: [pause],
+      on: {
+        "play-track": "loading",
+      },
+    },
     init: {
       on: {
         "play-track": "loading",
@@ -37,11 +43,13 @@ export const machine = FSM({
       on: {
         loaded: "starting",
         "play-track": "loading",
+        stop: "stopped",
       },
     },
     starting: {
       entry: [play],
       on: {
+        stop: "stopped",
         started: "playing",
         "play-track": "loading",
         failed: "error-playing",

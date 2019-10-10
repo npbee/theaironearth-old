@@ -21,6 +21,8 @@
       send("pause");
     } else if (isPaused) {
       send("play");
+    } else if (isBusy) {
+      send("stop");
     } else {
       send({ type: "play-track", trackId });
     }
