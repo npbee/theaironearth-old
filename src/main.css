@@ -163,3 +163,21 @@ h3,
 .trans {
   transition: all 200ms;
 }
+
+.nav-link {
+  @apply text-sm small-caps;
+  transition: all 200ms;
+}
+
+.nav-link:hover,
+.nav-link--current {
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 theme("colors.grey.200");
+  border-bottom: 1px solid theme("colors.grey.200");
+}
+
+.nav-link--current {
+  color: var(--accent-high-contrast);
+  box-shadow: inset 0 -1px 0 var(--accent-high-contrast, theme("colors.grey.200"));
+  border-bottom: 1px solid var(--accent-high-contrast, theme("colors.grey.200"));
+}

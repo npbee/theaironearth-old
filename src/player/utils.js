@@ -22,6 +22,7 @@ export function injectTrackTheme(track) {
     setCustomProp("--accent-gradient", styles);
     setCustomProp("--accent-color", hsla(color));
     setCustomProp("--accent-bg", hsla(background));
+    setCustomProp("--accent-high-contrast", hsla(toHighContrast(background)));
   }
 }
 
@@ -29,6 +30,7 @@ export function ejectTrackTheme() {
   removeCustomProp("--accent-gradient");
   removeCustomProp("--accent-color");
   removeCustomProp("--accent-bg");
+  removeCustomProp("--accent-high-contrast");
 }
 
 export function formatTime(seconds) {
@@ -48,4 +50,11 @@ function removeCustomProp(prop) {
 
 function hsla(config, alpha = 1) {
   return `hsla(${config.h}, ${config.s}%, ${config.l}%, ${alpha})`;
+}
+
+function toHighContrast(config) {
+  return {
+    ...config,
+    l: config.l * 0.5,
+  };
 }
