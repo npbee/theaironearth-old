@@ -176,6 +176,7 @@ h3,
   border-bottom: 1px solid theme("colors.grey.200");
 }
 
+.nav-link--current:hover,
 .nav-link--current {
   color: var(--accent-high-contrast);
   box-shadow: inset 0 -1px 0 var(--accent-high-contrast, theme("colors.grey.200"));
