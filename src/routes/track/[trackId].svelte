@@ -98,13 +98,13 @@
 <PageTransition>
   <div class={`breakout relative track track:${track.id}`}>
     <div class={`track-bg ${trackThemed ? 'track-bg--ready' : ''}`} />
-    <div class="container ctr max-w-3xl py-12 mb-8">
+    <div class="container ctr max-w-3xl py-12 mb-24">
       {#if album.accentImg}
         <FixedAccentImage alt={album.accentImg.alt} src={album.accentImg.src} />
       {/if}
 
       <div class="flex md:items-center flex-col md:flex-row">
-        <div class="mb-12 md:mb-0" style="flex: 3">
+        <div class="mb-16 md:mb-0" style="flex: 3">
           <div class="title flex items-baseline">
             <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
             <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
