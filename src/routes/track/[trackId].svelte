@@ -69,6 +69,16 @@
     color: var(--accent-color);
   }
 
+  .track :global(.icon-btn) {
+    color: var(--accent-high-contrast);
+  }
+
+  .track :global(.icon-btn):focus,
+  .track :global(.icon-btn):hover {
+    color: inherit;
+    color: var(--accent-bg);
+  }
+
   .track-bg {
     position: absolute;
     top: 0%;
@@ -110,7 +120,7 @@
             <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
             <PlayPause {store} trackId={track.id} size="2xl" />
           </div>
-          <AlbumRef {album} className="mb-4" />
+          <AlbumRef {album} className="mb-1" />
           <Links links={track.links} />
         </div>
 

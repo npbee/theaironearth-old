@@ -1,7 +1,7 @@
 <style>
   .earth {
     transition: fill 200ms 200ms;
-    fill: var(--accent-bg, currentColor);
+    fill: var(--accent-high-contrast, currentColor);
   }
 </style>
 

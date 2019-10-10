@@ -5,9 +5,8 @@
   export let segment;
 
   function currentClass(segment, path, cls) {
-    if (segment && segment.includes(path))
-      return `text-grey-900 underline ${cls}`;
-    return `text-grey-500 ${cls}`;
+    if (segment && segment.includes(path)) return `nav-link--current ${cls}`;
+    return cls;
   }
 </script>
 
@@ -29,19 +28,19 @@
   <div>
     <a
       rel="prefetch"
-      class={currentClass(segment, 'album', 'pl-2 text-sm hover:underline small-caps')}
+      class={currentClass(segment, 'album', 'nav-link ml-2')}
       href="/albums">
       Albums
     </a>
     <a
       rel="prefetch"
-      class={currentClass(segment, 'track', 'pl-2 text-sm hover:underline small-caps')}
+      class={currentClass(segment, 'track', 'nav-link ml-2')}
       href="/tracks">
       Tracks
     </a>
     <a
       rel="prefetch"
-      class={currentClass(segment, 'about', 'pl-2 text-sm hover:underline small-caps')}
+      class={currentClass(segment, 'about', 'nav-link ml-2')}
       href="/about">
       About
     </a>
