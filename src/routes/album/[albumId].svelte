@@ -7,6 +7,7 @@
   import Image from "../../components/Image.svelte";
   import CreditSource from "../../components/CreditSource.svelte";
   import FixedAccentImage from "../../components/FixedAccentImage.svelte";
+  import Track from "../../components/Track.svelte";
 
   export async function preload({ params }) {
     return {
@@ -35,25 +36,23 @@
       <FixedAccentImage alt={album.accentImg.alt} src={album.accentImg.src} />
     {/if}
 
-    <div class="mb-20 max-w-4xl mx-auto">
-      <time
-        dateTime={album.date}
-        class="text-sm text-grey-400 small-caps block">
-        {album.date}
-      </time>
-      <h2 class="text-3xl leading-none">{album.title}</h2>
-      <QuickLinks links={album.links} />
-    </div>
-
     <div class="flex flex-wrap -mx-2 mb-48">
-      <div class="md:mr-16 md:max-w-md mb-6">
+      <div class="md:mr-8 md:max-w-md mb-6 w-full">
         <img
           src={album.artwork}
           alt={`Album artwork for ${album.title}`}
-          class="rounded-sm shadow" />
+          class="rounded-sm shadow w-full" />
       </div>
       <div class="flex-grow my-auto">
-        <h3 class="text-3xl mb-2">Tracks</h3>
+        <div class="mb-8">
+          <time
+            dateTime={album.date}
+            class="text-sm text-grey-400 small-caps block">
+            {album.date}
+          </time>
+          <h2 class="text-3xl leading-none">{album.title}</h2>
+          <QuickLinks links={album.links} />
+        </div>
         <TrackList tracks={album.tracks} {store} />
       </div>
     </div>
@@ -87,5 +86,10 @@
         {/if}
       </div>
     {/each}
+
+    {#each album.tracks as track}
+      <Track {track} {album} />
+    {/each}
+
   </div>
 </PageTransition>

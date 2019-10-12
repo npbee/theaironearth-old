@@ -160,7 +160,7 @@ registerTrack({
     background: {
       h: 10,
       s: 50,
-      l: 82,
+      l: 87,
     },
     color: {
       h: 10,
@@ -240,7 +240,7 @@ registerTrack({
     background: {
       h: 19,
       s: 50,
-      l: 72,
+      l: 82,
     },
     color: {
       h: 19,
@@ -297,7 +297,7 @@ registerTrack({
     background: {
       h: 10,
       s: 50,
-      l: 42,
+      l: 82,
     },
     color: {
       h: 10,
@@ -342,7 +342,7 @@ registerTrack({
     background: {
       h: 220,
       s: 50,
-      l: 28,
+      l: 78,
     },
     color: {
       h: 220,
@@ -391,7 +391,7 @@ registerTrack({
     background: {
       h: 231,
       s: 50,
-      l: 14,
+      l: 74,
     },
     color: {
       h: 231,
@@ -593,13 +593,13 @@ registerTrack({
   ],
   theme: {
     background: {
-      h: 193,
-      s: 50,
-      l: 40,
+      h: 136,
+      s: 29,
+      l: 80,
     },
     color: {
-      h: 193,
-      s: 70,
+      h: 136,
+      s: 29,
       l: 10,
     },
   },
@@ -648,13 +648,13 @@ registerTrack({
   ],
   theme: {
     background: {
-      h: 193,
-      s: 50,
-      l: 75,
+      h: 190,
+      s: 25,
+      l: 85,
     },
     color: {
-      h: 193,
-      s: 30,
+      h: 190,
+      s: 25,
       l: 15,
     },
   },
