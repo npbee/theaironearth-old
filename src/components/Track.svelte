@@ -1,0 +1,65 @@
+<script>
+  import { store } from "../player/store";
+  import PlayPause from "../player/components/PlayPause.svelte";
+  import Links from "./Links.svelte";
+  import Credits from "./Credits.svelte";
+
+  export let track;
+  export let album;
+</script>
+
+<style>
+  .title {
+    position: relative;
+  }
+
+  .title img {
+    --width: 100px;
+    position: absolute;
+    width: var(--width);
+    opacity: 0.4;
+    z-index: -1;
+    left: calc(var(--width) * 0.6 * -1);
+    top: calc(var(--width) * 0.6 * -1);
+  }
+
+  .stanza-0 p:first-of-type:first-letter {
+    font-size: 200%;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+</style>
+
+<div id={track.id} class="py-24">
+  <div class="container ctr mb-12">
+    <div class="mb-12">
+      <div class="title flex items-baseline">
+        <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
+        <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
+        <PlayPause {store} trackId={track.id} size="2xl" />
+      </div>
+      <div class="text-grey-500">
+        <Links links={track.links} />
+      </div>
+    </div>
+
+    {#if track.lyrics.length > 0}
+      <div class="text-grey-600 serif">
+        {#each track.lyrics as stanza, i}
+          <div class={`mb-6 stanza-${i}`}>
+            {#each stanza as line}
+              <p>{line}</p>
+            {/each}
+          </div>
+        {/each}
+      </div>
+    {/if}
+
+    {#if track.credits.length > 1}
+      <div class="text-xs mt-12">
+        <hr class="mb-4" />
+        <Credits credits={track.credits} />
+      </div>
+    {/if}
+  </div>
+</div>
