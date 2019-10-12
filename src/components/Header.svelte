@@ -20,7 +20,7 @@
         </h1>
       </a>
     </nav>
-    <nav class="social">
+    <nav>
       <Links
         links={[site.links.bandcamp, site.links.soundcloud, site.links.spotify]} />
     </nav>
@@ -31,12 +31,6 @@
       class={currentClass(segment, 'album', 'nav-link ml-2')}
       href="/albums">
       Albums
-    </a>
-    <a
-      rel="prefetch"
-      class={currentClass(segment, 'track', 'nav-link ml-2')}
-      href="/tracks">
-      Tracks
     </a>
     <a
       rel="prefetch"

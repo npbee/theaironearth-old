@@ -29,7 +29,9 @@ nav,
 main,
 section,
 a,
-footer {
+footer,
+ol,
+li {
   max-width: none;
 }
 
@@ -136,17 +138,13 @@ h3,
 .decorated-link {
   text-decoration: none;
   box-shadow: inset 0 -1px 0 theme("colors.grey.200");
-  box-shadow: inset 0 -1px 0 var(--accent-color, theme("colors.grey.200"));
   border-bottom: 1px solid theme("colors.grey.200");
-  border-bottom: 1px solid var(--accent-color, theme("colors.grey.200"));
   transition: background-color 200ms;
 }
 
 .decorated-link:hover {
-  background-color: theme("colors.grey.200");
-  background-color: var(--accent-bg, theme("colors.grey.200"));
+  background-color: theme("colors.grey.600");
   color: theme("colors.grey.50");
-  color: var(--accent-contrast, theme("colors.grey.50"));
 }
 
 .serif {
