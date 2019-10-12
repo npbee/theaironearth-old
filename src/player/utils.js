@@ -3,32 +3,13 @@ export function canPlay() {
 }
 
 export function injectTrackTheme(track) {
-  const { theme = {} } = track;
-  const { background, color } = theme;
+  const theme = generateTheme(track);
 
-  if (background && color) {
-    let alphaStops = [[0, 0], [0.2, 15], [0.3, 50], [0, 100]];
-    let styles = "linear-gradient(to bottom,";
-
-    for (let [alpha, stop] of alphaStops) {
-      styles += `${hsla(background, alpha)} ${stop}%,`;
-    }
-
-    if (styles.endsWith(",")) {
-      styles = styles.slice(0, -1);
-    }
-    styles += ")";
-
-    setCustomProp("--accent-gradient", styles);
-    setCustomProp("--accent-color", hsla(color));
-    setCustomProp("--accent-bg", hsla(background));
-    setCustomProp("--accent-high-contrast", hsla(toHighContrast(background)));
-  }
+  setCustomProp(`--accent-bg`, theme.background);
+  setCustomProp(`--accent-high-contrast`, theme.highContrast);
 }
 
 export function ejectTrackTheme() {
-  removeCustomProp("--accent-gradient");
-  removeCustomProp("--accent-color");
   removeCustomProp("--accent-bg");
   removeCustomProp("--accent-high-contrast");
 }
@@ -46,6 +27,34 @@ function setCustomProp(prop, value) {
 
 function removeCustomProp(prop) {
   document.documentElement.style.removeProperty(prop);
+}
+
+function generateTheme(track) {
+  const { theme = {} } = track;
+  const { background, color } = theme;
+
+  if (background && color) {
+    let alphaStops = [[0, 0], [0.2, 15], [0.3, 50], [0, 100]];
+    let styles = "linear-gradient(to bottom,";
+
+    for (let [alpha, stop] of alphaStops) {
+      styles += `${hsla(background, alpha)} ${stop}%,`;
+    }
+
+    if (styles.endsWith(",")) {
+      styles = styles.slice(0, -1);
+    }
+    styles += ")";
+
+    return {
+      gradient: styles,
+      color: hsla(color),
+      background: hsla(background),
+      highContrast: hsla(toHighContrast(background)),
+    };
+  }
+
+  return {};
 }
 
 function hsla(config, alpha = 1) {

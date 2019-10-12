@@ -1,7 +1,16 @@
 <script>
   import PlayPause from "../player/components/PlayPause.svelte";
+  import { onMount } from "svelte";
+
   export let tracks;
   export let store;
+
+  // Workaround to support relative links in Sapper
+  onMount(async () => {
+    [...document.querySelectorAll('a[href^="#"]')].map(
+      x => (x.href = document.location.pathname + new URL(x.href).hash)
+    );
+  });
 </script>
 
 <style>
@@ -27,7 +36,7 @@
         <PlayPause trackId={track.id} {store} size="xl" />
       </div>
       <a
-        href={`/track/${track.id}`}
+        href={`#${track.id}`}
         class="border-dotted border-b-2 border-grey-100 hover:border-grey-700
         active:border-blue-600 trans">
         <span>{track.title}</span>
