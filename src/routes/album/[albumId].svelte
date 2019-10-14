@@ -60,10 +60,10 @@
     <div class="mb-48 w-full max-w-4xl mx-auto">
       <h3 class="text-3xl">About</h3>
       <div class="flex flex-col md:flex-row">
-        <p class="mb-8 md:mr-32 md:leading-relaxed">
+        <p class="mb-8 md:mr-32 md:leading-relaxed" style="flex: 3">
           {@html album.description}
         </p>
-        <div class="text-sm">
+        <div class="text-sm" style="flex: 2">
           <Credits credits={album.credits} />
         </div>
       </div>

@@ -21,28 +21,30 @@
       <h2 class="small-caps">About</h2>
       <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
       <p class="mb-6">
-        Consectetur cum placeat quas quo hic Dolore itaque dicta corporis
-        officia velit est. Ab minus magni cupiditate sunt accusamus Amet
-        provident fugiat inventore dolores consectetur quam, numquam! Illum ab
-        odit. Consectetur culpa debitis temporibus reprehenderit sequi Est aut
-        officia fuga similique rem? Ipsam rem veritatis maxime reprehenderit
-        quia in hic quos. Minima libero mollitia aperiam dolorum architecto
-        tempora Numquam perspiciatis Dolor doloribus molestias sunt nemo facilis
-        reprehenderit Nam commodi libero labore velit aut voluptates Deserunt
-        accusamus deserunt est odio magni? Nostrum repellendus eveniet labore
-        distinctio quibusdam exercitationem. Vitae debitis doloribus
+        <em>The Air on Earth</em>
+        is a musical project by Nick Ball. The project attempts a wide range of
+        genres with influences from artists like Explosions and the Sky, Sigur
+        Rós, Radiohead, Jon Hopkins, Bon Iver, and many more. Within minimal
+        arrangments, ambience, and long songs you'll hear delayed guitars,
+        drone-y synths, electronic drums, pianos, and found percussion sounds.
+        The music will age with the person but the project will stay the same.
       </p>
       <p class="mb-6">
-        Consectetur cum placeat quas quo hic Dolore itaque dicta corporis
-        officia velit est. Ab minus magni cupiditate sunt accusamus Amet
-        provident fugiat inventore dolores consectetur quam, numquam! Illum ab
-        odit. Consectetur culpa debitis temporibus reprehenderit sequi Est aut
-        officia fuga similique rem? Ipsam rem veritatis maxime reprehenderit
-        quia in hic quos. Minima libero mollitia aperiam dolorum architecto
-        tempora Numquam perspiciatis Dolor doloribus molestias sunt nemo facilis
-        reprehenderit Nam commodi libero labore velit aut voluptates Deserunt
-        accusamus deserunt est odio magni? Nostrum repellendus eveniet labore
-        distinctio quibusdam exercitationem. Vitae debitis doloribus
+        Nick was a member of the band
+        <a href="https://scarey.org" class="decorated-link">S. Carey</a>
+        , playing guitar and contributing to albums including
+        <em>All We Grow</em>
+        and
+        <em>Range of Light</em>
+        . Nick has also contributed to music from artists
+        <a href="https://www.luraymusic.com/" class="decorated-link">Luray</a>
+        and
+        <a href="https://www.aeroflynn.org/" class="decorated-link">
+          Aero Flynn
+        </a>
+        , and was a past touring member of the band
+        <a href="https://www.aabondy.co/" class="decorated-link">A.A. Bondy</a>
+        <span>.</span>
       </p>
 
       <Links links={Object.values(site.links)} />

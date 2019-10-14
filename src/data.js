@@ -54,6 +54,11 @@ const Dad = {
   name: "Mike Ball",
 };
 
+const Heather = {
+  name: "Heather Pierce",
+  link: "http://www.heathervox.com/",
+};
+
 /**
  * Albums
  */
@@ -96,7 +101,8 @@ const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
   artwork: "/album-the-air-on-earth.jpg",
-  description: `Some description`,
+  description:
+    "<em>Good Sport</em> is the second album. Started with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.",
   date: "January 1, 2020",
   credits: [
     {
@@ -106,6 +112,14 @@ const GoodSport = registerAlbum({
     {
       credit: "Recorded at",
       source: TinyTelephone,
+    },
+    {
+      credit: "Production by",
+      source: [Me, Beau],
+    },
+    {
+      credit: "Thanks to",
+      source: [Beau, Warren, Heather, Sean, Zach, Ben, Jer, Dad, Katie],
     },
   ],
   links: [sc("the-air-on-earth"), spotify("the-air-on-earth")],
@@ -661,9 +675,10 @@ registerTrack({
 });
 
 registerTrack({
-  id: "brothers",
+  id: "good-sport",
   title: "Good Sport",
   albumId: "good-sport",
+  length: "1:30",
   credits: [
     {
       credit: "Production",
@@ -705,6 +720,7 @@ registerTrack({
   id: "sprint",
   title: "Sprint",
   albumId: "good-sport",
+  length: "6:47",
   credits: [
     {
       credit: "Pedal steel",
@@ -769,6 +785,7 @@ registerTrack({
 registerTrack({
   id: "rest",
   title: "Rest",
+  length: "5:13",
   albumId: "good-sport",
   credits: [
     {
@@ -824,6 +841,7 @@ registerTrack({
 registerTrack({
   id: "recur",
   title: "Recur",
+  length: "2:26",
   albumId: "good-sport",
   credits: [
     {
@@ -876,6 +894,7 @@ registerTrack({
 registerTrack({
   id: "run-long",
   title: "Run Long",
+  length: "7:06",
   albumId: "good-sport",
   links: [sc("run-long")],
   lyrics: [
@@ -936,6 +955,7 @@ registerTrack({
   id: "bliss",
   title: "Bliss",
   albumId: "good-sport",
+  length: "5:04",
   links: [],
   lyrics: [
     [
@@ -995,6 +1015,7 @@ registerTrack({
 registerTrack({
   id: "drone",
   title: "Drone",
+  length: "4:20",
   albumId: "good-sport",
   links: [],
   lyrics: [
@@ -1063,6 +1084,7 @@ registerTrack({
 registerTrack({
   id: "hollow",
   title: "Hollow",
+  length: "5:54",
   albumId: "good-sport",
   links: [],
   lyrics: [

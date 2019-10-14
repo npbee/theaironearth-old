@@ -9,7 +9,7 @@
     <strong>
       {@html credit.credit}
     </strong>
-    <div>
+    <div class="flex flex-wrap">
       <CreditSource source={credit.source} />
     </div>
   </section>
