@@ -92,8 +92,8 @@
 
 {#if $store.value !== 'init'}
   <div
-    class="ctr flex items-center fixed bottom-0 left-0 bg-white text-xs border-t
-    border-grey-100 border-solid h-16"
+    class="ctr flex items-center fixed bottom-0 left-0 bg-white-trans text-xs
+    h-16"
     transition:slide={{}}>
     <div class="flex items-center">
       <a href={`/album/${activeAlbum.id}`} class="album-link mr-2">
@@ -104,7 +104,7 @@
       </a>
       <div class="mr-8 flex flex-col">
         <a
-          href={`/track/${activeTrack.id}`}
+          href={`/album/${activeAlbum.id}#${activeTrack.id}`}
           class="font-semibold hover:underline">
           {activeTrack.title}
         </a>
