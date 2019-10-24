@@ -47,7 +47,7 @@
         <div class="mb-8">
           <time
             dateTime={album.date}
-            class="text-sm text-grey-400 small-caps block">
+            class="text-sm text-grey-600 small-caps block">
             {album.date}
           </time>
           <h2 class="text-3xl leading-none">{album.title}</h2>
