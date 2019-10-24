@@ -1,6 +1,6 @@
 <style>
   .earth {
-    transition: fill 200ms 200ms;
+    transition: fill 200ms;
     fill: var(--accent-high-contrast, currentColor);
   }
 </style>

@@ -17,6 +17,7 @@ module.exports = {
           800: "#323f4b",
           900: "#1f2933",
         },
+        "white-trans": "hsla(36, 64%, 99%, 0.9)",
       },
     },
     container: {
