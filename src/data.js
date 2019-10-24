@@ -1153,9 +1153,9 @@ registerTrack({
  */
 export const site = {
   links: {
-    soundcloud: sc("the-air-on-earth"),
-    bandcamp: bc("the-air-on-earth"),
-    spotify: spotify("the-air-on-earth"),
+    soundcloud: sc(""),
+    bandcamp: bc("https://theaironearth.bandcamp.com"),
+    spotify: spotify("artist/4beU4ZRfDapoH3orvpJthM"),
   },
 };
 
