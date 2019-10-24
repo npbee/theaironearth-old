@@ -27,6 +27,8 @@
     key="viewport" />
 </svelte:head>
 
+<div class="background-attachment" />
+
 <Header {segment} />
 <main class="mb-16">
   <slot />

@@ -37,7 +37,7 @@
       </div>
       <a
         href={`#${track.id}`}
-        class="border-dotted border-b-2 border-grey-100 hover:border-grey-700
+        class="border-dotted border-b-2 border-grey-600 hover:border-grey-700
         active:border-blue-600 trans">
         <span>{track.title}</span>
         <span>{track.length}</span>

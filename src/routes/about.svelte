@@ -20,7 +20,7 @@
     <div>
       <h2 class="small-caps">About</h2>
       <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
-      <p class="mb-6">
+      <p class="mb-6 " style="xbackground-color: rgba(255, 255, 255, 0.5)">
         <em>The Air on Earth</em>
         is a musical project by Nick Ball. The project attempts a wide range of
         genres with influences from artists like Explosions and the Sky, Sigur

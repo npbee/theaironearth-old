@@ -10,10 +10,16 @@ const options = {
   quality: 85,
 };
 
-convertAll();
+const [, , arg] = process.argv;
 
-async function convertAll() {
-  const jpegs = await fg(["static/img/**/*.jpg"]);
+if (arg) {
+  convertGlob(arg);
+} else {
+  convertGlob("static/img/**/*.jpg");
+}
+
+async function convertGlob(glob) {
+  const jpegs = await fg([glob]);
 
   for (let jpeg of jpegs) {
     await convert(jpeg);
