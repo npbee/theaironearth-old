@@ -22,6 +22,7 @@
     </nav>
     <nav>
       <Links
+        dimmed={true}
         links={[site.links.bandcamp, site.links.soundcloud, site.links.spotify]} />
     </nav>
   </div>

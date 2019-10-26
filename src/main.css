@@ -2,6 +2,7 @@
 
 :root {
   --accent-bg: theme("colors.grey.600");
+  --bg-contrast: hsla(0, 18%, 50%, 1);
 }
 
 * {
@@ -69,7 +70,7 @@ hr {
 @tailwind components;
 
 .icon-btn {
-  @apply flex rounded-sm text-grey-700 justify-center;
+  @apply flex rounded-sm text-grey-600 justify-center;
   transition: color 200ms;
 }
 
