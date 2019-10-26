@@ -55,7 +55,7 @@
       target="_blank"
       rel="noreferrer noopener nofollow"
       class={`icon-btn m-2 icon-btn--${link.type}`}
-      style={`${dimmed ? "color: var(--bg-contrast);" : ""}`}
+      style={`${dimmed ? 'color: var(--bg-contrast);' : ''}`}
       title={linkTitle(link)}>
       <span class="visually-hidden">{linkTitle(link)}</span>
       <svelte:component this={icon(link.type)} />
