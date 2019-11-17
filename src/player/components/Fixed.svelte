@@ -72,7 +72,7 @@
   }
   .progress .played {
     /* Svelte doesn't like fallback custom props? */
-    background-color: var(--accent-bg);
+    background-color: var(--accent-main);
     z-index: 1;
   }
   .progress .seek {

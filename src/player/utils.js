@@ -5,12 +5,12 @@ export function canPlay() {
 export function injectTrackTheme(track) {
   const theme = generateTheme(track);
 
-  setCustomProp(`--accent-bg`, theme.background);
+  setCustomProp(`--accent-main`, theme.main);
   setCustomProp(`--accent-high-contrast`, theme.highContrast);
 }
 
 export function ejectTrackTheme() {
-  removeCustomProp("--accent-bg");
+  removeCustomProp("--accent-main");
   removeCustomProp("--accent-high-contrast");
 }
 
@@ -31,39 +31,22 @@ function removeCustomProp(prop) {
 
 function generateTheme(track) {
   const { theme = {} } = track;
-  const { background, color } = theme;
+  const { main, highContrast } = theme;
+  const generatedTheme = {};
 
-  if (background && color) {
-    let alphaStops = [[0, 0], [0.2, 15], [0.3, 50], [0, 100]];
-    let styles = "linear-gradient(to bottom,";
-
-    for (let [alpha, stop] of alphaStops) {
-      styles += `${hsla(background, alpha)} ${stop}%,`;
-    }
-
-    if (styles.endsWith(",")) {
-      styles = styles.slice(0, -1);
-    }
-    styles += ")";
-
-    return {
-      gradient: styles,
-      color: hsla(color),
-      background: hsla(background),
-      highContrast: hsla(toHighContrast(background)),
-    };
+  if (main) {
+    generatedTheme.main = hsla(main);
   }
 
-  return {};
+  if (highContrast) {
+    generatedTheme.highContrast = hsla(highContrast);
+  } else {
+    generatedTheme.highContrast = hsla(main);
+  }
+
+  return generatedTheme;
 }
 
 function hsla(config, alpha = 1) {
   return `hsla(${config.h}, ${config.s}%, ${config.l}%, ${alpha})`;
-}
-
-function toHighContrast(config) {
-  return {
-    ...config,
-    l: config.l * 0.5,
-  };
 }
