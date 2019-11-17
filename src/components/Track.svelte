@@ -1,11 +1,13 @@
 <script>
   import { store } from "../player/store";
   import PlayPause from "../player/components/PlayPause.svelte";
+  import AlbumRef from "./AlbumRef.svelte";
   import Links from "./Links.svelte";
   import Credits from "./Credits.svelte";
 
   export let track;
   export let album;
+  export let albumRef = false;
 </script>
 
 <style>
@@ -43,6 +45,9 @@
         <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
         <PlayPause {store} trackId={track.id} size="2xl" />
       </div>
+      {#if albumRef === true}
+        <AlbumRef {album} />
+      {/if}
       <div class="text-grey-500">
         <Links links={track.links} />
       </div>
