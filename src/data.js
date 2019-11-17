@@ -63,7 +63,6 @@ const Heather = {
  * Albums
  */
 const TheAirOnEarth = registerAlbum({
-  accentImg: { src: "img/flowers.png", alt: "Picture of flowers" },
   title: "The Air on Earth",
   id: "the-air-on-earth",
   artwork: "/album-the-air-on-earth.jpg",
