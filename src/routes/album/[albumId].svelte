@@ -6,7 +6,6 @@
   import TrackList from "../../components/TrackList.svelte";
   import Image from "../../components/Image.svelte";
   import CreditSource from "../../components/CreditSource.svelte";
-  import FixedAccentImage from "../../components/FixedAccentImage.svelte";
   import Track from "../../components/Track.svelte";
 
   export async function preload({ params }) {
@@ -31,10 +30,6 @@
 
 <PageTransition>
   <div class="container ctr max-w-6xl">
-
-    {#if album.accentImg}
-      <FixedAccentImage alt={album.accentImg.alt} src={album.accentImg.src} />
-    {/if}
 
     <div class="flex flex-wrap -mx-2 mb-48">
       <div class="md:mr-8 md:max-w-md mb-6 w-full">
