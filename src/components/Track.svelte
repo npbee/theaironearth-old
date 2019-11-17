@@ -21,6 +21,11 @@
     z-index: -1;
     left: calc(var(--width) * 0.6 * -1);
     top: calc(var(--width) * 0.6 * -1);
+    z-index: 1;
+  }
+
+  .title h2 {
+    z-index: 2;
   }
 
   .stanza-0 p:first-of-type:first-letter {
