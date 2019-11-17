@@ -16,7 +16,7 @@ export async function streamUrlFor(trackId) {
 }
 
 async function fetchStreamUrl(trackId) {
-  if (isDev) return `/audio/the-air-on-earth/${trackId}.mp3`;
+  if (isDev) return `/audio/${trackId}.mp3`;
 
   const url = buildScUrl(
     `https://api.soundcloud.com/resolve?url=https://soundcloud.com/theaironearth/${trackId}`

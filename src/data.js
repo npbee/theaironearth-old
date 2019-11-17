@@ -171,15 +171,15 @@ registerTrack({
   ],
   length: "2:18",
   theme: {
-    background: {
-      h: 10,
+    main: {
+      h: 36,
       s: 50,
-      l: 87,
+      l: 85,
     },
-    color: {
-      h: 10,
+    highContrast: {
+      h: 36,
       s: 50,
-      l: 10,
+      l: 39,
     },
   },
 });
@@ -251,15 +251,15 @@ registerTrack({
   ],
   length: "5:38",
   theme: {
-    background: {
+    main: {
       h: 19,
       s: 50,
-      l: 82,
+      l: 72,
     },
-    color: {
+    highContrast: {
       h: 19,
-      s: 80,
-      l: 10,
+      s: 50,
+      l: 46,
     },
   },
 });
@@ -308,15 +308,10 @@ registerTrack({
     },
   ],
   theme: {
-    background: {
-      h: 10,
+    main: {
+      h: 193,
       s: 50,
-      l: 82,
-    },
-    color: {
-      h: 10,
-      s: 50,
-      l: 12,
+      l: 38,
     },
   },
 });
@@ -353,12 +348,7 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
-      h: 220,
-      s: 50,
-      l: 78,
-    },
-    color: {
+    main: {
       h: 220,
       s: 50,
       l: 28,
@@ -402,12 +392,7 @@ registerTrack({
     ["Breaking my heart", "This is how we fall in"],
   ],
   theme: {
-    background: {
-      h: 231,
-      s: 50,
-      l: 74,
-    },
-    color: {
+    main: {
       h: 231,
       s: 50,
       l: 14,
@@ -473,15 +458,15 @@ registerTrack({
     ["But I moved on"],
   ],
   theme: {
-    background: {
+    main: {
       h: 250,
       s: 50,
       l: 79,
     },
-    color: {
+    highContrast: {
       h: 250,
-      s: 70,
-      l: 10,
+      s: 50,
+      l: 59,
     },
   },
 });
@@ -542,15 +527,15 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
+    main: {
       h: 27,
       s: 50,
       l: 76,
     },
-    color: {
+    highContrast: {
       h: 27,
-      s: 70,
-      l: 20,
+      s: 50,
+      l: 42,
     },
   },
 });
@@ -606,15 +591,15 @@ registerTrack({
     ["We are never honest"],
   ],
   theme: {
-    background: {
-      h: 136,
-      s: 29,
-      l: 80,
+    main: {
+      h: 32,
+      s: 50,
+      l: 79,
     },
-    color: {
-      h: 136,
-      s: 29,
-      l: 10,
+    highContrast: {
+      h: 32,
+      s: 50,
+      l: 40,
     },
   },
 });
@@ -661,15 +646,15 @@ registerTrack({
     ["When we’re breathless", "When the love hits", "We’re all the same"],
   ],
   theme: {
-    background: {
-      h: 190,
-      s: 25,
-      l: 85,
+    main: {
+      h: 180,
+      s: 50,
+      l: 76,
     },
-    color: {
-      h: 190,
-      s: 25,
-      l: 15,
+    highContrast: {
+      h: 180,
+      s: 50,
+      l: 33,
     },
   },
 });
@@ -703,15 +688,10 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
-      h: 32,
-      s: 36,
-      l: 65,
-    },
-    color: {
-      h: 32,
-      s: 36,
-      l: 10,
+    main: {
+      h: 10.9,
+      s: 82.9,
+      l: 52,
     },
   },
 });
@@ -768,15 +748,15 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
-      h: 7,
-      s: 47,
-      l: 76,
+    main: {
+      h: 43,
+      s: 72.3,
+      l: 61.8,
     },
-    color: {
-      h: 7,
-      s: 47,
-      l: 10,
+    highContrast: {
+      h: 43,
+      s: 72.3,
+      l: 41.8,
     },
   },
 });
@@ -822,15 +802,15 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
-      h: 218,
-      s: 19,
-      l: 69,
+    main: {
+      h: 197.4,
+      s: 72.9,
+      l: 61,
     },
-    color: {
-      h: 218,
-      s: 19,
-      l: 10,
+    highContrast: {
+      h: 197.4,
+      s: 72.9,
+      l: 33,
     },
   },
 });
@@ -878,15 +858,15 @@ registerTrack({
     ],
   ],
   theme: {
-    background: {
-      h: 325,
-      s: 24,
-      l: 58,
+    main: {
+      h: 26.3,
+      s: 68.1,
+      l: 63.1,
     },
-    color: {
-      h: 325,
-      s: 24,
-      l: 18,
+    highContrast: {
+      h: 26.3,
+      s: 68.1,
+      l: 41,
     },
   },
 });
@@ -938,15 +918,15 @@ registerTrack({
     },
   ],
   theme: {
-    background: {
-      h: 304,
-      s: 52,
-      l: 25,
+    main: {
+      h: 210,
+      s: 55.7,
+      l: 76.1,
     },
-    color: {
-      h: 304,
-      s: 52,
-      l: 15,
+    highContrast: {
+      h: 210,
+      s: 55.7,
+      l: 47,
     },
   },
 });
@@ -1009,15 +989,15 @@ registerTrack({
     },
   ],
   theme: {
-    background: {
-      h: 27,
-      s: 69,
-      l: 55,
+    main: {
+      h: 21.7,
+      s: 65.1,
+      l: 58.4,
     },
-    color: {
-      h: 27,
-      s: 69,
-      l: 19,
+    highContrast: {
+      h: 21.7,
+      s: 65.1,
+      l: 44,
     },
   },
 });
@@ -1076,15 +1056,15 @@ registerTrack({
     },
   ],
   theme: {
-    background: {
-      h: 59,
-      s: 40,
-      l: 70,
+    main: {
+      h: 157.5,
+      s: 77.5,
+      l: 54.7,
     },
-    color: {
-      h: 59,
-      s: 40,
-      l: 10,
+    highContrast: {
+      h: 157.5,
+      s: 77.5,
+      l: 29,
     },
   },
 });
@@ -1144,15 +1124,15 @@ registerTrack({
     },
   ],
   theme: {
-    background: {
-      h: 184,
-      s: 29,
-      l: 63,
+    main: {
+      h: 310.3,
+      s: 56.9,
+      l: 70,
     },
-    color: {
-      h: 184,
-      s: 29,
-      l: 13,
+    highContrast: {
+      h: 310.3,
+      s: 56.9,
+      l: 49,
     },
   },
 });
