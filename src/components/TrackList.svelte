@@ -6,10 +6,16 @@
   export let store;
 
   // Workaround to support relative links in Sapper
+  // I prefer linking to the relative location in the page, but sapper will
+  // parse relative links and turn them into absolute links. So instead we
+  // start by linking to the individual track page and then use JS to link
+  // relatively. If JS is not available, we'll link to the standalone track
+  // page
   onMount(async () => {
-    [...document.querySelectorAll('a[href^="#"]')].map(
-      x => (x.href = document.location.pathname + new URL(x.href).hash)
-    );
+    [...document.querySelectorAll('a[href^="/track/"]')].map(x => {
+      const trackId = x.href.replace(/.*\/track\//g, "");
+      x.href = document.location.pathname + `#${trackId}`;
+    });
   });
 </script>
 
@@ -36,7 +42,7 @@
         <PlayPause trackId={track.id} {store} size="xl" />
       </div>
       <a
-        href={`#${track.id}`}
+        href={`/track/${track.id}`}
         class="border-dotted border-b-2 border-grey-600 hover:border-grey-700
         active:border-blue-600 trans">
         <span>{track.title}</span>
