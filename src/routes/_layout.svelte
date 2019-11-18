@@ -38,10 +38,8 @@
 
 <Header {segment} />
 
-{#if !$preloading}
-  <main class="mb-16" transition:fade={{ duration: 150 }}>
-    <slot />
-  </main>
-{/if}
+<main class="mb-16" transition:fade={{ duration: 150 }}>
+  <slot />
+</main>
 
 <Footer {store} />
