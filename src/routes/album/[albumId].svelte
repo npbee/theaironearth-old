@@ -29,7 +29,7 @@
 
 <div class="container ctr max-w-6xl">
 
-  <div class="flex flex-wrap -mx-2 mb-48">
+  <div class="flex flex-wrap mb-48">
     <div class="md:mr-8 md:max-w-md mb-6 w-full">
       <img
         src={album.artwork}
