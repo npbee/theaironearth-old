@@ -1,7 +1,12 @@
 <script>
   import Header from "../components/Header.svelte";
   import Footer from "../components/Footer.svelte";
+  import LoadingBar from "../components/LoadingBar.svelte";
   import { store } from "../player/store";
+  import { fade } from "svelte/transition";
+  import { stores } from "@sapper/app";
+
+  const { preloading } = stores();
 
   export let segment;
 </script>
@@ -27,11 +32,16 @@
     key="viewport" />
 </svelte:head>
 
+<LoadingBar {preloading} />
+
 <div class="background-attachment" />
 
 <Header {segment} />
-<main class="mb-16">
-  <slot />
-</main>
+
+{#if !$preloading}
+  <main class="mb-16" transition:fade={{ duration: 150 }}>
+    <slot />
+  </main>
+{/if}
 
 <Footer {store} />

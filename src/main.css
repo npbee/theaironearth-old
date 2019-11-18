@@ -198,6 +198,14 @@ hr {
   background-size: cover;
 }
 
+.bg-loading-base {
+  background-color: theme("colors.indigo.200");
+}
+
+.bg-loading-inner {
+  background-color: theme("colors.indigo.400");
+}
+
 @media screen and (min-width: 700px) {
   .background-attachment {
     background-position: center right;
