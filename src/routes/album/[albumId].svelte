@@ -31,7 +31,7 @@
 
   <div class="flex flex-wrap mb-48">
     <div class="md:mr-8 md:max-w-md mb-6 w-full">
-      <img
+      <Image
         src={album.artwork}
         alt={`Album artwork for ${album.title}`}
         class="rounded-sm shadow w-full" />

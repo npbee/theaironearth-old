@@ -65,7 +65,7 @@ const Heather = {
 const TheAirOnEarth = registerAlbum({
   title: "The Air on Earth",
   id: "the-air-on-earth",
-  artwork: "/album-the-air-on-earth.jpg",
+  artwork: "artwork/the-air-on-earth-front",
   date: "February 23, 2015",
   description:
     "<em>The Air on Earth</em> is a musical project chronicling the passage of time and many stages of life, both significant and not.  Written and recorded over several years, the songs themselves reflect these stages in feeling and maturity.  Sentimental and perhaps distorted, each song is a source of nostalgia and reflects a moment in time.",
@@ -99,7 +99,7 @@ const TheAirOnEarth = registerAlbum({
 const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
-  artwork: "/album-the-air-on-earth.jpg",
+  artwork: "artwork/good-sport-front",
   description:
     "<em>Good Sport</em> is the second album. Started with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.",
   date: "January 1, 2020",
@@ -662,6 +662,7 @@ registerTrack({
   id: "good-sport",
   title: "Good Sport",
   albumId: "good-sport",
+  artwork: "/artwork/good-sport-track.jpg",
   length: "1:30",
   credits: [
     {
@@ -698,6 +699,7 @@ registerTrack({
 registerTrack({
   id: "sprint",
   title: "Sprint",
+  artwork: "/artwork/sprint.jpg",
   albumId: "good-sport",
   length: "6:47",
   credits: [
@@ -765,6 +767,7 @@ registerTrack({
   title: "Rest",
   length: "5:13",
   albumId: "good-sport",
+  artwork: "/artwork/rest.jpg",
   credits: [
     {
       credit: "Bass",
@@ -819,6 +822,7 @@ registerTrack({
   title: "Recur",
   length: "2:26",
   albumId: "good-sport",
+  artwork: "/artwork/recur.jpg",
   credits: [
     {
       credit: "Nashville guitars",
@@ -875,6 +879,7 @@ registerTrack({
   title: "Run Long",
   length: "7:06",
   albumId: "good-sport",
+  artwork: "/artwork/run-long.jpg",
   links: [sc("run-long")],
   lyrics: [
     [
@@ -934,6 +939,7 @@ registerTrack({
   id: "bliss",
   title: "Bliss",
   albumId: "good-sport",
+  artwork: "/artwork/bliss.jpg",
   length: "5:04",
   links: [],
   lyrics: [
@@ -1006,6 +1012,7 @@ registerTrack({
   title: "Drone",
   length: "4:20",
   albumId: "good-sport",
+  artwork: "/artwork/drone.jpg",
   links: [],
   lyrics: [
     [
@@ -1073,6 +1080,7 @@ registerTrack({
   title: "Hollow",
   length: "5:54",
   albumId: "good-sport",
+  artwork: "/artwork/hollow.jpg",
   links: [],
   lyrics: [
     [

@@ -104,11 +104,11 @@
       <picture>
         <source
           type="image/webp"
-          srcset={inview ? `img/large/${src}.webp` : `img/tiny/${src}.webp`}
+          srcset={inview ? `img/large/${src}.webp` : `img/tiny/${src}.jpg`}
           media="(min-width: 1200px)" />
         <source
           type="image/webp"
-          srcset={inview ? `img/medium/${src}.webp` : `img/tiny/${src}.webp`}
+          srcset={inview ? `img/medium/${src}.webp` : `img/tiny/${src}.jpg`}
           media="(min-width: 740px)" />
 
         <source
