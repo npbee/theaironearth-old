@@ -34,6 +34,7 @@
       <Image
         src={album.artwork}
         alt={`Album artwork for ${album.title}`}
+        ratio="100%"
         class="rounded-sm shadow w-full" />
     </div>
     <div class="flex-grow my-auto">
@@ -62,7 +63,7 @@
     </div>
   </div>
 
-  {#each album.imgs as img}
+  {#each album.imgs.slice(0, 1) as img}
     <div class="mb-16 md:mb-32">
       {#if img.size === 'full'}
         <div class="breakout">
@@ -82,6 +83,24 @@
 
   {#each album.tracks as track}
     <Track {track} {album} />
+  {/each}
+
+  {#each album.imgs.slice(1) as img}
+    <div class="mb-16 md:mb-32">
+      {#if img.size === 'full'}
+        <div class="breakout">
+          <Image src={img.src} alt={img.alt} ratio={img.ratio} />
+        </div>
+      {:else}
+        <Image src={img.src} alt={img.alt} ratio={img.ratio} />
+      {/if}
+      {#if img.credit}
+        <p class="text-sm mt-2 text-grey-400">
+          Photo by:
+          <CreditSource source={img.credit} />
+        </p>
+      {/if}
+    </div>
   {/each}
 
 </div>

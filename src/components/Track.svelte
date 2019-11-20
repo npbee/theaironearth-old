@@ -4,6 +4,7 @@
   import AlbumRef from "./AlbumRef.svelte";
   import Links from "./Links.svelte";
   import Credits from "./Credits.svelte";
+  import Image from "./Image.svelte";
 
   export let track;
   export let album;
@@ -17,14 +18,9 @@
 
   .artwork {
     display: block;
-    --width: 300px;
-    /* position: absolute; */
-    /* width: var(--width); */
-    opacity: 0.9;
+    opacity: 1;
     z-index: -1;
-    /* left: calc(var(--width) * 1.1 * -1); */
     right: 0;
-    top: 0;
     top: calc(var(--width) * 0.3 * -1);
     z-index: 1;
   }
@@ -43,10 +39,12 @@
 <div id={track.id} class="py-24">
   <div class="container ctr mb-12">
     <div class="mb-12 relative">
-      <img
-        class="artwork shadow mb-4 md:absolute w-full md:w-1/3"
-        src={track.artwork || album.artwork}
-        alt={`Artwork for ${track.title}`} />
+      <div class="artwork shadow mb-4 md:absolute w-full md:w-1/3">
+        <Image
+          ratio="100%"
+          src={track.artwork || album.artwork}
+          alt={`Artwork for ${track.title}`} />
+      </div>
       <div class="title flex items-baseline">
         <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
         <PlayPause {store} trackId={track.id} size="2xl" />
