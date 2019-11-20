@@ -15,14 +15,17 @@
     position: relative;
   }
 
-  .title img {
-    --width: 100px;
-    position: absolute;
-    width: var(--width);
-    opacity: 0.4;
+  .artwork {
+    display: block;
+    --width: 300px;
+    /* position: absolute; */
+    /* width: var(--width); */
+    opacity: 0.9;
     z-index: -1;
-    left: calc(var(--width) * 0.6 * -1);
-    top: calc(var(--width) * 0.6 * -1);
+    /* left: calc(var(--width) * 1.1 * -1); */
+    right: 0;
+    top: 0;
+    top: calc(var(--width) * 0.3 * -1);
     z-index: 1;
   }
 
@@ -39,9 +42,12 @@
 
 <div id={track.id} class="py-24">
   <div class="container ctr mb-12">
-    <div class="mb-12">
+    <div class="mb-12 relative">
+      <img
+        class="artwork shadow mb-4 md:absolute w-full md:w-1/3"
+        src={track.artwork || album.artwork}
+        alt={`Artwork for ${track.title}`} />
       <div class="title flex items-baseline">
-        <img src={album.artwork} alt={`Album artwork for ${album.title}`} />
         <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
         <PlayPause {store} trackId={track.id} size="2xl" />
       </div>
