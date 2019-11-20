@@ -662,7 +662,7 @@ registerTrack({
   id: "good-sport",
   title: "Good Sport",
   albumId: "good-sport",
-  artwork: "/artwork/good-sport-track.jpg",
+  artwork: "artwork/good-sport-track",
   length: "1:30",
   credits: [
     {
@@ -699,7 +699,7 @@ registerTrack({
 registerTrack({
   id: "sprint",
   title: "Sprint",
-  artwork: "/artwork/sprint.jpg",
+  artwork: "artwork/sprint",
   albumId: "good-sport",
   length: "6:47",
   credits: [
@@ -767,7 +767,7 @@ registerTrack({
   title: "Rest",
   length: "5:13",
   albumId: "good-sport",
-  artwork: "/artwork/rest.jpg",
+  artwork: "artwork/rest",
   credits: [
     {
       credit: "Bass",
@@ -822,7 +822,7 @@ registerTrack({
   title: "Recur",
   length: "2:26",
   albumId: "good-sport",
-  artwork: "/artwork/recur.jpg",
+  artwork: "artwork/recur",
   credits: [
     {
       credit: "Nashville guitars",
@@ -879,7 +879,7 @@ registerTrack({
   title: "Run Long",
   length: "7:06",
   albumId: "good-sport",
-  artwork: "/artwork/run-long.jpg",
+  artwork: "artwork/run-long",
   links: [sc("run-long")],
   lyrics: [
     [
@@ -939,7 +939,7 @@ registerTrack({
   id: "bliss",
   title: "Bliss",
   albumId: "good-sport",
-  artwork: "/artwork/bliss.jpg",
+  artwork: "artwork/bliss",
   length: "5:04",
   links: [],
   lyrics: [
@@ -1012,7 +1012,7 @@ registerTrack({
   title: "Drone",
   length: "4:20",
   albumId: "good-sport",
-  artwork: "/artwork/drone.jpg",
+  artwork: "artwork/drone",
   links: [],
   lyrics: [
     [
@@ -1080,7 +1080,7 @@ registerTrack({
   title: "Hollow",
   length: "5:54",
   albumId: "good-sport",
-  artwork: "/artwork/hollow.jpg",
+  artwork: "artwork/hollow",
   links: [],
   lyrics: [
     [

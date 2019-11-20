@@ -1,5 +1,6 @@
 <script>
   import Links from "../components/Links.svelte";
+  import Image from "../components/Image.svelte";
   import { albums } from "../data";
 </script>
 
@@ -13,9 +14,9 @@
 <section class="ctr flex flex-col md:flex-row flex-wrap md:justify-around">
   {#each Object.values(albums) as album}
     <div class="flex flex-col w-full md:max-w-sm mb-24 md:mr-8 md:mb-0">
-      <a href={`/album/${album.id}`} class="mb-6">
-        <img
-          class="rounded-sm shadow"
+      <a href={`/album/${album.id}`} class="mb-6 rounded-sm shadow">
+        <Image
+          ratio="100%"
           src={album.artwork}
           alt={`Album artwork for ${album.title}`} />
       </a>

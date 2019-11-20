@@ -99,7 +99,7 @@
       <a href={`/album/${activeAlbum.id}`} class="album-link mr-2">
         <img
           class="w-12"
-          src={activeAlbum.artwork}
+          src={`img/${activeAlbum.artwork}.jpg`}
           alt={`Album artwork for ${activeAlbum.title}`} />
       </a>
       <div class="mr-8 flex flex-col">
