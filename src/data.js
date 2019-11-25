@@ -47,7 +47,7 @@ const Jer = {
 
 const Warren = {
   name: "Warren Lain",
-  link: "https://www.youtube.com/user/warrenmusic",
+  link: "https://warrenlain.com/",
 };
 
 const Dad = {
@@ -101,7 +101,7 @@ const GoodSport = registerAlbum({
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
   description:
-    "<em>Good Sport</em> is the second album. Started with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.",
+    "<p class='mb-6'><em>Good Sport</em> is the second album by <em>The Air on Earth</em>. Kicked off with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.</p><p class='mb-6'><em>Good Sport</em> was written primarily in a quiet apartment in San Francisco, opting to incorporate more synths and drum machines that could be played back in headphones without disturbing neighbors or a sleeping spouse.</p><p>A small evolution from <em>The Air on Earth</em>, but hopefully in the right direction.</p>",
   date: "January 1, 2020",
   credits: [
     {
@@ -770,7 +770,7 @@ registerTrack({
   artwork: "artwork/rest",
   credits: [
     {
-      credit: "Bass",
+      credit: "Bass / Synths",
       source: Jer,
     },
     {
@@ -1239,7 +1239,7 @@ function registerAlbum(props) {
   return Album;
 }
 
-export const playlistOrder = [/*GoodSport*/ TheAirOnEarth].reduce(
+export const playlistOrder = [GoodSport, TheAirOnEarth].reduce(
   (list, album) => {
     list.push(...album.tracks.map(track => track.id));
     return list;
