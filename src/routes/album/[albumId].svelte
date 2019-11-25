@@ -30,12 +30,11 @@
 <div class="container ctr max-w-6xl">
 
   <div class="flex flex-wrap mb-48">
-    <div class="md:mr-8 md:max-w-md mb-6 w-full">
+    <div class="md:mr-8 md:max-w-md mb-6 w-full rounded-sm shadow w-full">
       <Image
         src={album.artwork}
         alt={`Album artwork for ${album.title}`}
-        ratio="100%"
-        class="rounded-sm shadow w-full" />
+        ratio="100%" />
     </div>
     <div class="flex-grow my-auto">
       <div class="mb-8">
