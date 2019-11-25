@@ -1,9 +1,4 @@
 <script>
-  import Soundcloud from "./icons/Soundcloud.svelte";
-  import Spotify from "./icons/Spotify.svelte";
-  import Bandcamp from "./icons/Bandcamp.svelte";
-  import AppleMusic from "./icons/AppleMusic.svelte";
-
   export let links;
   export let category = "quick";
   export let dimmed = false;
@@ -23,19 +18,8 @@
     }
   }
 
-  function icon(type) {
-    switch (type) {
-      case "soundcloud":
-        return Soundcloud;
-      case "spotify":
-        return Spotify;
-      case "bandcamp":
-        return Bandcamp;
-      case "apple-music":
-        return AppleMusic;
-      default:
-        throw new Error(`No icon defined for link type ${type}`);
-    }
+  function iconPath(type) {
+    return `#${type}`;
   }
 
   const quickLinks = links.filter(link => link.type !== "apple-music");
@@ -57,7 +41,9 @@
       class={`icon-btn m-2 icon-btn--${link.type}`}
       title={linkTitle(link)}>
       <span class="visually-hidden">{linkTitle(link)}</span>
-      <svelte:component this={icon(link.type)} />
+      <svg>
+        <use xlink:href={iconPath(link.type)} />
+      </svg>
     </a>
   {/each}
 </div>

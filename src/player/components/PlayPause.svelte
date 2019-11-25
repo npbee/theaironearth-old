@@ -44,9 +44,13 @@
     {#if isBusy}
       <Loader />
     {:else if isPlaying}
-      <PauseIcon />
+      <svg>
+        <use xlink:href="#pause" />
+      </svg>
     {:else}
-      <PlayIcon />
+      <svg>
+        <use xlink:href="#play" />
+      </svg>
     {/if}
   </button>
 {/if}
