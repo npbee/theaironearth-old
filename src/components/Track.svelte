@@ -37,8 +37,8 @@
 </style>
 
 <div id={track.id} class="py-24">
-  <div class="container ctr mb-12">
-    <div class="mb-12 relative">
+  <div class="container mb-12">
+    <div class="mb-8 relative">
       <div class="artwork shadow mb-4 md:absolute w-full md:w-1/3">
         <Image
           ratio="100%"
