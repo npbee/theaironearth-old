@@ -5,6 +5,7 @@
   import { store } from "../player/store";
   import { fade } from "svelte/transition";
   import { stores } from "@sapper/app";
+  import SvgSprite from "../components/Icons.svelte";
 
   const { preloading } = stores();
 
@@ -31,6 +32,8 @@
     content="initial-scale=1.0, width=device-width"
     key="viewport" />
 </svelte:head>
+
+<SvgSprite />
 
 <LoadingBar {preloading} />
 
