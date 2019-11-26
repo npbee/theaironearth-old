@@ -19,7 +19,7 @@
     "check:format": "npm run prettier -- --check",
     "check:lint": "eslint src",
     "check": "run-p check:**",
-    "serve:build": "serve __sapper__/export"
+    "serve:build": "netlify dev -c 'serve __sapper__/export -l 3000'"
   },
   "bundlesize": [
     {
