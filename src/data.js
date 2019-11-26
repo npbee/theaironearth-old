@@ -67,8 +67,9 @@ const TheAirOnEarth = registerAlbum({
   id: "the-air-on-earth",
   artwork: "artwork/the-air-on-earth-front",
   date: "February 23, 2015",
-  description:
+  description: [
     "<em>The Air on Earth</em> is a musical project chronicling the passage of time and many stages of life, both significant and not.  Written and recorded over several years, the songs themselves reflect these stages in feeling and maturity.  Sentimental and perhaps distorted, each song is a source of nostalgia and reflects a moment in time.",
+  ],
   credits: [
     {
       credit: "Written and recorded by",
@@ -100,8 +101,11 @@ const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
-  description:
-    "<p class='mb-6'><em>Good Sport</em> is the second album by <em>The Air on Earth</em>. Kicked off with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.</p><p class='mb-6'><em>Good Sport</em> was written primarily in a quiet apartment in San Francisco, opting to incorporate more synths and drum machines that could be played back in headphones without disturbing neighbors or a sleeping spouse.</p><p>A small evolution from <em>The Air on Earth</em>, but hopefully in the right direction.</p>",
+  description: [
+    "<em>Good Sport</em> is the second album by <em>The Air on Earth</em>. Kicked off with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.",
+    "<em>Good Sport</em> was written primarily in a quiet apartment in San Francisco, opting to incorporate more synths and drum machines that could be played back in headphones without disturbing neighbors or a sleeping spouse.",
+    "A small evolution from <em>The Air on Earth</em>, but hopefully in the right direction.",
+  ],
   date: "January 1, 2020",
   credits: [
     {
