@@ -39,12 +39,14 @@
 <div id={track.id} class="py-24">
   <div class="container mb-12">
     <div class="mb-8 relative">
-      <div class="artwork shadow mb-4 md:absolute w-full md:w-1/3">
-        <Image
-          ratio="100%"
-          src={track.artwork || album.artwork}
-          alt={`Artwork for ${track.title}`} />
-      </div>
+      {#if track.artwork}
+        <div class="artwork shadow mb-4 md:absolute w-full md:w-1/3">
+          <Image
+            ratio="100%"
+            src={track.artwork}
+            alt={`Artwork for ${track.title}`} />
+        </div>
+      {/if}
       <div class="title flex items-baseline">
         <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
         <PlayPause {store} trackId={track.id} size="2xl" />
