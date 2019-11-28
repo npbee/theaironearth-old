@@ -214,7 +214,7 @@ function assign(assignment) {
 }
 
 function runAssignment(assignment, context, event) {
-  let nextContext = { ...context };
+  let nextContext = Object.assign({}, context);
 
   Object.keys(assignment).forEach(key => {
     nextContext[key] = assignment[key](context, event);

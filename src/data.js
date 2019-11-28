@@ -1195,18 +1195,20 @@ function ap(url) {
 }
 
 function registerTrack(props) {
-  const { id, title, ...rest } = props;
+  const { id, title } = props;
 
-  const Track = {
-    type: "track",
-    id,
-    title,
-    lyrics: [],
-    links: [],
-    credits: [],
-    albumId: null,
-    ...rest,
-  };
+  const Track = Object.assign(
+    {
+      type: "track",
+      id,
+      title,
+      lyrics: [],
+      links: [],
+      credits: [],
+      albumId: null,
+    },
+    props
+  );
 
   if (!tracks[id]) {
     tracks[id] = Track;
@@ -1222,19 +1224,21 @@ function registerTrack(props) {
 }
 
 function registerAlbum(props) {
-  const { id, title, ...rest } = props;
-  const Album = {
-    type: "album",
-    id,
-    title,
-    tracks: [],
-    artwork: null,
-    description: "",
-    date: null,
-    credits: [],
-    links: [],
-    ...rest,
-  };
+  const { id, title } = props;
+  const Album = Object.assign(
+    {
+      type: "album",
+      id,
+      title,
+      tracks: [],
+      artwork: null,
+      description: "",
+      date: null,
+      credits: [],
+      links: [],
+    },
+    props
+  );
 
   if (!albums[id]) {
     albums[id] = Album;
@@ -1252,8 +1256,9 @@ export const playlistOrder = [GoodSport, TheAirOnEarth].reduce(
 );
 
 export function preloadAlbums(tracks) {
-  return Object.values(tracks).map(track => ({
-    ...track,
-    album: albums[track.albumId],
-  }));
+  return Object.values(tracks).map(track =>
+    Object.assign({}, track, {
+      album: albums[track.albumId],
+    })
+  );
 }
