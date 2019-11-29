@@ -17,12 +17,8 @@
   }
 
   .artwork {
-    display: block;
-    opacity: 1;
-    z-index: -1;
     right: 0;
-    top: calc(var(--width) * 0.3 * -1);
-    z-index: 1;
+    top: -80px;
   }
 
   .title h2 {
