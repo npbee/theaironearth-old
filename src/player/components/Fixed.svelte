@@ -11,7 +11,7 @@
   $: activeAlbum = albums[activeTrack && activeTrack.albumId];
   $: percentPlayed = $store.context.percentPlayed;
   $: currentTime = formatTime($store.context.currentTime);
-  $: duration = $store.context.duration;
+  $: duration = $store.context.duration || 0;
   $: formattedDuration = formatTime($store.context.duration);
   $: isErrored = $store.value === "error-playing";
   $: scLink = activeTrack.links.find(link => link.type === "soundcloud");

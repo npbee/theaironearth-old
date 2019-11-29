@@ -53,6 +53,7 @@ export const machine = FSM({
         started: "playing",
         "play-track": "loading",
         failed: "error-playing",
+        ready: "stopped",
       },
     },
     "error-playing": {
@@ -166,8 +167,14 @@ async function play(context) {
     };
     audio.addEventListener("ended", onEnd);
   } catch (err) {
-    log.error(err);
-    send("failed");
+
+    // Safari wants another user-initiated click to actually start the audio
+    if (err.name === "NotAllowedError") {
+      send("ready");
+    } else {
+      log.error(err);
+      send("failed");
+    }
   }
 }
 
@@ -197,7 +204,7 @@ function updateCurrentTime(_context, evt) {
 function updateDuration(_context, evt) {
   const { duration } = evt;
 
-  return duration;
+  return Number.isNaN(duration) ? 0 : duration;
 }
 
 function updatePercentPlayed(_context, evt) {

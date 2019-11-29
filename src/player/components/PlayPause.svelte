@@ -1,6 +1,4 @@
 <script>
-  import PlayIcon from "./Play.svelte";
-  import PauseIcon from "./Pause.svelte";
   import Loader from "../../components/icons/Loader.svelte";
   import { send } from "../store";
   import { canPlay } from "../utils";
