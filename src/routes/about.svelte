@@ -13,8 +13,7 @@
 
 <section class="ctr flex flex-col md:flex-row">
   <figure class="mb-4 md:mr-8 md:-mx-6 md:w-3/5" style="max-width: none">
-    <!--<Image src="about" alt="The Air on Earth promotional picture" />-->
-    <img src="img/about.jpg" alt="The Air on Earth promotional picture" />
+    <Image src="about" alt="Picture of Nick Ball from The Air on Earth" />
   </figure>
   <div>
     <h2 class="small-caps">About</h2>
