@@ -92,8 +92,8 @@
 
 {#if $store.value !== 'init'}
   <div
-    class="ctr flex items-center fixed bottom-0 left-0 bg-white-trans text-xs
-    h-16"
+    class="ctr flex items-center justify-between fixed bottom-0 left-0
+    bg-white-trans text-xs h-16"
     transition:slide={{}}>
     <div class="flex items-center">
       <a href={`/album/${activeAlbum.id}`} class="album-link mr-2">
@@ -129,7 +129,7 @@
       </div>
     {:else}
       <div
-        class="progress flex-1 mr-8"
+        class="progress flex-1 mr-8 hidden md:block"
         on:mouseover={trackMouseSeek}
         on:mouseleave={untrackMouseSeek}
         on:click={seek}
@@ -147,18 +147,18 @@
     {/if}
     <div class="flex items-center">
       <button
-        class="mr-3 icon-btn text-sm"
+        class="mr-4 md:mr-3 icon-btn text-lg md:text-sm"
         on:click={() => send({
             type: 'play-track',
             trackId: prevTrack(activeTrack.id),
           })}>
         <PrevIcon />
       </button>
-      <div class="mr-3">
-        <PlayPause trackId={activeTrack.id} {store} size="2xl" />
+      <div class="mr-4 md:mr-3 text-4xl md:text-2xl">
+        <PlayPause trackId={activeTrack.id} {store} size="" />
       </div>
       <button
-        class="icon-btn text-sm"
+        class="icon-btn text-lg md:text-sm"
         on:click={() => send({
             type: 'play-track',
             trackId: nextTrack(activeTrack.id),
