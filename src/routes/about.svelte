@@ -21,10 +21,35 @@
     <p class="mb-6 ">
       The Air on Earth is a musical project by Nick Ball. With no particular
       genre in mind the music takes on the shape of personal influences built up
-      over time, including Talk Talk, Radiohead, Explosions in the Sky, Sigur
-      Rós, Jon Hopkins, and Bon Iver. You'll hear vocal harmonies, delayed
-      guitars, drone-y synths, pianos, electronic drums, found percussion, and
-      sometimes even trombones. Long songs are not uncommon.
+      over time, including
+      <a class="decorated-link" href="https://www.talktalk.co.uk/">Talk Talk</a>
+      ,
+      <a href="https://www.radiohead.com/deadairspace" class="decorated-link">
+        Radiohead
+      </a>
+      ,
+      <a href="http://www.explosionsinthesky.com/" class="decorated-link">
+        Explosions in the Sky
+      </a>
+      ,
+      <a href="https://sigurros.com/" class="decorated-link">Sigur Rós</a>
+      ,
+      <a href="http://www.halloweenalaska.com/" class="decorated-link">
+        Halloween, Alaska
+      </a>
+      ,
+      <a href="http://www.americanfootballmusic.com/" class="decorated-link">
+        American Footabll
+      </a>
+      ,
+      <a href="http://www.jonhopkins.co.uk/" class="decorated-link">
+        Jon Hopkins
+      </a>
+      , and
+      <a href="https://boniver.org/" class="decorated-link">Bon Iver</a>
+      . You'll hear vocal harmonies, delayed guitars, drone-y synths, pianos,
+      electronic drums, found percussion, and sometimes even trombones. Long
+      songs are not uncommon.
     </p>
     <p class="mb-6">
       Nick was a member of the band
