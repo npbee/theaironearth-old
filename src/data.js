@@ -102,9 +102,10 @@ const GoodSport = registerAlbum({
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
   description: [
-    "<em>Good Sport</em> is the second album by <em>The Air on Earth</em>. Kicked off with a nudge from a friend and recorded over a period of a year at Tiny Telephone studios in San Francisco, <em>Good Sport</em> is about life, family, and priorities.",
-    "<em>Good Sport</em> was written primarily in a quiet apartment in San Francisco, opting to incorporate more synths and drum machines that could be played back in headphones without disturbing neighbors or a sleeping spouse.",
-    "A small evolution from <em>The Air on Earth</em>, but hopefully in the right direction.",
+    "<em>Good Sport</em> is the second album by The Air on Earth. Kicked off with a wedding gift from a friend, <em>Good Sport</em> was recorded over a year-long period at Tiny Telephone studios in San Francisco.",
+    "Primarily constrained to headphones, <em>Good Sport</em> explores synthesizers, electronic percussion, and intricately composed ambient details combined with pianos, layered vocals, and found sound.",
+    "<em>Good Sport</em> was shaped by the amazing people who contributed, including engineer/producer Beau Sorenson, an array of talented San Francisco and midwest friends, and even family.",
+    "This album is about life, family and priorities.",
   ],
   date: "January 1, 2020",
   credits: [
