@@ -13,10 +13,13 @@
       href={source.link}>
       {source.name}
     </a>
+    <span class="mr-1">
+      {#if idx < sources.length - 1},{/if}
+    </span>
   {:else}
     <span class="source">{source.name}</span>
-  {/if}
-  {#if idx !== sources.length - 1}
-    <span>,&nbsp;</span>
+    <span class="mr-1">
+      {#if idx < sources.length - 1},{/if}
+    </span>
   {/if}
 {/each}

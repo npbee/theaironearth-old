@@ -59,6 +59,11 @@ const Heather = {
   link: "http://www.heathervox.com/",
 };
 
+const Ivo = {
+  name: "Ivo Matić",
+  link: "https://ivomatic.com/",
+};
+
 /**
  * Albums
  */
@@ -101,6 +106,11 @@ const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
+  extraArtwork: {
+    src: "artwork/good-sport-booklet.pdf",
+    name: "Artwork Booklet",
+    size: "29.7MB",
+  },
   description: [
     "<em>Good Sport</em> is the second album by The Air on Earth. Kicked off with a wedding gift from a friend, <em>Good Sport</em> was recorded over a year-long period at Tiny Telephone studios in San Francisco.",
     "Primarily constrained to headphones, <em>Good Sport</em> explores synthesizers, electronic percussion, and intricately composed ambient details combined with pianos, layered vocals, and found sound.",
@@ -110,20 +120,32 @@ const GoodSport = registerAlbum({
   date: "January 1, 2020",
   credits: [
     {
-      credit: "Engineered by",
+      credit: "Engineered and mixed by",
       source: Beau,
+    },
+    {
+      credit: "Mastered by",
+      source: Zach,
     },
     {
       credit: "Recorded at",
       source: TinyTelephone,
     },
     {
+      credit: "Artwork by",
+      source: Ivo,
+    },
+    {
       credit: "Production by",
       source: [Me, Beau],
     },
     {
+      credit: "Performed by",
+      source: [Me, Sean, Jer, Ben, Warren, Dad],
+    },
+    {
       credit: "Thanks to",
-      source: [Beau, Warren, Heather, Sean, Zach, Ben, Jer, Dad, Katie],
+      source: [Beau, Warren, Heather, Sean],
     },
   ],
   links: [sc("the-air-on-earth"), spotify("the-air-on-earth")],
