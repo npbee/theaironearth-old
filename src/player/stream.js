@@ -7,7 +7,7 @@ export async function streamUrlFor(trackId) {
     return cache[trackId];
   }
 
-  const url = await fetchStreamUrl(trackId);
+  const url = `/audio/${trackId}.mp3`;
 
   // eslint-disable-next-line
   cache[trackId] = url;
