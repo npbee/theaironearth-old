@@ -1,3 +1,4 @@
 static/img/** filter=lfs diff=lfs merge=lfs -text
 static/audio/** filter=lfs diff=lfs merge=lfs -text
+static/artwork/** filter=lfs diff=lfs merge=lfs -text
 . text !filter !merge !diff

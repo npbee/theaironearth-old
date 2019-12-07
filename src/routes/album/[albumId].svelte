@@ -30,13 +30,30 @@
 <div class="container ctr max-w-6xl">
 
   <div class="flex flex-wrap mb-48">
-    <div class="md:mr-8 md:max-w-md mb-6 w-full rounded-sm shadow w-full">
-      <Image
-        src={album.artwork}
-        alt={`Album artwork for ${album.title}`}
-        ratio="100%" />
+    <div class="md:mr-8 md:max-w-md mb-6 w-full">
+      <div class="rounded-sm shadow">
+        <Image
+          src={album.artwork}
+          alt={`Album artwork for ${album.title}`}
+          ratio="100%" />
+      </div>
+      {#if album.extraArtwork}
+        <a
+          href={album.extraArtwork.src}
+          target="_blank"
+          rel="noreferrer noopener nofollow"
+          class="flex py-4 items-center justify-center underline text-sm
+          text-grey-600 hover:text-grey-900 trans">
+          <span class="mr-1">
+            {album.extraArtwork.name} ({album.extraArtwork.size})
+          </span>
+          <svg class="fill-current" style="width: 1em; height: 1em;">
+            <use xlink:href="#link-icon" />
+          </svg>
+        </a>
+      {/if}
     </div>
-    <div class="flex-grow my-auto">
+    <div class="flex-grow py-2">
       <div class="mb-8">
         <time
           dateTime={album.date}
