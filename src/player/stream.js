@@ -1,3 +1,3 @@
-export async function streamUrlFor(trackId) {
+export function streamUrlFor(trackId) {
   return `/audio/${trackId}.mp3`;
 }
