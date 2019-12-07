@@ -2,7 +2,7 @@ import { FSM } from "@xstate/fsm";
 import { writable } from "svelte/store";
 import log from "loglevel";
 import * as Data from "../data";
-import { streamUrlFor } from "./sc";
+import { streamUrlFor } from "./stream";
 import { injectTrackTheme } from "./utils";
 
 export const machine = FSM({
@@ -167,7 +167,6 @@ async function play(context) {
     };
     audio.addEventListener("ended", onEnd);
   } catch (err) {
-
     // Safari wants another user-initiated click to actually start the audio
     if (err.name === "NotAllowedError") {
       send("ready");
