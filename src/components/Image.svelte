@@ -37,6 +37,23 @@
       return () => observer.unobserve(node);
     }
   }
+
+  function url(transform, src) {
+    return `https://res.cloudinary.com/dhhjogfy6/image/upload/${transform}/v1575831765/img/${src}`;
+  }
+
+  function largeUrl(src) {
+    return url("w_1200", src);
+  }
+  function medUrl(src) {
+    return url("w_800", src);
+  }
+  function smallUrl(src) {
+    return url("w_500", src);
+  }
+  function tinyUrl(src) {
+    return url("w_20", src);
+  }
 </script>
 
 <style>
@@ -90,37 +107,37 @@
 
     <noscript>
       <picture>
-        <source srcset={`img/large/${src}.jpg`} media="(min-width: 1200px)" />
-        <source srcset={`img/medium/${src}.jpg`} media="(min-width: 740px)" />
-        <img class="main" src={`img/small/${src}.jpg`} {alt} />
+        <source srcset={largeUrl(`${src}.jpg`)} media="(min-width: 1200px)" />
+        <source srcset={medUrl(`${src}.jpg`)} media="(min-width: 740px)" />
+        <img class="main" src={smallUrl(`${src}.jpg`)} {alt} />
       </picture>
     </noscript>
 
     <div style={`width: 100%; padding-bottom: ${ratio}`} />
 
     <div style={`display: ${js ? 'block' : 'none'}`}>
-      <img class="placeholder blur" src={`img/tiny/${src}.jpg`} {alt} />
+      <img class="placeholder blur" src={tinyUrl(`${src}.jpg`)} {alt} />
 
       <picture>
         <source
           type="image/webp"
-          srcset={inview ? `img/large/${src}.webp` : `img/tiny/${src}.jpg`}
+          srcset={inview ? largeUrl(`${src}.webp`) : tinyUrl(`${src}.jpg`)}
           media="(min-width: 1200px)" />
         <source
           type="image/webp"
-          srcset={inview ? `img/medium/${src}.webp` : `img/tiny/${src}.jpg`}
+          srcset={inview ? medUrl(`${src}.webp`) : tinyUrl(`${src}.jpg`)}
           media="(min-width: 740px)" />
 
         <source
-          srcset={inview ? `img/large/${src}.jpg` : `img/tiny/${src}.jpg`}
+          srcset={inview ? largeUrl(`${src}.jpg`) : tinyUrl(`${src}.jpg`)}
           media="(min-width: 1200px)" />
         <source
-          srcset={inview ? `img/medium/${src}.jpg` : `img/tiny/${src}.jpg`}
+          srcset={inview ? medUrl(`${src}.jpg`) : tinyUrl(`${src}.jpg`)}
           media="(min-width: 740px)" />
         <img
           class="main blur"
           use:load
-          src={inview ? `img/small/${src}.jpg` : `img/tiny/${src}.jpg`}
+          src={inview ? smallUrl(`${src}.jpg`) : tinyUrl(`${src}.jpg`)}
           {alt} />
       </picture>
     </div>
