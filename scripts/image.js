@@ -1,6 +1,8 @@
 /**
  * Converts images within the `static/img` folder to webp.  This should be done
  * before deploying with the results committed to the repo
+ *
+ * NOTE: Decided not to use this for now in favor of Cloudinary, but leaving it here.
  */
 const mkdirp = require("mkdirp");
 const path = require("path");
@@ -8,8 +10,6 @@ const sharp = require("sharp");
 const fg = require("fast-glob");
 const fs = require("fs");
 const { promisify } = require("util");
-
-const copyFile = promisify(fs.copyFile);
 
 const options = {
   quality: 85,
