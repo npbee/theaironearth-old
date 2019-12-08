@@ -7,5 +7,3 @@ yarn-error.log
 .env
 /static/global.css
 
-# Local Netlify folder
-.netlify
