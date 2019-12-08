@@ -90,37 +90,41 @@
 
     <noscript>
       <picture>
-        <source srcset={`img/large/${src}.jpg`} media="(min-width: 1200px)" />
-        <source srcset={`img/medium/${src}.jpg`} media="(min-width: 740px)" />
-        <img class="main" src={`img/small/${src}.jpg`} {alt} />
+        <source
+          srcset={`img-opt/large/${src}.jpg`}
+          media="(min-width: 1200px)" />
+        <source
+          srcset={`img-opt/medium/${src}.jpg`}
+          media="(min-width: 740px)" />
+        <img class="main" src={`img-opt/small/${src}.jpg`} {alt} />
       </picture>
     </noscript>
 
     <div style={`width: 100%; padding-bottom: ${ratio}`} />
 
     <div style={`display: ${js ? 'block' : 'none'}`}>
-      <img class="placeholder blur" src={`img/tiny/${src}.jpg`} {alt} />
+      <img class="placeholder blur" src={`img-opt/tiny/${src}.jpg`} {alt} />
 
       <picture>
         <source
           type="image/webp"
-          srcset={inview ? `img/large/${src}.webp` : `img/tiny/${src}.jpg`}
+          srcset={inview ? `img-opt/large/${src}.webp` : `img-opt/tiny/${src}.jpg`}
           media="(min-width: 1200px)" />
         <source
           type="image/webp"
-          srcset={inview ? `img/medium/${src}.webp` : `img/tiny/${src}.jpg`}
+          srcset={inview ? `img-opt/medium/${src}.webp` : `img-opt/tiny/${src}.jpg`}
           media="(min-width: 740px)" />
 
         <source
-          srcset={inview ? `img/large/${src}.jpg` : `img/tiny/${src}.jpg`}
+          srcset={inview ? `img-opt/large/${src}.jpg` : `img-opt/tiny/${src}.jpg`}
           media="(min-width: 1200px)" />
         <source
-          srcset={inview ? `img/medium/${src}.jpg` : `img/tiny/${src}.jpg`}
+          srcset={inview ? `img-opt/medium/${src}.jpg` : `img-opt/tiny/${src}.jpg`}
           media="(min-width: 740px)" />
         <img
           class="main blur"
           use:load
-          src={inview ? `img/small/${src}.jpg` : `img/tiny/${src}.jpg`}
+          src={inview ? `img-opt/small/${src}.jpg` : `img-opt/tiny/${src}.jpg`}
           {alt} />
       </picture>
     </div>

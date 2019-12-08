@@ -9,7 +9,8 @@ const ASSETS = `cache${timestamp}`;
 // `files` is an array of everything in the `static` directory
 const to_cache = shell
   .concat(files)
-  .filter(fileName => !fileName.endsWith("mp3"));
+  .filter(fileName => !fileName.endsWith("mp3"))
+  .filter(fileName => !fileName.includes("img"));
 const cached = new Set(to_cache);
 
 log("Asset cache: ", ASSETS);
