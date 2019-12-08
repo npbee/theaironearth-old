@@ -6,5 +6,5 @@ yarn-error.log
 /__sapper__/
 .env
 /static/global.css
-/static/audio
+/static/audio/
 
