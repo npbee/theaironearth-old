@@ -112,12 +112,12 @@ const GoodSport = registerAlbum({
     size: "29.7MB",
   },
   description: [
-    "<em>Good Sport</em> is the second album by The Air on Earth. Kicked off with a wedding gift from a friend, <em>Good Sport</em> was recorded over a year-long period at Tiny Telephone studios in San Francisco.",
-    "Primarily constrained to headphones, <em>Good Sport</em> explores synthesizers, electronic percussion, and intricately composed ambient details combined with pianos, layered vocals, and found sound.",
-    "<em>Good Sport</em> was shaped by the amazing people who contributed, including engineer/producer Beau Sorenson, an array of talented San Francisco and midwest friends, and even family.",
-    "This album is about life, family and priorities.",
+    "<em>Good Sport</em> is the second full-length album under The Air on Earth. The project was kicked off with a single studio session day as a wedding gift from a friend and it continued to grow from there, drawing inspriation from the studio space and collaboration with engineer Beau Sorenson. It was recorded over a year-long period both at home and at Tiny Telephone studios in San Francisco.",
+    "Primarily constrained to headphones, the album explores synthesizers, electronic percussion, and finely detailed ambient noise in combination with pianos, layered vocals, and found sound. ",
+    "These songs were shaped by the amazing people who contributed, including engineer/producer Beau Sorenson, an array of talented San Francisco and midwest friends, and even family. ",
+    "<em>Good Sport</em> is about life, family and priorities.",
   ],
-  date: "January 1, 2020",
+  date: "January 7, 2020",
   credits: [
     {
       credit: "Engineered and mixed by",
@@ -141,14 +141,18 @@ const GoodSport = registerAlbum({
     },
     {
       credit: "Performed by",
-      source: [Me, Sean, Jer, Ben, Warren, Dad],
+      source: [Me, Beau, Sean, Jer, Ben, Warren, Dad],
     },
     {
       credit: "Thanks to",
       source: [Beau, Warren, Heather, Sean],
     },
   ],
-  links: [sc("the-air-on-earth"), spotify("the-air-on-earth")],
+  links: [
+    bc("https://theaironearth.bandcamp.com/album/good-sport"),
+    sc("https://soundcloud.com/theaironearth/sets/good-sport"),
+    // spotify("the-air-on-earth"),
+  ],
   imgs: [
     {
       src: "good-sport-1",
