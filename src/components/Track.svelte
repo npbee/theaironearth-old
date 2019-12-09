@@ -21,10 +21,6 @@
     top: -80px;
   }
 
-  .title h2 {
-    z-index: 2;
-  }
-
   .stanza-0 p:first-of-type:first-letter {
     font-size: 200%;
     letter-spacing: 0.05em;
