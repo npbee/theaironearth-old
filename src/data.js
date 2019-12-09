@@ -72,6 +72,7 @@ const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
+  shade: "dark",
   extraArtwork: {
     src: "artwork/good-sport-booklet.pdf",
     name: "Artwork Booklet",
@@ -725,6 +726,7 @@ registerTrack({
       l: 50,
     },
   },
+  links: [bc("good-sport"), sc("good-sport")],
 });
 
 registerTrack({
@@ -791,6 +793,7 @@ registerTrack({
       l: 28,
     },
   },
+  links: [bc("sprint"), sc("sprint")],
 });
 
 registerTrack({
@@ -846,6 +849,7 @@ registerTrack({
       l: 33,
     },
   },
+  links: [bc("rest"), sc("rest")],
 });
 
 registerTrack({
@@ -903,6 +907,7 @@ registerTrack({
       l: 37,
     },
   },
+  links: [bc("recur"), sc("recur")],
 });
 
 registerTrack({
@@ -911,7 +916,7 @@ registerTrack({
   length: "7:06",
   albumId: "good-sport",
   artwork: "artwork/run-long",
-  links: [sc("run-long")],
+  links: [bc("run-long"), sc("run-long")],
   lyrics: [
     [
       "I will know what you have done",
@@ -972,7 +977,7 @@ registerTrack({
   albumId: "good-sport",
   artwork: "artwork/bliss",
   length: "5:04",
-  links: [],
+  links: [bc("bliss"), sc("bliss")],
   lyrics: [
     [
       "And the hate floats",
@@ -1044,7 +1049,7 @@ registerTrack({
   length: "4:20",
   albumId: "good-sport",
   artwork: "artwork/drone",
-  links: [],
+  links: [bc("drone"), sc("drone")],
   lyrics: [
     [
       "My only sweep",
@@ -1112,7 +1117,7 @@ registerTrack({
   length: "5:54",
   albumId: "good-sport",
   artwork: "artwork/hollow",
-  links: [],
+  links: [bc("hollow"), sc("hollow")],
   lyrics: [
     [
       "In the reeds that we love",

@@ -8,6 +8,12 @@
   export let album;
   export let trackId;
 
+  let color = "text-grey-600";
+
+  if (album.shade === "dark") {
+    color = "text-white";
+  }
+
   $: activeTrackId = $store.context.trackId;
   $: isPlaying =
     $store.value === "playing" && activeTrackId === trackId ? true : false;
@@ -43,7 +49,7 @@
     left: 0;
     transition: background 200ms, opacity 200ms;
     background: rgba(0, 0, 0, 0);
-    opacity: 0.3;
+    opacity: 0.6;
   }
 
   button:hover > .icon {
@@ -53,7 +59,7 @@
 </style>
 
 {#if canPlay()}
-  <button on:click={handler} class="w-24 text-grey-100">
+  <button on:click={handler} class={`w-full ${color}`}>
     <Image
       ratio="100%"
       src={album.artwork}

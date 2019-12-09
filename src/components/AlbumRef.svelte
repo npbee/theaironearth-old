@@ -1,9 +1,9 @@
 <script>
   export let album;
-  export let className = "";
+  export let className = "text-sm ";
 </script>
 
-<p class={`text-sm ${className}`}>
+<p class={className}>
   from
   <a class="decorated-link" href={`/album/${album.id}`}>
     <em>{album.title}</em>
