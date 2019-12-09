@@ -67,41 +67,6 @@ const Ivo = {
 /**
  * Albums
  */
-const TheAirOnEarth = registerAlbum({
-  title: "The Air on Earth",
-  id: "the-air-on-earth",
-  artwork: "artwork/the-air-on-earth-front",
-  date: "February 23, 2015",
-  description: [
-    "<em>The Air on Earth</em> is a musical project chronicling the passage of time and many stages of life, both significant and not.  Written and recorded over several years, the songs themselves reflect these stages in feeling and maturity.  Sentimental and perhaps distorted, each song is a source of nostalgia and reflects a moment in time.",
-  ],
-  credits: [
-    {
-      credit: "Written and recorded by",
-      source: Me,
-    },
-    {
-      credit: "Mixed and mastered by",
-      source: Zach,
-    },
-  ],
-  links: [
-    bc("http://theaironearth.bandcamp.com/album/the-air-on-earth"),
-    sc("https://soundcloud.com/theaironearth/sets/the-air-on-earth"),
-    spotify("album/1e7vdaAh4jNtYJoapS40uC"),
-    ap("https://music.apple.com/us/album/the-air-on-earth/1085692009"),
-  ],
-  imgs: [
-    {
-      src: "the-air-on-earth-1",
-      size: "full",
-      alt: "Image of in a tunnel doing some field recordings",
-      ratio: "20%",
-    },
-  ],
-});
-
-// eslint-disable-next-line
 const GoodSport = registerAlbum({
   id: "good-sport",
   title: "Good Sport",
@@ -176,6 +141,40 @@ const GoodSport = registerAlbum({
       src: "good-sport-4",
       credit: Warren,
       alt: "Image of the Pro Tools session and a coffee mug",
+    },
+  ],
+});
+
+const TheAirOnEarth = registerAlbum({
+  title: "The Air on Earth",
+  id: "the-air-on-earth",
+  artwork: "artwork/the-air-on-earth-front",
+  date: "February 23, 2015",
+  description: [
+    "<em>The Air on Earth</em> is a musical project chronicling the passage of time and many stages of life, both significant and not.  Written and recorded over several years, the songs themselves reflect these stages in feeling and maturity.  Sentimental and perhaps distorted, each song is a source of nostalgia and reflects a moment in time.",
+  ],
+  credits: [
+    {
+      credit: "Written and recorded by",
+      source: Me,
+    },
+    {
+      credit: "Mixed and mastered by",
+      source: Zach,
+    },
+  ],
+  links: [
+    bc("http://theaironearth.bandcamp.com/album/the-air-on-earth"),
+    sc("https://soundcloud.com/theaironearth/sets/the-air-on-earth"),
+    spotify("album/1e7vdaAh4jNtYJoapS40uC"),
+    ap("https://music.apple.com/us/album/the-air-on-earth/1085692009"),
+  ],
+  imgs: [
+    {
+      src: "the-air-on-earth-1",
+      size: "full",
+      alt: "Image of in a tunnel doing some field recordings",
+      ratio: "20%",
     },
   ],
 });

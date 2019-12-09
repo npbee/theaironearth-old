@@ -29,7 +29,7 @@
 
 <div class="container ctr max-w-6xl">
 
-  <div class="flex flex-wrap mb-48">
+  <div class="flex flex-wrap mb-16 md:mb-48">
     <div class="md:mr-8 md:max-w-md mb-6 w-full">
       <div class="rounded-sm shadow">
         <Image
@@ -60,14 +60,14 @@
           class="text-sm text-grey-600 small-caps block">
           {album.date}
         </time>
-        <h2 class="text-3xl leading-none">{album.title}</h2>
+        <h2 class="text-4xl leading-none">{album.title}</h2>
         <QuickLinks links={album.links} />
       </div>
       <TrackList tracks={album.tracks} {store} />
     </div>
   </div>
 
-  <div class="mb-48 w-full max-w-4xl mx-auto">
+  <div class="mb-16 md:mb-48 w-full max-w-4xl mx-auto">
     <h3 class="text-3xl">About</h3>
     <div class="flex flex-col md:flex-row">
       <div class="mb-8 md:mr-32 md:leading-relaxed" style="flex: 3">

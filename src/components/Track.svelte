@@ -32,11 +32,11 @@
   }
 </style>
 
-<div id={track.id} class="py-24">
-  <div class="container mb-12">
+<div id={track.id} class="py-32 mb-12">
+  <div class="container">
     <div class="mb-8 relative">
       {#if track.artwork}
-        <div class="artwork shadow mb-4 md:absolute w-full md:w-1/3">
+        <div class="artwork shadow mb-4 md:absolute w-full md:w-1/2">
           <Image
             ratio="100%"
             src={track.artwork}
