@@ -1,4 +1,5 @@
 <script>
+  // eslint-disable-next-line
   export let preloading;
   export let height = "3px";
   $: style = `height: ${height}`;

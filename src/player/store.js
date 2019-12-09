@@ -1,11 +1,11 @@
-import { FSM } from "@xstate/fsm";
+import { createMachine } from "@xstate/fsm";
 import { writable } from "svelte/store";
 import log from "loglevel";
 import * as Data from "../data";
 import { streamUrlFor } from "./stream";
 import { injectTrackTheme } from "./utils";
 
-export const machine = FSM({
+export const machine = createMachine({
   id: "player",
   initial: "init",
   context: {

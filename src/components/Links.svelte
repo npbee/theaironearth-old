@@ -1,7 +1,6 @@
 <script>
   export let links;
   export let category = "quick";
-  export let dimmed = false;
 
   function linkTitle(link) {
     switch (link.type) {
