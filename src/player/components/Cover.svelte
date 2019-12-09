@@ -3,6 +3,7 @@
   import PlayIcon from "./Play.svelte";
   import PauseIcon from "./Pause.svelte";
   import { canPlay } from "../utils";
+  import Image from "../../components/Image.svelte";
 
   export let album;
   export let trackId;
@@ -52,8 +53,11 @@
 </style>
 
 {#if canPlay()}
-  <button on:click={handler}>
-    <img src={album.artwork} alt={`Artwork for ${album.title}`} />
+  <button on:click={handler} class="w-24 text-grey-100">
+    <Image
+      ratio="100%"
+      src={album.artwork}
+      alt={`Artwork for ${album.title}`} />
     <div class="icon text-2xl">
       {#if isPlaying}
         <PauseIcon />
@@ -63,5 +67,5 @@
     </div>
   </button>
 {:else}
-  <img src={album.artwork} alt={`Artwork for ${album.title}`} />
+  <Image ratio="100%" src={album.artwork} alt={`Artwork for ${album.title}`} />
 {/if}

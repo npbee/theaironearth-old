@@ -19,9 +19,7 @@
     <h2 class="small-caps">About</h2>
     <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
     <p class="mb-6 ">
-      The Air on Earth is a musical project by Nick Ball. With no particular
-      genre in mind the music takes on the shape of personal influences built up
-      over time, including
+      The Air on Earth is a musical project by Nick Ball. Influences include
       <a class="decorated-link" href="https://www.talktalk.co.uk/">Talk Talk</a>
       ,
       <a href="https://www.radiohead.com/deadairspace" class="decorated-link">
@@ -54,15 +52,18 @@
     <p class="mb-6">
       Nick was a member of the band
       <a href="https://scarey.org" class="decorated-link">S. Carey</a>
-      , playing guitar and contributing to albums including
+      <span>,</span>
+      playing guitar and contributing to albums such as
       <em>All We Grow</em>
       and
       <em>Range of Light</em>
-      . Nick has also contributed to albums from artists
+      <span>.</span>
+      Nick has also contributed to albums from artists
       <a href="https://www.luraymusic.com/" class="decorated-link">Luray</a>
       and
       <a href="https://www.aeroflynn.org/" class="decorated-link">Aero Flynn</a>
-      , and was a past touring member of the band
+      <span>,</span>
+      and was a past touring member of the band
       <a href="https://www.aabondy.co/" class="decorated-link">A.A. Bondy</a>
       <span>.</span>
     </p>

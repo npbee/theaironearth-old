@@ -32,7 +32,7 @@
   }
 </style>
 
-<div id={track.id} class="py-32 mb-12">
+<div id={track.id} class="py-12 md:py-32 mb-12">
   <div class="container">
     <div class="mb-8 relative">
       {#if track.artwork}

@@ -34,6 +34,12 @@
     </a>
     <a
       rel="prefetch"
+      class={currentClass(segment, 'track', 'nav-link ml-2')}
+      href="/tracks">
+      Tracks
+    </a>
+    <a
+      rel="prefetch"
       class={currentClass(segment, 'about', 'nav-link ml-2')}
       href="/about">
       About

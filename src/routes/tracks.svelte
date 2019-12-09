@@ -3,8 +3,16 @@
   import { tracks as _tracks, preloadAlbums } from "../data";
   import Cover from "../player/components/Cover.svelte";
 
-  let tracks = preloadAlbums(_tracks);
+  let tracks = preloadAlbums(_tracks).filter(track => track.album);
 </script>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 16px;
+  }
+</style>
 
 <svelte:head>
   <title>The Air on Earth | Tracks</title>
@@ -13,9 +21,8 @@
     content="All of the tracks created by the band with their corresponding
     purchase and streaming links." />
 </svelte:head>
-
 <!-- TODO: Make this more clickable -->
-<div class="ctr">
+<div class="ctr grid">
   {#each tracks as track}
     <div class="mb-8 flex items-center">
       <div class="w-24 mr-4">

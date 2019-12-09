@@ -68,6 +68,7 @@ const Ivo = {
  * Albums
  */
 const GoodSport = registerAlbum({
+  disabled: false,
   id: "good-sport",
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
@@ -1266,7 +1267,7 @@ function registerAlbum(props) {
     props
   );
 
-  if (!albums[id]) {
+  if (!albums[id] && !Album.disabled) {
     albums[id] = Album;
   }
 
@@ -1275,6 +1276,7 @@ function registerAlbum(props) {
 
 export const playlistOrder = [GoodSport, TheAirOnEarth].reduce(
   (list, album) => {
+    if (album.disabled) return list;
     list.push(...album.tracks.map(track => track.id));
     return list;
   },
