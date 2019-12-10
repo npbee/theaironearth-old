@@ -185,9 +185,9 @@ function seek(_context, evt) {
   audio.currentTime = evt.to;
 }
 
-function load(context) {
+async function load(context) {
   const { trackId } = context;
-  const url = streamUrlFor(trackId);
+  const url = await streamUrlFor(trackId);
 
   audio.src = url;
 

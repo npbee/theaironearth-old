@@ -84,7 +84,7 @@ const GoodSport = registerAlbum({
     "These songs were shaped by the amazing people who contributed, including engineer/producer Beau Sorenson, an array of talented San Francisco and midwest friends, and even family. ",
     "<em>Good Sport</em> is about life, family and priorities.",
   ],
-  date: "January 7, 2020",
+  date: "January 24, 2020",
   credits: [
     {
       credit: "Engineered and mixed by",

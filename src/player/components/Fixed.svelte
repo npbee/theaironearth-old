@@ -88,6 +88,16 @@
     bottom: -8px;
     width: 100%;
   }
+
+  .attribution {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 4px);
+    z-index: 2;
+    font-size: 0.6rem;
+  }
 </style>
 
 {#if $store.value !== 'init'}
@@ -114,6 +124,19 @@
           {activeAlbum.title}
         </a>
       </div>
+      <a
+        class="attribution text-xs text-grey-300 flex hover:text-grey-800 trans
+        inset-y-auto md:inset-y-0"
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href={scLink.url}>
+        <span class="visually-hidden">
+          Soundcloud link for {activeTrack.title}
+        </span>
+        <svg>
+          <use xlink:href="#soundcloud" />
+        </svg>
+      </a>
     </div>
     {#if isErrored}
       <div class="flex-1 text-red-700">
