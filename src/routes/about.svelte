@@ -20,55 +20,38 @@
     <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
     <p class="mb-6 ">
       The Air on Earth is a musical project by Nick Ball. Influences include
-      <a class="decorated-link" href="https://www.talktalk.co.uk/">Talk Talk</a>
-      ,
-      <a href="https://www.radiohead.com/deadairspace" class="decorated-link">
-        Radiohead
-      </a>
-      ,
-      <a href="http://www.explosionsinthesky.com/" class="decorated-link">
-        Explosions in the Sky
-      </a>
-      ,
-      <a href="https://sigurros.com/" class="decorated-link">Sigur Rós</a>
-      ,
-      <a href="http://www.halloweenalaska.com/" class="decorated-link">
-        Halloween, Alaska
-      </a>
-      ,
-      <a href="http://www.americanfootballmusic.com/" class="decorated-link">
-        American Footabll
-      </a>
-      ,
-      <a href="http://www.jonhopkins.co.uk/" class="decorated-link">
-        Jon Hopkins
-      </a>
-      , and
-      <a href="https://boniver.org/" class="decorated-link">Bon Iver</a>
-      . You'll hear vocal harmonies, delayed guitars, drone-y synths, pianos,
+      <a class="decorated-link" href="https://www.talktalk.co.uk/">Talk Talk</a>,
+      <a href="https://www.radiohead.com/deadairspace" class="decorated-link">Radiohead</a>,
+      <a href="http://www.explosionsinthesky.com/" class="decorated-link">Explosions in the Sky</a>,
+      <a href="https://sigurros.com/" class="decorated-link">Sigur Rós</a>,
+      <a href="http://www.halloweenalaska.com/" class="decorated-link">Halloween, Alaska</a>,
+      <a href="http://www.americanfootballmusic.com/" class="decorated-link">American Football</a>,
+      <a href="http://www.jonhopkins.co.uk/" class="decorated-link">Jon Hopkins</a>,
+      and <a href="https://boniver.org/" class="decorated-link">Bon Iver</a>.
+      You'll hear vocal harmonies, delayed guitars, drone-y synths, pianos,
       electronic drums, found percussion, and sometimes even trombones. Long
       songs are not uncommon.
     </p>
     <p class="mb-6">
       Nick was a member of the band
-      <a href="https://scarey.org" class="decorated-link">S. Carey</a>
-      <span>,</span>
+      <a href="https://scarey.org" class="decorated-link">S. Carey</a>,
       playing guitar and contributing to albums such as
-      <em>All We Grow</em>
-      and
-      <em>Range of Light</em>
-      <span>.</span>
+      <em>All We Grow</em> and <em>Range of Light</em>.
       Nick has also contributed to albums from artists
       <a href="https://www.luraymusic.com/" class="decorated-link">Luray</a>
       and
-      <a href="https://www.aeroflynn.org/" class="decorated-link">Aero Flynn</a>
-      <span>,</span>
+      <a href="https://www.aeroflynn.org/" class="decorated-link">Aero Flynn</a>,
       and was a past touring member of the band
-      <a href="https://www.aabondy.co/" class="decorated-link">A.A. Bondy</a>
-      <span>.</span>
+      <a href="https://www.aabondy.co/" class="decorated-link">A.A. Bondy</a>.
     </p>
 
     <Links links={Object.values(site.links)} />
+
+    <p class="text-sm mt-4">
+    Audio streaming provided by <a class="decorated-link" href="https://soundcloud.com">Soundcloud</a>.</p>
+    <p class="text-sm mt-1">
+      Source code for this site available on <a class="decorated-link" href="https://github.com/npbee/theaironearth">GitHub</a>.
+    </p>
 
   </div>
 </section>
