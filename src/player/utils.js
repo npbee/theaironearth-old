@@ -1,5 +1,11 @@
-export function canPlay() {
-  return typeof window !== "undefined" && window.Modernizr.audio;
+export function canPlay(track) {
+  const hasAudio = typeof window !== "undefined" && window.Modernizr.audio;
+
+  if (!hasAudio) return false;
+
+  if (track && track.canPlay !== undefined) return track.canPlay;
+
+  return true;
 }
 
 export function injectTrackTheme(track) {

@@ -44,6 +44,7 @@ export const machine = createMachine({
         loaded: "starting",
         "play-track": "loading",
         stop: "stopped",
+        failed: "error-playing",
       },
     },
     starting: {
@@ -57,7 +58,9 @@ export const machine = createMachine({
       },
     },
     "error-playing": {
-      on: {},
+      on: {
+        "play-track": "loading",
+      },
     },
     playing: {
       on: {
@@ -187,8 +190,14 @@ function seek(_context, evt) {
 
 async function load(context) {
   const { trackId } = context;
-  const url = await streamUrlFor(trackId);
 
+  let url;
+
+  try {
+    url = await streamUrlFor(trackId);
+  } catch (err) {
+    return send("failed");
+  }
   audio.src = url;
 
   audio.load();

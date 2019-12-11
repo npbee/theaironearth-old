@@ -4,6 +4,8 @@
   import PauseIcon from "./Pause.svelte";
   import { canPlay } from "../utils";
   import Image from "../../components/Image.svelte";
+  import Loader from "../../components/icons/Loader.svelte";
+  import { tracks } from "../../data";
 
   export let album;
   export let trackId;
@@ -15,6 +17,9 @@
   }
 
   $: activeTrackId = $store.context.trackId;
+  $: isBusy =
+    ($store.value === "loading" || $store.value === "starting") &&
+    activeTrackId === trackId;
   $: isPlaying =
     $store.value === "playing" && activeTrackId === trackId ? true : false;
   $: isPaused =
@@ -24,6 +29,8 @@
       send("pause");
     } else if (isPaused) {
       send("play");
+    } else if (isBusy) {
+      send("stop");
     } else {
       send({ type: "play-track", trackId });
     }
@@ -58,17 +65,19 @@
   }
 </style>
 
-{#if canPlay()}
+{#if canPlay(tracks[trackId])}
   <button on:click={handler} class={`w-full ${color}`}>
     <Image
       ratio="100%"
       src={album.artwork}
       alt={`Artwork for ${album.title}`} />
-    <div class="icon text-2xl">
-      {#if isPlaying}
-        <PauseIcon />
+    <div class={`icon ${color}`}>
+      {#if isBusy}
+        <Loader size="20%" />
+      {:else if isPlaying}
+        <PauseIcon size="20%" />
       {:else}
-        <PlayIcon />
+        <PlayIcon size="20%" />
       {/if}
     </div>
   </button>

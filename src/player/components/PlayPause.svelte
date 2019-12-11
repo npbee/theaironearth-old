@@ -2,6 +2,7 @@
   import Loader from "../../components/icons/Loader.svelte";
   import { send } from "../store";
   import { canPlay } from "../utils";
+  import { tracks } from "../../data";
   export let store;
   export let trackId;
   export let size = "";
@@ -34,7 +35,7 @@
   }
 </style>
 
-{#if canPlay()}
+{#if canPlay(tracks[trackId])}
   <button
     class={`icon-btn c-grey-700 flex text-${size}`}
     data-testid={isPlaying ? 'pause' : 'play'}

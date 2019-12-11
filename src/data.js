@@ -68,7 +68,6 @@ const Ivo = {
  * Albums
  */
 const GoodSport = registerAlbum({
-  disabled: false,
   id: "good-sport",
   title: "Good Sport",
   artwork: "artwork/good-sport-front",
@@ -691,6 +690,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "good-sport",
   title: "Good Sport",
   albumId: "good-sport",
@@ -730,6 +730,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "sprint",
   title: "Sprint",
   artwork: "artwork/sprint",
@@ -797,6 +798,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "rest",
   title: "Rest",
   length: "5:13",
@@ -853,6 +855,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: true,
   id: "recur",
   title: "Recur",
   length: "2:26",
@@ -911,6 +914,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "run-long",
   title: "Run Long",
   length: "7:06",
@@ -972,6 +976,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "bliss",
   title: "Bliss",
   albumId: "good-sport",
@@ -1044,6 +1049,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "drone",
   title: "Drone",
   length: "4:20",
@@ -1112,6 +1118,7 @@ registerTrack({
 });
 
 registerTrack({
+  canPlay: false,
   id: "hollow",
   title: "Hollow",
   length: "5:54",
@@ -1272,7 +1279,7 @@ function registerAlbum(props) {
     props
   );
 
-  if (!albums[id] && !Album.disabled) {
+  if (!albums[id]) {
     albums[id] = Album;
   }
 
@@ -1281,7 +1288,6 @@ function registerAlbum(props) {
 
 export const playlistOrder = [GoodSport, TheAirOnEarth].reduce(
   (list, album) => {
-    if (album.disabled) return list;
     list.push(...album.tracks.map(track => track.id));
     return list;
   },
