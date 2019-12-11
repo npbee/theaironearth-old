@@ -21,12 +21,10 @@
       <Cover {album} trackId="recur" />
     </div>
   </div>
-  <section class="flex-1 w-full">
-    <p class="small-caps text-sm mb-0">New Album</p>
-    <h1 class="text-4xl leading-none mb-0">Good Sport</h1>
-    <h2 class="text-md">January 24, 2020</h2>
-    <div class="">
-      <Links links={album.links} />
-    </div>
+  <section class="flex-1 w-full mt-16">
+    <p class="small-caps text-xs mb-0">New Album</p>
+    <h1 class="text-4xl leading-none mb-0 text-grey-700">Good Sport</h1>
+    <h2 class="text-sm mt-1">January 24, 2020</h2>
+    <Links links={album.links} />
   </section>
 </div>

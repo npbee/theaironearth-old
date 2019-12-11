@@ -84,7 +84,7 @@ hr {
 }
 
 .icon-btn:hover {
-  @apply text-gray-900;
+  @apply text-grey-900;
 }
 
 .icon-btn > svg {
