@@ -18,7 +18,7 @@
   <div>
     <h2 class="small-caps">About</h2>
     <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
-    <p class="mb-6 ">
+    <p class="mb-4 ">
       The Air on Earth is a musical project by Nick Ball. Influences include
       <a class="decorated-link" href="https://www.talktalk.co.uk/">Talk Talk</a>,
       <a href="https://www.radiohead.com/deadairspace" class="decorated-link">Radiohead</a>,
@@ -32,7 +32,7 @@
       electronic drums, found percussion, and sometimes even trombones. Long
       songs are not uncommon.
     </p>
-    <p class="mb-6">
+    <p class="mb-4">
       Nick was a member of the band
       <a href="https://scarey.org" class="decorated-link">S. Carey</a>,
       playing guitar and contributing to albums such as
@@ -47,9 +47,8 @@
 
     <Links links={Object.values(site.links)} />
 
-    <p class="text-sm mt-4">
-    Audio streaming provided by <a class="decorated-link" href="https://soundcloud.com">Soundcloud</a>.</p>
-    <p class="text-sm mt-1">
+    <p class="text-xs mt-6">
+    Audio streaming provided by <a class="decorated-link" href="https://soundcloud.com">Soundcloud</a>.
       Source code for this site available on <a class="decorated-link" href="https://github.com/npbee/theaironearth">GitHub</a>.
     </p>
 
