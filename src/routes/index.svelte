@@ -18,7 +18,7 @@
     class="relative flex-1 w-full flex items-center md:justify-end md:mr-16 mb-8
     md:mb-0">
     <div class="md:max-w-sm w-full">
-      <Cover {album} trackId="rest" />
+      <Cover {album} trackId="recur" />
     </div>
   </div>
   <section class="flex-1 w-full mt-16">
