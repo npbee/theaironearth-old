@@ -168,6 +168,7 @@ hr {
 }
 
 .nav-link {
+  border-bottom: 1px solid transparent;
   @apply text-sm small-caps;
   transition: all 200ms;
 }
