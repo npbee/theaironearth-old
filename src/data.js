@@ -78,7 +78,7 @@ const GoodSport = registerAlbum({
     size: "29.7MB",
   },
   description: [
-    "<em>Good Sport</em> is the second full-length album under The Air on Earth. The project was kicked off with a single studio session as a wedding gift from a friend and it continued to grow from there, drawing inspriation from the studio space and collaboration with engineer Beau Sorenson. It was recorded over a year-long period both at home and at Tiny Telephone studios in San Francisco.",
+    "<em>Good Sport</em> is the second full-length album under The Air on Earth. The project was kicked off with a single studio session as a wedding gift from a friend and it continued to grow from there, drawing inspiration from the studio space and collaboration with engineer Beau Sorenson. It was recorded over a year-long period both at home and at Tiny Telephone studios in San Francisco.",
     "Primarily constrained to headphones, the album explores synthesizers, electronic percussion, and finely detailed ambient noise in combination with pianos, layered vocals, and found sound. ",
     "These songs were shaped by the wonderful people who contributed including engineer/producer Beau Sorenson, an array of talented San Francisco and midwestern musicians, and one dad named Mike.",
     "<em>Good Sport</em> is about life, family and priorities.",

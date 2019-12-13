@@ -63,11 +63,9 @@
       </div>
     {/if}
 
-    {#if track.credits.length > 1}
-      <div class="text-xs mt-12">
-        <hr class="mb-4" />
-        <Credits credits={track.credits} />
-      </div>
-    {/if}
+    <div class="text-xs mt-12">
+      <hr class="mb-4" />
+      <Credits credits={track.credits} />
+    </div>
   </div>
 </div>
