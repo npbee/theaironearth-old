@@ -31,13 +31,13 @@
   }
 </style>
 
-<div class="-mx-2 flex items-center flex-wrap">
+<div class="-mx-4 -my-2 md:my-auto md:-mx-2 flex items-center flex-wrap">
   {#each filteredLinks as link, i}
     <a
       href={link.url}
       target="_blank"
       rel="noreferrer noopener nofollow"
-      class={`icon-btn m-2 icon-btn--${link.type}`}
+      class={`icon-btn p-4 md:p-2 text-3xl md:text-2xl icon-btn--${link.type}`}
       title={linkTitle(link)}>
       <span class="visually-hidden">{linkTitle(link)}</span>
       <svg>

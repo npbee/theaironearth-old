@@ -21,7 +21,7 @@
       <Cover {album} trackId="recur" />
     </div>
   </div>
-  <section class="flex-1 w-full mt-16">
+  <section class="flex-1 w-full mt-0 md:mt-16">
     <p class="small-caps text-xs mb-0">New Album</p>
     <h1 class="text-4xl leading-none mb-0 text-grey-700">Good Sport</h1>
     <Links links={album.links} />

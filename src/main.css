@@ -92,26 +92,13 @@ hr {
   height: 1em;
 }
 
-.icon-btn--bandcamp > svg {
-  width: 24px;
-  height: 24px;
-}
-
-.icon-btn--soundcloud > svg {
-  width: 24px;
-  height: 24px;
-}
-
 .icon-btn--apple-music > svg {
   width: 80px;
 }
 
-.icon-btn--spotify {
-  width: 18px;
-}
-
 .icon-btn--spotify > svg {
-  width: 16px;
+  width: 0.7em;
+  height: 0.7em;
 }
 
 @tailwind utilities;

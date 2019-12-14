@@ -67,6 +67,10 @@ self.addEventListener("fetch", event => {
     return;
   }
 
+  if (url.href.includes("livereload")) {
+    return;
+  }
+
   if (url.host === self.location.host) {
     if (isBundlerGeneratedAsset(url)) {
       log(`Serving ${url.pathname} from cache`);

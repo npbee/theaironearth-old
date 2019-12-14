@@ -10,7 +10,14 @@
   }
 </script>
 
-<header class="ctr py-4 mb-10">
+<style>
+  .grid > :global(*) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+</style>
+
+<header class="ctr py-4 mb-4 md:mb-10">
   <div class="flex items-center justify-between flex-wrap">
     <nav class="links">
       <a href="/" class="logo block">
@@ -20,12 +27,12 @@
         </h1>
       </a>
     </nav>
-    <nav>
+    <nav class="grid">
       <Links
         links={[site.links.bandcamp, site.links.soundcloud, site.links.spotify]} />
     </nav>
   </div>
-  <div class="flex md:block justify-between -ml-3 md:ml-0 -mr-3 md:mr-0">
+  <div class="flex md:block justify-between">
     <a
       rel="prefetch"
       class={currentClass(segment, 'album', 'nav-link inline-flex md:inline py-2 px-3 md:p-0 md:ml-2')}
