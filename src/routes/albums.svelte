@@ -8,7 +8,14 @@
   <title>The Air on Earth | Albums</title>
   <meta
     name="description"
-    content="See all of the albums by The Air on Earth." />
+    content="Released albums with purchase and streaming links." />
+  <meta
+    property="og:description"
+    content="Released albums with purchase and streaming links." />
+  <meta property="og:url" content="https://theaironearth.com/albums" />
+  <meta
+    name="twitter:description"
+    content="Released tracks with purchase and streaming links." />
 </svelte:head>
 
 <section class="ctr flex flex-col md:flex-row md:justify-around">

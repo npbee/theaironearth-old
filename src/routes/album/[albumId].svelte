@@ -24,7 +24,19 @@
   <title>The Air on Earth&thinsp;|&thinsp;{album.title}</title>
   <meta
     name="description"
-    content={`See the track listing, credits, and purchase/streaming links for the album ${album.title} by The Air on Earth`} />
+    content={`Album listing, credits, and purchase/streaming links for ${album.title} by The Air on Earth`} />
+  <meta
+    name="description"
+    content={`Album listing, credits, and purchase/streaming links for ${album.title} by The Air on Earth`} />
+  <meta
+    property="og:description"
+    content={`Album listing, credits, and purchase/streaming links for ${album.title} by The Air on Earth`} />
+  <meta
+    property="og:url"
+    content={`https://theaironearth.com/album/${album.id}`} />
+  <meta
+    name="twitter:description"
+    content={`Album listing, credits, and purchase/streaming links for ${album.title} by The Air on Earth`} />
 </svelte:head>
 
 <div class="container ctr max-w-6xl">

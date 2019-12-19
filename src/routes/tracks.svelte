@@ -26,6 +26,16 @@
     name="description"
     content="All of the tracks created by the band with their corresponding
     purchase and streaming links." />
+  <meta
+    name="description"
+    content="Released tracks with purchase and streaming links." />
+  <meta
+    property="og:description"
+    content="Released tracks with purchase and streaming links." />
+  <meta property="og:url" content="https://theaironearth.com/tracks" />
+  <meta
+    name="twitter:description"
+    content="Released tracks with purchase and streaming links." />
 </svelte:head>
 <!-- TODO: Make this more clickable -->
 <div class="ctr grid">
