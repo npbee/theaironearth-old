@@ -45,6 +45,21 @@ html {
   font-style: normal;
 }
 
+html,
+body,
+.root {
+  min-height: 100vh;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
 body {
   background-color: hsla(36, 64%, 99%, 1);
   color: theme("colors.grey.800");
@@ -107,6 +122,8 @@ hr {
   padding-left: theme("spacing.6");
   padding-right: theme("spacing.6");
   width: 100%;
+  max-width: 1600px;
+  @apply mx-auto;
 }
 
 .visually-hidden {

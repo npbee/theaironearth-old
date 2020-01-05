@@ -12,20 +12,6 @@
   export let segment;
 </script>
 
-<style>
-  :global(.root) {
-    display: flex;
-    flex-direction: column;
-  }
-  :global(footer),
-  :global(header) {
-    flex-grow: 0;
-  }
-  main {
-    flex-grow: 1;
-  }
-</style>
-
 <svelte:head>
   <meta
     name="viewport"

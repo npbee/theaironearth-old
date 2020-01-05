@@ -1,23 +1,65 @@
 <script>
   import Logo from "./Logo.svelte";
   import Links from "./Links.svelte";
+  import MiniPlayer from '../player/components/Mini.svelte';
   import { site } from "../data";
+  import { onMount } from 'svelte';
   export let segment;
 
   function currentClass(segment, path, cls) {
     if (segment && segment.includes(path)) return `nav-link--current ${cls}`;
     return cls;
   }
+
+let stickySentinel;
+let scrolled = false;
+let header;
+
+function observeSticky(el) {
+  const observer = new IntersectionObserver((records) => {
+    for (const record of records) {
+      const rect = record.boundingClientRect;
+      if (rect.y < 0) {
+        scrolled = true;
+      } else {
+        scrolled = false;
+      }
+    }
+  });
+
+  observer.observe(el);
+}
+
+onMount(() => {
+  observeSticky(stickySentinel);
+});
+
 </script>
 
 <style>
+  header {
+    transition: background-color 200ms, box-shadow 200ms;
+    z-index: 10;
+  }
+
+
+  .scrolled {
+    background: white;
+  }
   .grid > :global(*) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+  .sticky-sentinel {
+    left: 0;
+    right: 0;
+    visibility: hidden;
+  }
 </style>
 
-<header class="ctr py-4 mb-4 md:mb-10">
+<span bind:this={stickySentinel} class="sticky-sentinel" />
+<header class={`top-0 sticky py-3 mb-4 md:mb-10 ${scrolled ? 'bg-white-trans shadow' : ''}`} bind:this={header}>
+  <div class="ctr">
   <div class="flex items-center justify-between flex-wrap">
     <nav class="links">
       <a href="/" class="logo block">
@@ -27,10 +69,7 @@
         </h1>
       </a>
     </nav>
-    <nav class="grid">
-      <Links
-        links={[site.links.bandcamp, site.links.soundcloud, site.links.spotify]} />
-    </nav>
+    <MiniPlayer />
   </div>
   <div class="flex md:block justify-between">
     <a
@@ -51,5 +90,6 @@
       href="/about">
       About
     </a>
+  </div>
   </div>
 </header>
