@@ -57,7 +57,7 @@
 
 <span bind:this={stickySentinel} class="sticky-sentinel" />
 <header
-  class={`top-0 sticky py-3 mb-4 md:mb-10 ${scrolled ? 'bg-white-trans shadow' : ''}`}
+  class={`top-0 sticky py-3 mb-6 md:mb-10 ${scrolled ? 'bg-white-trans shadow' : ''}`}
   bind:this={header}>
   <div class="ctr">
     <div class="flex items-center justify-between flex-wrap">

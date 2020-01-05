@@ -70,13 +70,13 @@
         <span class="tracking-wide small-caps">Now Playing</span>
         <a
           href={`/album/${activeAlbum.id}#${activeTrack.id}`}
-          class="font-semibold hover:underline text-sm">
+          class="font-semibold hover:underline text-sm leading-none">
           {activeTrack.title}
         </a>
       </div>
     </div>
     <div class="flex items-center mr-4">
-      <div class="text-4xl md:text-2xl">
+      <div class="text-2xl md:text-2xl">
         <PlayPause trackId={activeTrack.id} {store} size="" />
       </div>
     </div>
