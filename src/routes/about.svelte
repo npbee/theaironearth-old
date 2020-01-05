@@ -1,48 +1,10 @@
 <script>
-  import Links from "../components/Links.svelte";
+  import Link from '../components/Link.svelte';
   import Image from "../components/Image.svelte";
   import { site } from "../data";
   import PromoPhotoGrid from "../components/PromoPhotoGrid.svelte";
 
-  function linkTitle(link) {
-    switch (link.type) {
-      case "soundcloud":
-        return "Soundcloud";
-      case "bandcamp":
-        return "Bandcamp";
-      case "spotify":
-        return "Spotify";
-      case "apple-music":
-        return "Apple Music";
-      default:
-        throw new Error(`Unknown link type ${link.type}`);
-    }
-  }
 </script>
-
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-    grid-gap: 1rem;
-  }
-
-  .img-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  .img-wrapper > img {
-    /* position: absolute; */
-    /* top: 0; */
-    /* left: 0; */
-    height: 200px;
-    width: 100%;
-    object-fit: cover;
-  }
-</style>
 
 <svelte:head>
   <title>The Air on Earth | About</title>
@@ -63,7 +25,7 @@
   </div>
   <div class="mb-12">
     <h2 class="small-caps">About</h2>
-    <h3 class="mb-4 text-2xl leading-none">The Air on Earth</h3>
+    <h3 class="mb-4 text-3xl leading-none">The Air on Earth</h3>
     <p class="mb-4 ">
       Recording as The Air on Earth, Nick Ball creates wandering, ambient pop
       music that's patient and immersive. Vocal harmonies, delayed guitars,
@@ -84,18 +46,13 @@
     </p>
 
 
-    <p class="text-xs mt-6 mb-8">
-      Audio streaming provided by
-      <a class="decorated-link" href="https://soundcloud.com">Soundcloud</a>.
-      Source code for this site available on <a class="decorated-link" href="https://github.com/npbee/theaironearth">GitHub</a>.
-    </p>
-
-    <h2 class="small-caps">Links</h2>
-    <div class="-mx-4 -my-2">
+    <ul>
     {#each Object.values(site.links) as link}
-      <a class="decorated-link inline-block m-4" target="_blank" rel="noopener noreferrer nofollow" href="{link.url}">{linkTitle(link)}</a>
+      <li class="py-2 md:py-1">
+        <Link link={link} display='icon-and-text' />
+      </li>
     {/each}
-    </div>
+    </ul>
 
   </div>
   <div class="md:hidden">
