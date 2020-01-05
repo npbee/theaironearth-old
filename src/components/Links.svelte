@@ -1,5 +1,5 @@
 <script>
-  import Link from './Link.svelte';
+  import Link from "./Link.svelte";
   export let links;
   export let category = "quick";
 
@@ -15,6 +15,6 @@
 
 <div class="-mx-4 -my-2 md:my-auto md:-mx-2 flex items-center flex-wrap">
   {#each filteredLinks as link, i}
-    <Link link={link} />
+    <Link {link} />
   {/each}
 </div>

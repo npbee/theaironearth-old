@@ -20,10 +20,9 @@
     content="Ambient/pop/electronic music project based in San Francisco" />
 </svelte:head>
 
-<div
-  class="flex flex-col px-8 ctr mx-auto justify-between items-center
-  h-full">
-  <section class="w-full mb-8 w-full md:max-w-sm flex items-end justify-between">
+<div class="flex flex-col px-8 ctr mx-auto justify-between items-center h-full">
+  <section
+    class="w-full mb-8 w-full md:max-w-sm flex items-end justify-between">
     <div>
       <p class="small-caps text-xs mb-0">New Album</p>
       <h1 class="text-4xl leading-none mb-0 text-grey-700">Good Sport</h1>

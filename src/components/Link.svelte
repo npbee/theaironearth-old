@@ -1,6 +1,6 @@
 <script>
   export let link;
-  export let display = 'icon-only';
+  export let display = "icon-only";
 
   function linkTitle(link) {
     switch (link.type) {
@@ -23,17 +23,17 @@
 </script>
 
 {#if display === 'icon-only'}
-<a
-  href={link.url}
-  target="_blank"
-  rel="noreferrer noopener nofollow"
-  class={`icon-btn p-4 md:p-2 text-3xl md:text-2xl icon-btn--${link.type}`}
-  title={linkTitle(link)}>
-  <span class="visually-hidden">{linkTitle(link)}</span>
-  <svg>
-    <use xlink:href={iconPath(link.type)} />
-  </svg>
-</a>
+  <a
+    href={link.url}
+    target="_blank"
+    rel="noreferrer noopener nofollow"
+    class={`icon-btn p-4 md:p-2 text-3xl md:text-2xl icon-btn--${link.type}`}
+    title={linkTitle(link)}>
+    <span class="visually-hidden">{linkTitle(link)}</span>
+    <svg>
+      <use xlink:href={iconPath(link.type)} />
+    </svg>
+  </a>
 {:else if display === 'icon-and-text'}
   <a
     href={link.url}

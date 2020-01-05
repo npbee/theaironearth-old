@@ -51,12 +51,11 @@
 </script>
 
 {#if $store.value !== 'init'}
-  <div
-    class="flex items-center justify-between text-xs"
-    transition:fade={{}}>
+  <div class="flex items-center justify-between text-xs" transition:fade={{}}>
     <div class="flex items-center">
       <a
-        class="attribution text-lg text-grey-300 flex hover:text-grey-800 trans mr-3"
+        class="attribution text-lg text-grey-300 flex hover:text-grey-800 trans
+        mr-3"
         target="_blank"
         rel="noopener noreferrer nofollow"
         href={scLink.url}>
@@ -68,9 +67,7 @@
         </svg>
       </a>
       <div class="mr-4 flex flex-col">
-        <span class="tracking-wide small-caps">
-          Now Playing
-        </span>
+        <span class="tracking-wide small-caps">Now Playing</span>
         <a
           href={`/album/${activeAlbum.id}#${activeTrack.id}`}
           class="font-semibold hover:underline text-sm">
