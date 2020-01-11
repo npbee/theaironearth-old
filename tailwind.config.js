@@ -19,6 +19,10 @@ module.exports = {
         },
         "white-trans": "hsla(36, 64%, 99%, 0.95)",
       },
+      fontSize: {
+        "7xl": "6rem",
+        "8xl": "8rem",
+      },
     },
     container: {
       center: true,

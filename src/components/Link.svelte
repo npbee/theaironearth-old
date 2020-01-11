@@ -17,6 +17,21 @@
     }
   }
 
+  function linkLogoSrc(link) {
+    switch (link.type) {
+      case "soundcloud":
+        return "/logos/soundcloud.svg";
+      case "bandcamp":
+        return "/logos/bandcamp.png";
+      /* case "spotify": */
+      /*   return "Spotify"; */
+      /* case "apple-music": */
+      /*   return "Apple Music"; */
+      default:
+        throw new Error(`Unknown link type ${link.type}`);
+    }
+  }
+
   function iconPath(type) {
     return `#${type}`;
   }
@@ -41,5 +56,14 @@
     rel="noreferrer noopener nofollow"
     class={`decorated-link`}>
     {linkTitle(link)}
+  </a>
+{:else if display === 'official'}
+  <a
+    href={link.url}
+    target="_blank"
+    rel="noreferrer noopener nofollow"
+    class={`block w-32 p-4 md:p-2`}>
+    <span class="visually-hidden">{linkTitle(link)}</span>
+    <img src={linkLogoSrc(link)} alt={`${link.type} logo`} />
   </a>
 {/if}
