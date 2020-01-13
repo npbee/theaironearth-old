@@ -33,20 +33,25 @@
         src={cloudinaryUrl('w_200', 'artwork/good-sport-white-overlay')}
         alt="Album artwork for 'Good Sport'" />
     </div>
-    <p class="small-caps text-sm md:text-base mb-1 text-grey-400">
+    <p
+      class="small-caps text-sm md:text-base mb-1 text-grey-400;"
+      style="z-index: 1">
       The Air on Earth
     </p>
     <h2
-      class="text-5xl md:text-6xl mb-8 text-grey-500 leading-none font-normal">
+      class="text-5xl md:text-6xl mb-8 text-grey-500 leading-none font-normal"
+      style="z-index: 1">
       Good Sport
     </h2>
-    <p class="text-sm text-grey-500 leading-loose md:ml-8 mb-4">
+    <p
+      class="text-sm text-grey-500 leading-loose md:ml-8 mb-4"
+      style="z-index: 1">
       <em>Good Sport</em>
-      is the second full-length album under The Air on Earth. It was recorded
-      over a year-long period both at home and at Tiny Telephone studios in San
-      Francisco. Primarily constrained to headphones, the album explores
-      synthesizers, electronic percussion, and finely detailed ambient noise in
-      combination with pianos, layered vocals, and found sound.
+      is the second full-length album under The Air on Earth. Recorded over a
+      year-long period both at home and at Tiny Telephone studios in San
+      Francisco, the album explores synthesizers, electronic percussion, and
+      finely detailed ambient noise in combination with pianos, layered vocals,
+      and found sound.
     </p>
 
     <a
@@ -74,14 +79,9 @@
       <Links links={album.links} display="official" presentation="stacked" />
     </p>
   </section>
-  <div class="md:flex-1 flex flex-col justify-center items-center">
-    <!--<div class="w-1/2">
+  <div class="md:flex-1 w-full flex flex-col justify-center items-center">
+    <div class="w-full max-w-lg">
       <Cover {album} trackId="recur" />
-    </div>-->
-    <div
-      class="md:flex-1 flex justify-center items-center text-6xl md:text-6xl">
-      <PlayPause trackId="recur" />
-      <p class="text-lg ml-8 small-caps">Play 'Recur'</p>
     </div>
   </div>
 </div>
