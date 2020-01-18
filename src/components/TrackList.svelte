@@ -12,7 +12,7 @@
   // relatively. If JS is not available, we'll link to the standalone track
   // page
   onMount(async () => {
-    [...document.querySelectorAll('a[href^="/track/"]')].map(x => {
+    [...document.querySelectorAll('[data-track-list-track="true"]')].map(x => {
       const trackId = x.href.replace(/.*\/track\//g, "");
       x.href = document.location.pathname + `#${trackId}`;
     });
@@ -43,6 +43,7 @@
       </div>
       <a
         href={`/track/${track.id}`}
+        data-track-list-track="true"
         class="border-dotted border-b-2 border-grey-600 hover:border-grey-700
         active:border-blue-600 trans">
         <span>{track.title}</span>

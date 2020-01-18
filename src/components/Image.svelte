@@ -1,4 +1,5 @@
 <script>
+  import { cloudinaryUrl as url } from "../utils";
   export let src;
   export let alt;
   export let ratio = "62.5%";
@@ -36,10 +37,6 @@
 
       return () => observer.unobserve(node);
     }
-  }
-
-  function url(transform, src) {
-    return `https://res.cloudinary.com/dhhjogfy6/image/upload/${transform}/v1575831765/img/${src}`;
   }
 
   function largeUrl(src) {

@@ -1,9 +1,9 @@
 <script>
   import Loader from "../../components/icons/Loader.svelte";
-  import { send } from "../store";
+  import { send, store as defaultStore } from "../store";
   import { canPlay } from "../utils";
   import { tracks } from "../../data";
-  export let store;
+  export let store = defaultStore;
   export let trackId;
   export let size = "";
 

@@ -27,7 +27,7 @@
 
 <Header {segment} />
 
-<main class="mb-16" transition:fade={{ duration: 150 }}>
+<main class="mb-16 flex flex-col" transition:fade={{ duration: 150 }}>
   <slot />
 </main>
 
