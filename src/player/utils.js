@@ -35,13 +35,14 @@ function removeCustomProp(prop) {
   document.documentElement.style.removeProperty(prop);
 }
 
-function generateTheme(track) {
+export function generateTheme(track) {
   const { theme = {} } = track;
   const { main, highContrast } = theme;
   const generatedTheme = {};
 
   if (main) {
     generatedTheme.main = hsla(main);
+    generatedTheme.mainAlpha = hsla(main, 0.5);
   }
 
   if (highContrast) {

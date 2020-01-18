@@ -5,10 +5,12 @@
   import Links from "./Links.svelte";
   import Credits from "./Credits.svelte";
   import Image from "./Image.svelte";
+  import { generateTheme } from "../player/utils";
 
   export let track;
   export let album;
   export let albumRef = false;
+  const theme = generateTheme(track);
 </script>
 
 <style>
@@ -28,26 +30,38 @@
   }
 </style>
 
-<div id={track.id} class="py-12 md:py-32 mb-12">
+<div id={track.id} class="py-8 md:py-24 mb-12">
   <div class="container">
-    <div class="mb-8 relative">
+    <div class="mb-8 p-4 -mx-4 relative md:flex justify-between items-center">
       {#if track.artwork}
-        <div class="artwork shadow mb-4 md:absolute w-full md:w-1/2">
+        <div
+          class="artwork shadow mb-8 md:mb-0 w-full md:w-1/4 md:order-2"
+          style={`box-shadow: 0px 0px 100px 4px ${theme.mainAlpha}`}>
           <Image
             ratio="100%"
             src={track.artwork}
             alt={`Artwork for ${track.title}`} />
         </div>
       {/if}
-      <div class="title flex items-baseline">
-        <h2 class="leading-none text-4xl mr-2">{track.title}</h2>
-        <PlayPause {store} trackId={track.id} size="2xl" />
-      </div>
-      {#if albumRef === true}
-        <AlbumRef {album} />
-      {/if}
-      <div class="text-grey-500">
-        <Links links={track.links} />
+      <div class="flex flex-col justify-between">
+        <div>
+          <div class="title flex items-baseline">
+            <h2 class="leading-none text-4xl mr-2">
+              <a class="hover:underline" href={`/track/${track.id}`}>
+                {track.title}
+              </a>
+            </h2>
+            <PlayPause {store} trackId={track.id} size="2xl" />
+          </div>
+          {#if albumRef === true}
+            <div class="mb-2 text-grey-500">
+              <AlbumRef {album} />
+            </div>
+          {/if}
+        </div>
+        <div class="text-grey-500">
+          <Links links={track.links} />
+        </div>
       </div>
     </div>
 
@@ -63,8 +77,7 @@
       </div>
     {/if}
 
-    <div class="text-xs mt-12">
-      <hr class="mb-4" />
+    <div class="text-xs mt-4">
       <Credits credits={track.credits} />
     </div>
   </div>
