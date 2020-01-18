@@ -74,9 +74,9 @@
         </svg>
       </span>
     </a>
-    <p class="md:ml-8">
+    <div class="md:ml-8">
       <Links links={album.links} display="official" presentation="stacked" />
-    </p>
+    </div>
   </section>
   <div class="md:flex-1 w-full flex flex-col justify-center items-center">
     <div class="w-full max-w-xs">

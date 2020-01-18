@@ -43,6 +43,7 @@ export function generateTheme(track) {
   if (main) {
     generatedTheme.main = hsla(main);
     generatedTheme.mainAlpha = hsla(main, 0.5);
+    generatedTheme.mainAlpha2 = hsla(main, 0.1);
   }
 
   if (highContrast) {

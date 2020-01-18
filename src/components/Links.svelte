@@ -1,7 +1,7 @@
 <script>
   import Link from "./Link.svelte";
   export let links;
-  export let display;
+  export let display = "icon-only";
   export let category = "quick";
   export let presentation = "row";
 
