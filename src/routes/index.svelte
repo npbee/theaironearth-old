@@ -1,5 +1,4 @@
 <script>
-  import PlayPause from "../player/components/PlayPause.svelte";
   import Cover from "../player/components/Cover.svelte";
   import Links from "../components/Links.svelte";
   import { albums } from "../data";
@@ -28,18 +27,18 @@
     relative">
     <div
       class=" absolute -ml-24 -mt-12 md:-mt-24 opacity-50"
-      style="width: 200px; top: 0; left: 0; z-index: 0;">
+      style="width: 150px; top: 0; left: 0; z-index: 0;">
       <img
-        src={cloudinaryUrl('w_200', 'artwork/good-sport-white-overlay')}
+        src={cloudinaryUrl('w_150', 'artwork/good-sport-white-overlay')}
         alt="Album artwork for 'Good Sport'" />
     </div>
     <p
-      class="small-caps text-sm md:text-base mb-1 text-grey-400;"
+      class="small-caps text-sm md:text-base mb-1 text-grey-400"
       style="z-index: 1">
       The Air on Earth
     </p>
     <h2
-      class="text-5xl md:text-6xl mb-8 text-grey-500 leading-none font-normal"
+      class="text-5xl md:text-5xl mb-4 text-grey-500 leading-none font-normal"
       style="z-index: 1">
       Good Sport
     </h2>
@@ -80,7 +79,7 @@
     </p>
   </section>
   <div class="md:flex-1 w-full flex flex-col justify-center items-center">
-    <div class="w-full max-w-lg">
+    <div class="w-full max-w-xs">
       <Cover {album} trackId="recur" />
     </div>
   </div>
