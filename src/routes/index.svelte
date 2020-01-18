@@ -38,7 +38,7 @@
       The Air on Earth
     </p>
     <h2
-      class="text-5xl md:text-5xl mb-4 text-grey-500 leading-none font-normal"
+      class="text-4xl mb-4 text-grey-500 leading-none font-normal"
       style="z-index: 1">
       Good Sport
     </h2>
