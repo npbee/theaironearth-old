@@ -117,7 +117,10 @@ const GoodSport = registerAlbum({
   links: [
     bc("https://theaironearth.bandcamp.com/album/good-sport"),
     sc("https://soundcloud.com/theaironearth/sets/good-sport"),
-    // spotify("the-air-on-earth"),
+    spotify("album/5DsO8idYocGTAMArSor8qU"),
+    ap(
+      "https://geo.music.apple.com/us/album/good-sport/1491613444?mt=1&app=music"
+    ),
   ],
   imgs: [
     {

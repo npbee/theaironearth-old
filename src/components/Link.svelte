@@ -23,10 +23,10 @@
         return "/logos/soundcloud.svg";
       case "bandcamp":
         return "/logos/bandcamp.png";
-      /* case "spotify": */
-      /*   return "Spotify"; */
-      /* case "apple-music": */
-      /*   return "Apple Music"; */
+      case "spotify":
+        return "/logos/spotify.png";
+      case "apple-music":
+        return "/logos/apple-music.svg";
       default:
         throw new Error(`Unknown link type ${link.type}`);
     }

@@ -7,6 +7,14 @@
   let album = albums["good-sport"];
 </script>
 
+<style>
+  .link-grid > :global(*) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+  }
+</style>
+
 <svelte:head>
   <title>The Air on Earth</title>
   <meta
@@ -74,8 +82,12 @@
         </svg>
       </span>
     </a>
-    <div class="md:ml-8">
-      <Links links={album.links} display="official" presentation="stacked" />
+    <div class="md:ml-8 link-grid">
+      <Links
+        links={album.links}
+        display="official"
+        presentation="stacked"
+        category="all" />
     </div>
   </section>
   <div class="md:flex-1 w-full flex flex-col justify-center items-center">
