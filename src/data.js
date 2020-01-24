@@ -728,7 +728,11 @@ registerTrack({
       l: 50,
     },
   },
-  links: [bc("good-sport"), sc("good-sport")],
+  links: [
+    bc("good-sport"),
+    sc("good-sport"),
+    spotify("track/22mwiRps7oowfHX4XQPWG6"),
+  ],
 });
 
 registerTrack({
@@ -795,7 +799,7 @@ registerTrack({
       l: 28,
     },
   },
-  links: [bc("sprint"), sc("sprint")],
+  links: [bc("sprint"), sc("sprint"), spotify("track/1anztlSmPxEM0XZEv3KCyx")],
 });
 
 registerTrack({
@@ -851,7 +855,7 @@ registerTrack({
       l: 33,
     },
   },
-  links: [bc("rest"), sc("rest")],
+  links: [bc("rest"), sc("rest"), spotify("track/5fqgN15DVKhH7TjUkvjVQD")],
 });
 
 registerTrack({
@@ -909,7 +913,7 @@ registerTrack({
       l: 37,
     },
   },
-  links: [bc("recur"), sc("recur")],
+  links: [bc("recur"), sc("recur"), spotify("track/3CLNv2LLvLpokLOAgXE13Y")],
 });
 
 registerTrack({
@@ -918,7 +922,11 @@ registerTrack({
   length: "7:06",
   albumId: "good-sport",
   artwork: "artwork/run-long",
-  links: [bc("run-long"), sc("run-long")],
+  links: [
+    bc("run-long"),
+    sc("run-long"),
+    spotify("track/4EB16Im3JIBo2SnHreDlbU"),
+  ],
   lyrics: [
     [
       "I will know what you have done",
@@ -979,7 +987,7 @@ registerTrack({
   albumId: "good-sport",
   artwork: "artwork/bliss",
   length: "5:04",
-  links: [bc("bliss"), sc("bliss")],
+  links: [bc("bliss"), sc("bliss"), spotify("track/2yARNpMvIsECGv4RYK7sMM")],
   lyrics: [
     [
       "And the hate floats",
@@ -1051,7 +1059,7 @@ registerTrack({
   length: "4:20",
   albumId: "good-sport",
   artwork: "artwork/drone",
-  links: [bc("drone"), sc("drone")],
+  links: [bc("drone"), sc("drone"), spotify("track/7rIZsaL1CAecX31Mbjg6lj")],
   lyrics: [
     [
       "My only sweep",
@@ -1119,7 +1127,7 @@ registerTrack({
   length: "5:54",
   albumId: "good-sport",
   artwork: "artwork/hollow",
-  links: [bc("hollow"), sc("hollow")],
+  links: [bc("hollow"), sc("hollow"), spotify("track/3jFsyAwjlVjwF2G7vCc4Fy")],
   lyrics: [
     [
       "In the reeds that we love",

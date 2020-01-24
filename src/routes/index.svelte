@@ -31,8 +31,8 @@
 <div
   class="flex flex-col md:flex-row justify-between items-center ctr md:flex-1">
   <section
-    class="justify-center mb-16 mt-12 md:mt-24 md:ml-24 flex flex-col md:flex-1
-    relative">
+    class="justify-center mb-16 mt-12 md:mt-24 md:ml-24 md:mr-8 flex flex-col
+    md:flex-1 relative">
     <div
       class=" absolute -ml-24 -mt-12 md:-mt-24 opacity-50"
       style="width: 150px; top: 0; left: 0; z-index: 0;">
@@ -90,8 +90,9 @@
         category="all" />
     </div>
   </section>
-  <div class="md:flex-1 w-full flex flex-col justify-center items-center">
-    <div class="w-full max-w-xs">
+  <div
+    class="md:flex-1 w-full flex flex-col justify-center items-center md:ml-8">
+    <div class="w-full md:max-w-xs">
       <Cover {album} trackId="recur" />
     </div>
   </div>
