@@ -8,10 +8,26 @@
 </script>
 
 <style>
-  .link-grid > :global(*) {
+  .link-grid > :global(*):not(p) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 8px;
+    align-items: center;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    border-color: inherit;
+    border-radius: 3px;
+    background: linear-gradient(
+        0deg,
+        rgba(243, 233, 233, 0.4),
+        rgba(255, 251, 251, 0.4)
+      ),
+      #fff;
+  }
+
+  .link-grid > :global(*) > :global(*) {
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: inherit;
   }
 </style>
 
@@ -82,7 +98,7 @@
         </svg>
       </span>
     </a>
-    <div class="md:ml-8 link-grid">
+    <div class="link-grid border-pink-200 shadow-lg mt-4 max-w-md">
       <Links
         links={album.links}
         display="official"
@@ -92,7 +108,7 @@
   </section>
   <div
     class="md:flex-1 w-full flex flex-col justify-center items-center md:ml-8">
-    <div class="w-full md:max-w-xs">
+    <div class="w-full max-w-md md:max-w-xs">
       <Cover {album} trackId="recur" />
     </div>
   </div>

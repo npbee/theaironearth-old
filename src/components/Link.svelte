@@ -37,6 +37,29 @@
   }
 </script>
 
+<style>
+  :global(.logo-spotify) {
+    width: 75%;
+    max-width: 80px;
+  }
+
+  :global(.logo-soundcloud) {
+    width: 75%;
+    max-width: 110px;
+  }
+
+  :global(.logo-bandcamp) {
+    width: 85%;
+    max-width: 110px;
+    transform: translateX(-8px);
+  }
+
+  :global(.logo-apple-music) {
+    width: 80%;
+    max-width: 110px;
+  }
+</style>
+
 {#if display === 'icon-only'}
   <a
     href={link.url}
@@ -62,8 +85,11 @@
     href={link.url}
     target="_blank"
     rel="noreferrer noopener nofollow"
-    class={`block w-32 p-4 md:p-2`}>
+    class={`h-16 flex items-center justify-center p-4 md:p-2`}>
     <span class="visually-hidden">{linkTitle(link)}</span>
-    <img src={linkLogoSrc(link)} alt={`${link.type} logo`} />
+    <img
+      class={`logo-${link.type}`}
+      src={linkLogoSrc(link)}
+      alt={`${link.type} logo`} />
   </a>
 {/if}
