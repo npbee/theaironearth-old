@@ -11,23 +11,31 @@
   .link-grid > :global(*):not(p) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
     align-items: center;
-    border-left: 1px solid;
-    border-top: 1px solid;
     border-color: inherit;
-    border-radius: 3px;
+  }
+
+  .link-grid > :global(*) > :global(*) {
+    border: 1px solid;
+    border-radius: 4px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: inherit;
     background: linear-gradient(
         0deg,
         rgba(243, 233, 233, 0.4),
         rgba(255, 251, 251, 0.4)
       ),
       #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition-property: transform;
+    transition-duration: 200ms;
   }
 
-  .link-grid > :global(*) > :global(*) {
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-    border-color: inherit;
+  .link-grid > :global(*) > :global(*):hover {
+    transform: translateY(-1px);
   }
 </style>
 
@@ -98,7 +106,7 @@
         </svg>
       </span>
     </a>
-    <div class="link-grid border-pink-200 shadow-lg mt-4 max-w-md">
+    <div class="link-grid border-pink-200 mt-4 max-w-md">
       <Links
         links={album.links}
         display="official"
