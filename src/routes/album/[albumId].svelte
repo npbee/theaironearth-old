@@ -72,7 +72,7 @@
           class="text-sm text-grey-600 small-caps block">
           {album.date}
         </time>
-        <h2 class="text-4xl leading-none">{album.title}</h2>
+        <h2 class="text-4xl leading-none text-gray-700">{album.title}</h2>
         <QuickLinks links={album.links} />
       </div>
       <TrackList tracks={album.tracks} {store} />

@@ -38,7 +38,7 @@
           {album.date}
         </time>
         <a href={`/album/${album.id}`} class="hover:underline inline-block">
-          <h2 class="headline text-3xl leading-none text-grey-800">
+          <h2 class="headline text-3xl leading-none text-grey-700">
             {album.title}
           </h2>
         </a>

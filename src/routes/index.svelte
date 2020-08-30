@@ -75,7 +75,7 @@
       Good Sport
     </h2>
     <p
-      class="text-sm text-grey-500 leading-loose md:ml-8 mb-4"
+      class="text-base text-grey-700 leading-loose md:ml-8 mb-4"
       style="z-index: 1">
       <em>Good Sport</em>
       is the second full-length album under The Air on Earth. Recorded over a

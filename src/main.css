@@ -40,8 +40,8 @@ html {
   font-family: avenir next, avenir, -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-family: ff-meta-web-pro, sans-serif;
   font-weight: 400;
+  font-size: 0.9rem;
   font-style: normal;
 }
 
@@ -62,15 +62,16 @@ main {
 
 body {
   background-color: hsla(36, 64%, 99%, 1);
-  color: theme("colors.grey.800");
+  color: theme("colors.grey.900");
 }
 
 h1,
 h2,
 h3,
 .headline {
-  font-family: ff-meta-serif-web-pro, serif;
-  font-weight: 300;
+  font-family: "Playfair Display", serif;
+  /* font-weight: 300; */
+  color: theme("colors.grey.700");
   -webkit-font-kerning: normal;
   font-kerning: normal;
   -ms-font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh",
@@ -154,16 +155,6 @@ hr {
 .decorated-link:hover {
   background-color: theme("colors.grey.600");
   color: theme("colors.grey.50");
-}
-
-.serif {
-  font-family: ff-meta-serif-web-pro, serif;
-  font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh";
-}
-
-.sans-serif {
-  font-family: ff-meta-web-pro, sans-serif;
-  font-feature-settings: "kern", "liga", "clig", "calt", "dlig", "swsh";
 }
 
 .breakout {
